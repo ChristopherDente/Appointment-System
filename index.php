@@ -148,6 +148,17 @@
         .how-it-works {
             text-align: center;
         }
+
+        /* Mission Vision Section */
+        .mission-vision h3 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .mission-vision p {
+            font-size: 1rem;
+            color: #4b5563;
+        }
     </style>
 </head>
 
@@ -329,11 +340,40 @@
     </div>
 </div>
 
+<!-- Mission & Vision Section -->
+<div class="container mt-5 mission-vision">
+    <div class="text-center mb-5">
+        <h3 class="fw-bold">Mission & Vision</h3>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Mission -->
+        <div class="col-md-6">
+            <div class="card card-doctor h-100 border-0 shadow-sm p-4">
+                <h5 class="fw-bold text-doctor mb-3"><i class="bi bi-bullseye me-2"></i>Mission</h5>
+                <p>
+                    To provide accessible, reliable, and efficient medical appointment services that prioritize patient convenience and privacy.
+                </p>
+            </div>
+        </div>
+
+        <!-- Vision -->
+        <div class="col-md-6">
+            <div class="card card-doctor h-100 border-0 shadow-sm p-4">
+                <h5 class="fw-bold text-doctor mb-3"><i class="bi bi-eye me-2"></i>Vision</h5>
+                <p>
+                    To become the leading online platform for seamless healthcare scheduling, improving patient engagement and satisfaction worldwide.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modals and Scripts -->
 <!-- Book Appointment Modal -->
 <div class="modal fade" id="appointmentModal" tabindex="-1">
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content card-doctor border-0 shadow">
-
             <div class="modal-header bg-doctor text-white">
                 <h5 class="modal-title">
                     <i class="bi bi-calendar-plus"></i> Book Appointment
@@ -380,7 +420,6 @@
                     </button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
@@ -389,7 +428,6 @@
 <div class="modal fade" id="trackModal" tabindex="-1">
     <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content card-doctor border-0 shadow">
-
             <div class="modal-header bg-doctor text-white">
                 <h5 class="modal-title">
                     <i class="bi bi-search"></i> Track Appointment
@@ -413,7 +451,6 @@
                     </button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
@@ -422,7 +459,6 @@
 <div class="modal fade" id="loginModal" tabindex="-1">
     <div class="modal-dialog modal-md modal-dialog-centered">
         <div class="modal-content card-doctor border-0 shadow">
-
             <div class="modal-header bg-doctor text-white">
                 <h5 class="modal-title">
                     <i class="bi bi-box-arrow-in-right"></i> Login
@@ -432,7 +468,6 @@
 
             <form method="POST" action="login_process.php">
                 <div class="modal-body">
-
                     <div class="position-relative mb-3">
                         <i class="bi bi-person form-icon"></i>
                         <input type="text" name="username" class="form-control form-input" placeholder="Username" required>
@@ -447,7 +482,6 @@
                     <div class="mb-2">
                         <a href="forgot_password.php" class="forgot-link">Forgot Password?</a>
                     </div>
-
                 </div>
 
                 <div class="modal-footer">
@@ -459,7 +493,6 @@
                     </button>
                 </div>
             </form>
-
         </div>
     </div>
 </div>
