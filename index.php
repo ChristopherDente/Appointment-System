@@ -1,4 +1,3 @@
-<?php include "db_conn/db.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -216,7 +215,7 @@
 
         <!-- RIGHT IMAGE -->
         <div class="col-md-6 text-center d-none d-md-block">
-            <img src="images/calendar.jpg" alt="Calendar" class="hero-img">
+            <img src="frontend/images/calendar.jpg" alt="Calendar" class="hero-img">
         </div>
 
     </div>
@@ -282,6 +281,49 @@
                 </div>
                 <h6 class="fw-semibold">Track & Visit</h6>
                 <p class="text-muted small">Track your appointment and visit doctor</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- More Details Section -->
+<div class="container mt-5">
+    <div class="text-center mb-5">
+        <h3 class="fw-bold">More Details</h3>
+        <p class="text-muted">Discover why our system is secure, convenient, and easy to use</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+        <!-- Card 1 -->
+        <div class="col-md-4">
+            <div class="card card-doctor h-100 border-0 shadow-sm p-4 text-center">
+                <i class="bi bi-shield-lock fs-1 text-doctor mb-3"></i>
+                <h5 class="fw-semibold mb-2">Secure & Confidential</h5>
+                <p class="text-muted small">
+                    All your personal and medical data is protected with top-notch security.
+                </p>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="col-md-4">
+            <div class="card card-doctor h-100 border-0 shadow-sm p-4 text-center">
+                <i class="bi bi-clock-history fs-1 text-doctor mb-3"></i>
+                <h5 class="fw-semibold mb-2">Flexible Scheduling</h5>
+                <p class="text-muted small">
+                    Book appointments at your preferred time with real-time availability.
+                </p>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="col-md-4">
+            <div class="card card-doctor h-100 border-0 shadow-sm p-4 text-center">
+                <i class="bi bi-chat-left-text fs-1 text-doctor mb-3"></i>
+                <h5 class="fw-semibold mb-2">Easy Communication</h5>
+                <p class="text-muted small">
+                    Receive instant confirmations, reminders, and updates about your visits.
+                </p>
             </div>
         </div>
     </div>
