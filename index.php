@@ -159,6 +159,23 @@
             font-size: 1rem;
             color: #4b5563;
         }
+
+        #scrollTopBtn {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 1000;
+            display: none; /* hidden by default */
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0;
+        }
+
     </style>
 </head>
 
@@ -167,17 +184,52 @@
 <!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
     <div class="container">
+
+        <!-- Brand -->
         <span class="navbar-brand fw-semibold">
             <i class="bi bi-heart-pulse"></i> Doctor Appointment
         </span>
 
-        <div class="ms-auto">
-            <span class="nav-link-login" data-bs-toggle="modal" data-bs-target="#loginModal">
-                <i class="bi bi-box-arrow-in-right"></i> Login
-            </span>
+        <!-- Toggle for mobile -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#doctorNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="doctorNavbar">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#about">About</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#services">Services</a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#contact">Contact</a>
+                </li>
+
+                <!-- Login inside UL -->
+                <li class="nav-item">
+                    <a class="nav-link nav-link-login"
+                       data-bs-toggle="modal"
+                       data-bs-target="#loginModal">
+                        <i class="bi bi-box-arrow-in-right"></i> Login
+                    </a>
+                </li>
+
+            </ul>
         </div>
+
     </div>
 </nav>
+
 
 <!-- Hero -->
 <div class="container mt-5">
@@ -202,11 +254,10 @@
                     </p>
 
                     <div class="d-flex d-flex-left gap-3 flex-wrap">
-                        <button class="btn btn-doctor btn-lg px-4"
-                            data-bs-toggle="modal"
-                            data-bs-target="#appointmentModal">
-                            <i class="bi bi-calendar-plus"></i> Book Appointment
-                        </button>
+                        <button class="btn btn-doctor btn-lg px-4" id="bookAppointmentBtn">
+    <i class="bi bi-calendar-plus"></i> Book Appointment
+</button>
+
 
                         <button class="btn btn-outline-doctor btn-lg px-4"
                             data-bs-toggle="modal"
@@ -232,64 +283,44 @@
     </div>
 </div>
 
-<!-- How It Works / Process Flow - 5 Steps -->
+<!-- How It Works -->
 <div class="container mt-5 how-it-works">
     <div class="mb-5">
         <h3 class="fw-bold">How It Works</h3>
         <p class="text-muted">Simple & patient-friendly process</p>
     </div>
-
     <div class="row g-4 justify-content-center">
-        <!-- Step 1 -->
         <div class="col-6 col-md-4 col-lg-2">
             <div class="card card-doctor h-100 border-0 p-4 text-center">
-                <div class="step-icon mb-3">
-                    <i class="bi bi-clipboard-data fs-2"></i>
-                </div>
+                <div class="step-icon mb-3"><i class="bi bi-clipboard-data fs-2"></i></div>
                 <h6 class="fw-semibold">Choose Service</h6>
                 <p class="text-muted small">Pick the type of doctor</p>
             </div>
         </div>
-
-        <!-- Step 2 -->
         <div class="col-6 col-md-4 col-lg-2">
             <div class="card card-doctor h-100 border-0 p-4 text-center">
-                <div class="step-icon mb-3">
-                    <i class="bi bi-calendar-plus fs-2"></i>
-                </div>
+                <div class="step-icon mb-3"><i class="bi bi-calendar-plus fs-2"></i></div>
                 <h6 class="fw-semibold">Book Appointment</h6>
                 <p class="text-muted small">Select date & time</p>
             </div>
         </div>
-
-        <!-- Step 3 -->
         <div class="col-6 col-md-4 col-lg-2">
             <div class="card card-doctor h-100 border-0 p-4 text-center">
-                <div class="step-icon mb-3">
-                    <i class="bi bi-person-lines-fill fs-2"></i>
-                </div>
+                <div class="step-icon mb-3"><i class="bi bi-person-lines-fill fs-2"></i></div>
                 <h6 class="fw-semibold">Fill Details</h6>
                 <p class="text-muted small">Enter your personal info</p>
             </div>
         </div>
-
-        <!-- Step 4 -->
         <div class="col-6 col-md-4 col-lg-2">
             <div class="card card-doctor h-100 border-0 p-4 text-center">
-                <div class="step-icon mb-3">
-                    <i class="bi bi-check-circle fs-2"></i>
-                </div>
+                <div class="step-icon mb-3"><i class="bi bi-check-circle fs-2"></i></div>
                 <h6 class="fw-semibold">Confirm Appointment</h6>
                 <p class="text-muted small">Review & confirm your booking</p>
             </div>
         </div>
-
-        <!-- Step 5 -->
         <div class="col-6 col-md-4 col-lg-2">
             <div class="card card-doctor h-100 border-0 p-4 text-center">
-                <div class="step-icon mb-3">
-                    <i class="bi bi-search fs-2"></i>
-                </div>
+                <div class="step-icon mb-3"><i class="bi bi-search fs-2"></i></div>
                 <h6 class="fw-semibold">Track & Visit</h6>
                 <p class="text-muted small">Track your appointment and visit doctor</p>
             </div>
@@ -303,45 +334,33 @@
         <h3 class="fw-bold">More Details</h3>
         <p class="text-muted">Discover why our system is secure, convenient, and easy to use</p>
     </div>
-
     <div class="row g-4 justify-content-center">
-        <!-- Card 1 -->
         <div class="col-md-4">
             <div class="card card-doctor h-100 border-0 shadow-sm p-4 text-center">
                 <i class="bi bi-shield-lock fs-1 text-doctor mb-3"></i>
                 <h5 class="fw-semibold mb-2">Secure & Confidential</h5>
-                <p class="text-muted small">
-                    All your personal and medical data is protected with top-notch security.
-                </p>
+                <p class="text-muted small">All your personal and medical data is protected with top-notch security.</p>
             </div>
         </div>
-
-        <!-- Card 2 -->
         <div class="col-md-4">
             <div class="card card-doctor h-100 border-0 shadow-sm p-4 text-center">
                 <i class="bi bi-clock-history fs-1 text-doctor mb-3"></i>
                 <h5 class="fw-semibold mb-2">Flexible Scheduling</h5>
-                <p class="text-muted small">
-                    Book appointments at your preferred time with real-time availability.
-                </p>
+                <p class="text-muted small">Book appointments at your preferred time with real-time availability.</p>
             </div>
         </div>
-
-        <!-- Card 3 -->
         <div class="col-md-4">
             <div class="card card-doctor h-100 border-0 shadow-sm p-4 text-center">
                 <i class="bi bi-chat-left-text fs-1 text-doctor mb-3"></i>
                 <h5 class="fw-semibold mb-2">Easy Communication</h5>
-                <p class="text-muted small">
-                    Receive instant confirmations, reminders, and updates about your visits.
-                </p>
+                <p class="text-muted small">Receive instant confirmations, reminders, and updates about your visits.</p>
             </div>
         </div>
     </div>
 </div>
 
 <!-- Mission & Vision Section -->
-<div class="container mt-5 mission-vision">
+<div id="about" class="container mt-5 mission-vision">
     <div class="text-center mb-5">
         <h3 class="fw-bold">Mission & Vision</h3>
     </div>
@@ -497,6 +516,43 @@
     </div>
 </div>
 
+<!-- Scroll to Top Button -->
+<button id="scrollTopBtn" class="btn btn-doctor" title="Go to top">
+    <i class="bi bi-arrow-up"></i>
+</button>
+
+
+<!-- Footer -->
+<footer class="bg-doctor text-white mt-5 pt-5 pb-4">
+    <div class="container">
+        <div class="row gy-4">
+            <div class="col-md-4">
+                <h5><i class="bi bi-heart-pulse"></i> Online Appointment Booking System</h5>
+                <p class="small text-white-50">A secure and easy-to-use online appointment booking platform designed for patients and healthcare providers.</p>
+            </div>
+            <div class="col-md-4">
+                <h5>Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li class="mb-2"><a href="#" class="small text-white-50 text-decoration-none"><i class="bi bi-calendar-plus"></i> Book Appointment</a></li>
+                    <li><a href="#" class="small text-white-50 text-decoration-none"><i class="bi bi-search"></i> Track Appointment</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h5>Contact</h5>
+                <p class="small text-white-50 mb-2"><i class="bi bi-envelope"></i> support@doctorappointment.com</p>
+                <p class="small text-white-50 mb-3"><i class="bi bi-telephone"></i> +63 912 345 6789</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="text-white fs-4"><i class="bi bi-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <hr class="border-light my-4">
+        <div class="text-center small text-white-50">© 2026 Online Appointment Booking System. All rights reserved.</div>
+    </div>
+</footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
@@ -510,6 +566,58 @@
         togglePassword.classList.toggle('bi-eye-slash');
     });
 </script>
+<script>
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+
+    // Show button when user scrolls down 200px
+    window.onscroll = function() {
+        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+            scrollTopBtn.style.display = "flex";
+        } else {
+            scrollTopBtn.style.display = "none";
+        }
+    };
+
+    // Scroll to top smoothly when clicked
+    scrollTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+</script>
+<script>
+    // Simulate login status
+    let isLoggedIn = false; // <-- change to true if user is logged in
+
+    const bookBtn = document.getElementById('bookAppointmentBtn');
+    const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+    const appointmentModal = new bootstrap.Modal(document.getElementById('appointmentModal'));
+
+    bookBtn.addEventListener('click', () => {
+        if (!isLoggedIn) {
+            // Show login modal first
+            loginModal.show();
+
+            // After login, show appointment modal
+            const loginForm = document.querySelector('#loginModal form');
+            loginForm.addEventListener('submit', function handler(e) {
+                e.preventDefault(); // prevent default form submission for demo
+
+                // Simulate login success (here you would actually validate login)
+                isLoggedIn = true;
+
+                loginModal.hide(); // hide login modal
+                appointmentModal.show(); // show appointment modal
+
+                // Remove this event listener to prevent multiple triggers
+                loginForm.removeEventListener('submit', handler);
+            });
+        } else {
+            // User already logged in, just show appointment modal
+            appointmentModal.show();
+        }
+    });
+</script>
+
 
 </body>
 </html>
