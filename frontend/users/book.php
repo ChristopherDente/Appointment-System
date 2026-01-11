@@ -291,6 +291,7 @@
                             </div>
                         </div>
 
+                        
                         <!-- Navigation Buttons -->
                         <div class="d-flex justify-content-between mt-4 pt-3 border-top">
                             <button type="button" class="btn btn-outline-doctor" id="prevBtn" onclick="changeStep(-1)"
