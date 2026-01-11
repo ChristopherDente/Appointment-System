@@ -143,13 +143,11 @@
         </div>
     </nav>
 
-
-    <!-- Dashboard Content -->
-    <div class="container dashboard-content">
-        <!-- Welcome Section -->
-        <div class="welcome-card">
-            <div class="row align-items-center">
-                <div class="col-md-8">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <div class="d-flex align-items-center">
+               <div class="col-md-8">
                     <h2 class="fw-bold mb-2">Welcome back, John!</h2>
                     <p class="mb-0 opacity-90">Manage your appointments and health information in one place.</p>
                 </div>
@@ -160,7 +158,11 @@
                 </div>
             </div>
         </div>
+    </div>
 
+    <!-- Dashboard Content -->
+    <div class="container dashboard-content">
+         
         <!-- Stats Overview -->
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
