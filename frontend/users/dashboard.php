@@ -166,7 +166,7 @@
         <!-- Stats Overview -->
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
+                <div class="stat-card1">
                     <div class="d-flex align-items-center gap-3">
                         <div class="stat-icon">
                             <i class="bi bi-calendar-check"></i>
@@ -180,7 +180,7 @@
             </div>
 
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
+                <div class="stat-card1">
                     <div class="d-flex align-items-center gap-3">
                         <div class="stat-icon">
                             <i class="bi bi-clock-history"></i>
@@ -195,7 +195,7 @@
 
 
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card">
+                <div class="stat-card1">
                     <div class="d-flex align-items-center gap-3">
                         <div class="stat-icon">
                             <i class="bi bi-credit-card"></i>
@@ -216,7 +216,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <a href="book-appointment.php" class="text-decoration-none">
-                    <div class="stat-card text-center">
+                    <div class="stat-card1 text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-calendar-plus"></i>
                         </div>
@@ -227,7 +227,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <a href="upcoming-appointments.php" class="text-decoration-none">
-                    <div class="stat-card text-center">
+                    <div class="stat-card1 text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-clock-history"></i>
                         </div>
@@ -238,7 +238,7 @@
             </div>
             <div class="col-md-4 mb-3">
                 <a href="payments.php" class="text-decoration-none">
-                    <div class="stat-card text-center">
+                    <div class="stat-card1 text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-credit-card"></i>
                         </div>
