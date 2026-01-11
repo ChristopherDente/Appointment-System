@@ -16,7 +16,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center fw-semibold" href="index.php">
+            <a class="navbar-brand d-flex align-items-center fw-semibold" href="../index.php">
                 <span class="navbar-brand fw-semibold">
                     <i class="bi bi-heart-pulse"></i> Online Appointment Booking System
                 </span>
@@ -29,7 +29,7 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Home</a>
+                        <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="about-us.php">About Us</a>
@@ -84,7 +84,7 @@
             </div>
 
             <div class="col-md-6 text-center d-none d-md-block">
-                <img src="frontend/images/calendar.jpg" alt="Services" class="hero-img">
+                <img src="images/calendar.jpg" alt="Services" class="hero-img">
             </div>
         </div>
     </div>
@@ -475,7 +475,7 @@
                 <div class="col-md-4">
                     <h6 class="text-white fw-semibold mb-3">Quick Links</h6>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="index.php">Home</a></li>
+                        <li><a href="../index.php">Home</a></li>
                         <li><a href="about-us.php">About Us</a></li>
                         <li><a href="doctor-list.php">Doctor List</a></li>
                         <li><a href="departments.php">Departments & Services</a></li>

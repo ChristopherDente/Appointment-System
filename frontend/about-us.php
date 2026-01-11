@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Doctor List - Online Appointment Booking System</title>
+    <title>About Us - Online Appointment Booking System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
@@ -16,7 +16,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center fw-semibold" href="index.php">
+            <a class="navbar-brand d-flex align-items-center fw-semibold" href="../index.php">
                 <span class="navbar-brand fw-semibold">
                     <i class="bi bi-heart-pulse"></i> Online Appointment Booking System
                 </span>
@@ -29,13 +29,13 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php">Home</a>
+                        <a class="nav-link" href="../index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about-us.php">About Us</a>
+                        <a class="nav-link active" href="about-us.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="doctor-list.php">Doctor List</a>
+                        <a class="nav-link" href="doctor-list.php">Doctor List</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="departments.php">Departments & Services</a>
@@ -61,16 +61,16 @@
                 <div class="card card-doctor border-0">
                     <div class="card-body p-5 text-left">
                         <span class="text-uppercase text-doctor fw-semibold small">
-                            Our Medical Team
+                            Who We Are
                         </span>
 
                         <h1 class="fw-bold mt-2 mb-3">
-                            Meet Our Expert Doctors
+                            About Our Medical Center
                         </h1>
 
                         <p class="text-muted mb-4">
-                            Our team of experienced and compassionate doctors are dedicated to 
-                            providing you with the highest quality of care across various specialties.
+                            ACE Medical Center - Baypointe has been serving our community with excellence, 
+                            compassion, and innovation in healthcare for over 20 years.
                         </p>
 
                         <div class="d-flex d-flex-left gap-3 flex-wrap">
@@ -84,155 +84,127 @@
             </div>
 
             <div class="col-md-6 text-center d-none d-md-block">
-                <img src="frontend/images/calendar.jpg" alt="Doctors" class="hero-img">
+                <img src="images/calendar.jpg" alt="About Us" class="hero-img">
             </div>
         </div>
     </div>
 
-    <!-- Doctor List -->
+    <!-- Mission & Vision -->
     <div class="container my-5">
         <div class="row g-4">
-            <!-- Doctor Card 1 -->
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6">
                 <div class="card card-doctor h-100">
-                    <div class="card-body p-4 text-center">
+                    <div class="card-body p-4">
                         <div class="step-icon mb-3">
-                            <i class="bi bi-person-circle fs-2"></i>
+                            <i class="bi bi-bullseye fs-2"></i>
                         </div>
-                        <h5 class="fw-bold mb-2">Dr. Maria Santos</h5>
-                        <p class="text-doctor fw-semibold mb-2">Cardiologist</p>
-                        <p class="text-muted small mb-3">
-                            Specializes in heart conditions and cardiovascular diseases with 15+ years of experience.
+                        <h4 class="fw-bold text-center mb-3">Our Mission</h4>
+                        <p class="text-muted text-center">
+                            To provide accessible, compassionate, and quality healthcare services to our community 
+                            through innovation, expertise, and patient-centered care. We strive to improve health 
+                            outcomes and enhance the well-being of every individual we serve.
                         </p>
-                        <div class="mb-3">
-                            <span class="badge bg-success me-2">Mon-Fri</span>
-                            <span class="badge bg-info">8AM-5PM</span>
-                        </div>
-                        <button class="btn btn-doctor w-100" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                            <i class="bi bi-calendar-check"></i> Book Appointment
-                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Doctor Card 2 -->
-            <div class="col-md-6 col-lg-4">
+            <div class="col-md-6">
                 <div class="card card-doctor h-100">
-                    <div class="card-body p-4 text-center">
+                    <div class="card-body p-4">
                         <div class="step-icon mb-3">
-                            <i class="bi bi-person-circle fs-2"></i>
+                            <i class="bi bi-eye fs-2"></i>
                         </div>
-                        <h5 class="fw-bold mb-2">Dr. Juan Dela Cruz</h5>
-                        <p class="text-doctor fw-semibold mb-2">Pediatrician</p>
-                        <p class="text-muted small mb-3">
-                            Expert in children's health and development with a caring and friendly approach.
+                        <h4 class="fw-bold text-center mb-3">Our Vision</h4>
+                        <p class="text-muted text-center">
+                            To be the leading healthcare provider in the region, recognized for excellence in 
+                            patient care, medical innovation, and community health. We envision a healthier 
+                            future where quality healthcare is accessible to all.
                         </p>
-                        <div class="mb-3">
-                            <span class="badge bg-success me-2">Mon-Sat</span>
-                            <span class="badge bg-info">9AM-6PM</span>
-                        </div>
-                        <button class="btn btn-doctor w-100" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                            <i class="bi bi-calendar-check"></i> Book Appointment
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Doctor Card 3 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card card-doctor h-100">
-                    <div class="card-body p-4 text-center">
-                        <div class="step-icon mb-3">
-                            <i class="bi bi-person-circle fs-2"></i>
-                        </div>
-                        <h5 class="fw-bold mb-2">Dr. Anna Reyes</h5>
-                        <p class="text-doctor fw-semibold mb-2">Dermatologist</p>
-                        <p class="text-muted small mb-3">
-                            Specializes in skin, hair, and nail conditions with modern treatment approaches.
-                        </p>
-                        <div class="mb-3">
-                            <span class="badge bg-success me-2">Tue-Sat</span>
-                            <span class="badge bg-info">10AM-7PM</span>
-                        </div>
-                        <button class="btn btn-doctor w-100" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                            <i class="bi bi-calendar-check"></i> Book Appointment
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Doctor Card 4 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card card-doctor h-100">
-                    <div class="card-body p-4 text-center">
-                        <div class="step-icon mb-3">
-                            <i class="bi bi-person-circle fs-2"></i>
-                        </div>
-                        <h5 class="fw-bold mb-2">Dr. Roberto Garcia</h5>
-                        <p class="text-doctor fw-semibold mb-2">Orthopedic Surgeon</p>
-                        <p class="text-muted small mb-3">
-                            Expert in bone, joint, and muscle disorders with advanced surgical skills.
-                        </p>
-                        <div class="mb-3">
-                            <span class="badge bg-success me-2">Mon-Fri</span>
-                            <span class="badge bg-info">7AM-4PM</span>
-                        </div>
-                        <button class="btn btn-doctor w-100" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                            <i class="bi bi-calendar-check"></i> Book Appointment
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Doctor Card 5 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card card-doctor h-100">
-                    <div class="card-body p-4 text-center">
-                        <div class="step-icon mb-3">
-                            <i class="bi bi-person-circle fs-2"></i>
-                        </div>
-                        <h5 class="fw-bold mb-2">Dr. Sofia Mendoza</h5>
-                        <p class="text-doctor fw-semibold mb-2">Obstetrician-Gynecologist</p>
-                        <p class="text-muted small mb-3">
-                            Specializes in women's reproductive health, pregnancy, and childbirth care.
-                        </p>
-                        <div class="mb-3">
-                            <span class="badge bg-success me-2">Mon-Sat</span>
-                            <span class="badge bg-info">8AM-6PM</span>
-                        </div>
-                        <button class="btn btn-doctor w-100" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                            <i class="bi bi-calendar-check"></i> Book Appointment
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Doctor Card 6 -->
-            <div class="col-md-6 col-lg-4">
-                <div class="card card-doctor h-100">
-                    <div class="card-body p-4 text-center">
-                        <div class="step-icon mb-3">
-                            <i class="bi bi-person-circle fs-2"></i>
-                        </div>
-                        <h5 class="fw-bold mb-2">Dr. Michael Tan</h5>
-                        <p class="text-doctor fw-semibold mb-2">Neurologist</p>
-                        <p class="text-muted small mb-3">
-                            Expert in brain and nervous system disorders with cutting-edge diagnostic tools.
-                        </p>
-                        <div class="mb-3">
-                            <span class="badge bg-success me-2">Tue-Fri</span>
-                            <span class="badge bg-info">9AM-5PM</span>
-                        </div>
-                        <button class="btn btn-doctor w-100" data-bs-toggle="modal" data-bs-target="#appointmentModal">
-                            <i class="bi bi-calendar-check"></i> Book Appointment
-                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Login Modal -->
+    <!-- Core Values -->
+    <div class="container my-5">
+        <h2 class="text-center fw-bold mb-5">Our Core Values</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-4 text-center">
+                        <div class="step-icon mb-3">
+                            <i class="bi bi-heart-pulse fs-2"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Compassion</h5>
+                        <p class="text-muted">
+                            We treat every patient with empathy, respect, and understanding, 
+                            ensuring their comfort and dignity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-4 text-center">
+                        <div class="step-icon mb-3">
+                            <i class="bi bi-award fs-2"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Excellence</h5>
+                        <p class="text-muted">
+                            We maintain the highest standards in medical care, continuously 
+                            improving our services and expertise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-4 text-center">
+                        <div class="step-icon mb-3">
+                            <i class="bi bi-shield-check fs-2"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Integrity</h5>
+                        <p class="text-muted">
+                            We uphold ethical practices, transparency, and accountability 
+                            in all our interactions and decisions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="container my-5">
+        <div class="card card-doctor">
+            <div class="card-body p-5">
+                <h2 class="text-center fw-bold mb-5">Our Impact</h2>
+                <div class="row text-center g-4">
+                    <div class="col-md-3">
+                        <h1 class="text-doctor fw-bold">20+</h1>
+                        <p class="text-muted">Years of Service</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h1 class="text-doctor fw-bold">50+</h1>
+                        <p class="text-muted">Medical Specialists</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h1 class="text-doctor fw-bold">100K+</h1>
+                        <p class="text-muted">Patients Served</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h1 class="text-doctor fw-bold">98%</h1>
+                        <p class="text-muted">Satisfaction Rate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal (same as index.php) -->
     <div class="modal fade" id="loginModal" tabindex="-1">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content card-doctor border-0 shadow">
@@ -306,18 +278,6 @@
                                 <input type="email" name="email" class="form-control" required>
                             </div>
                             <div class="col-md-6">
-                                <label class="form-label">Select Doctor</label>
-                                <select name="doctor" class="form-control" required>
-                                    <option value="">Choose a doctor...</option>
-                                    <option value="Dr. Maria Santos">Dr. Maria Santos - Cardiologist</option>
-                                    <option value="Dr. Juan Dela Cruz">Dr. Juan Dela Cruz - Pediatrician</option>
-                                    <option value="Dr. Anna Reyes">Dr. Anna Reyes - Dermatologist</option>
-                                    <option value="Dr. Roberto Garcia">Dr. Roberto Garcia - Orthopedic Surgeon</option>
-                                    <option value="Dr. Sofia Mendoza">Dr. Sofia Mendoza - OB-GYN</option>
-                                    <option value="Dr. Michael Tan">Dr. Michael Tan - Neurologist</option>
-                                </select>
-                            </div>
-                            <div class="col-md-6">
                                 <label class="form-label">Appointment Date</label>
                                 <input type="date" name="appointment_date" class="form-control" required>
                             </div>
@@ -358,7 +318,7 @@
                 <div class="col-md-4">
                     <h6 class="text-white fw-semibold mb-3">Quick Links</h6>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="index.php">Home</a></li>
+                        <li><a href="../index.php">Home</a></li>
                         <li><a href="about-us.php">About Us</a></li>
                         <li><a href="doctor-list.php">Doctor List</a></li>
                         <li><a href="departments.php">Departments & Services</a></li>

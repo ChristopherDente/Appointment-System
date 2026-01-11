@@ -9,7 +9,7 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="frontend/style.css">
 
 </head>
 
@@ -33,19 +33,19 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php">Home</a>
+                        <a class="nav-link active" href="frontend/index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about-us.php">About Us</a>
+                        <a class="nav-link" href="frontend/about-us.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="doctor-list.php">Doctor List</a>
+                        <a class="nav-link" href="frontend/doctor-list.php">Doctor List</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="departments.php">Departments & Services</a>
+                        <a class="nav-link" href="frontend/departments.php">Departments & Services</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.php">Contact Us</a>
+                        <a class="nav-link" href="frontend/contact.php">Contact Us</a>
                     </li>
                     <li class="nav-item ms-lg-3">
                         <span class="nav-link-login nav-link" role="button" data-bs-toggle="modal"
@@ -123,7 +123,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
-                <form method="POST" action="save.php">
+                <form method="POST" action="frontend/save.php">
                     <div class="modal-body">
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -212,7 +212,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
-                <form method="POST" action="login_process.php">
+                <form method="POST" action="frontend/login_process.php">
                     <div class="modal-body">
 
                         <div class="position-relative mb-3">
@@ -229,7 +229,7 @@
                         </div>
 
                         <div class="mb-3">
-                            <a href="forgot_password.php" class="forgot-link">Forgot Password?</a>
+                            <a href="frontend/forgot_password.php" class="forgot-link">Forgot Password?</a>
                         </div>
 
                         <!-- Divider -->
@@ -292,11 +292,11 @@
                 <div class="col-md-4">
                     <h6 class="text-white fw-semibold mb-3">Quick Links</h6>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="index.php">Home</a></li>
-                        <li><a href="about-us.php">About Us</a></li>
-                        <li><a href="doctor-list.php">Doctor List</a></li>
-                        <li><a href="departments.php">Departments & Services</a></li>
-                        <li><a href="contact.php">Contact Us</a></li>
+                        <li><a href="frontend/index.php">Home</a></li>
+                        <li><a href="frontend/about-us.php">About Us</a></li>
+                        <li><a href="frontend/doctor-list.php">Doctor List</a></li>
+                        <li><a href="frontend/departments.php">Departments & Services</a></li>
+                        <li><a href="frontend/contact.php">Contact Us</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -348,7 +348,7 @@
     // Handle Google Sign-In response
     function handleGoogleSignIn(response) {
         // Send the credential token to your backend
-        fetch('google_login_process.php', {
+        fetch('frontend/google_login_process.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
