@@ -10,7 +10,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
-    
+
 </head>
 
 <body>
@@ -97,13 +97,13 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="dashboard.php">
+                        <a class="nav-link" href="dashboard.php">
                             Dashboard
                         </a>
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="appointmentDropdown" role="button"
+                        <a class="nav-link dropdown-toggle active" href="#" id="appointmentDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Appointments
                         </a>
