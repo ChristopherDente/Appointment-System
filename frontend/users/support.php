@@ -211,41 +211,10 @@
                     <li class="nav-item">
                         <a class="nav-link active" href="support.php">Support</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link position-relative d-flex align-items-center justify-content-center dropdown-toggle"
-                            href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="width: 40px; height: 40px;">
-                            <i class="bi bi-bell fs-5 text-white"></i>
-                            <span id="notificationBadge" class="notification-count">3</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
-                            aria-labelledby="notificationDropdown">
-                            <li class="dropdown-header fw-semibold">Notifications</li>
-                            <li><a class="dropdown-item d-flex gap-2" href="#"><i
-                                        class="bi bi-check-circle text-success"></i>Appointment Confirmation</a></li>
-                            <li><a class="dropdown-item d-flex gap-2" href="#"><i
-                                        class="bi bi-alarm text-primary"></i>Appointment Reminders</a></li>
-                            <li><a class="dropdown-item d-flex gap-2" href="#"><i
-                                        class="bi bi-x-circle text-danger"></i>Cancellation Updates</a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li><a class="dropdown-item text-center text-primary fw-semibold"
-                                    href="notifications.php">View all notifications</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php">Profile</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
-                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="view.php">View Profile</a></li>
-                            <li><a class="dropdown-item" href="edit.php">Edit Profile</a></li>
-                            <li><a class="dropdown-item" href="change-password.php">Change Password</a>
-                            </li>
-                            <li><a class="dropdown-item" href="medical-info.php">Medical
-                                    Information</a></li>
-                        </ul>
-                    </li>
+
                     <li class="nav-item ms-lg-3">
                         <a class="nav-link-login nav-link" href="logout.php"
                             onclick="return confirm('Are you sure you want to logout?');">
@@ -610,7 +579,7 @@
                         <li><a href="history.php">Appointment History</a></li>
                         <li><a href="payments.php">Payments</a></li>
                         <li><a href="support.php">Support</a></li>
-                        <li><a href="view.php">Profile</a></li>
+                        <li><a href="profile.php">Profile</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -634,7 +603,7 @@
             </div>
         </div>
     </footer>
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
     // Toggle FAQ
