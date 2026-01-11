@@ -54,14 +54,14 @@
                         </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="frontend/payments.php">
+                        <a class="nav-link" href="payments.php">
                             Payments
                         </a>
                     </li>
 
 
                     <li class="nav-item">
-                        <a class="nav-link" href="frontend/support.php">
+                        <a class="nav-link" href="support.php">
                             Support
                         </a>
                     </li>
@@ -111,7 +111,7 @@
 
                             <li>
                                 <a class="dropdown-item text-center text-primary fw-semibold"
-                                    href="frontend/notifications.php">
+                                    href="/notifications.php">
                                     View all notifications
                                 </a>
                             </li>
@@ -123,17 +123,17 @@
                             Profile
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="frontend/profile/view.php">View Profile</a></li>
-                            <li><a class="dropdown-item" href="frontend/profile/edit.php">Edit Profile</a></li>
-                            <li><a class="dropdown-item" href="frontend/profile/change-password.php">Change Password</a>
+                            <li><a class="dropdown-item" href="view.php">View Profile</a></li>
+                            <li><a class="dropdown-item" href="edit.php">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="change-password.php">Change Password</a>
                             </li>
-                            <li><a class="dropdown-item" href="frontend/profile/medical-info.php">Medical
+                            <li><a class="dropdown-item" href="medical-info.php">Medical
                                     Information</a></li>
                         </ul>
                     </li>
 
                     <li class="nav-item ms-lg-3">
-                        <a class="nav-link-login nav-link" href="frontend/logout.php"
+                        <a class="nav-link-login nav-link" href="/logout.php"
                             onclick="return confirm('Are you sure you want to logout?');">
                             <i class="bi bi-box-arrow-right"></i> Logout
                         </a>
@@ -485,9 +485,9 @@
                         <li><a href="upcoming.php">Upcoming Appointments</a></li>
                         <li><a href="past.php">Past Appointments</a></li>
                         <li><a href="history.php">Appointment History</a></li>
-                        <li><a href="frontend/payments.php">Payments</a></li>
-                        <li><a href="frontend/support.php">Support</a></li>
-                        <li><a href="frontend/profile/view.php">Profile</a></li>
+                        <li><a href="/payments.php">Payments</a></li>
+                        <li><a href="/support.php">Support</a></li>
+                        <li><a href="view.php">Profile</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
