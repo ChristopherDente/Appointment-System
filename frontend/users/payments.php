@@ -11,7 +11,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
 
-    
+
 
 </head>
 
@@ -50,35 +50,12 @@
                     <li class="nav-item">
                         <a class="nav-link" href="support.php">Support</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link position-relative d-flex align-items-center justify-content-center dropdown-toggle"
-                            href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="width: 40px; height: 40px;">
-                            <i class="bi bi-bell fs-5 text-white"></i>
-                            <span id="notificationBadge" class="notification-count">3</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
-                            aria-labelledby="notificationDropdown">
-                            <li class="dropdown-header fw-semibold">Notifications</li>
-                            <li><a class="dropdown-item d-flex gap-2" href="#"><i class="bi bi-check-circle text-success"></i>Appointment Confirmation</a></li>
-                            <li><a class="dropdown-item d-flex gap-2" href="#"><i class="bi bi-alarm text-primary"></i>Appointment Reminders</a></li>
-                            <li><a class="dropdown-item d-flex gap-2" href="#"><i class="bi bi-x-circle text-danger"></i>Cancellation Updates</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item text-center text-primary fw-semibold" href="/notifications.php">View all notifications</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.php">Profile</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Profile</a>
-                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="view.php">View Profile</a></li>
-                            <li><a class="dropdown-item" href="edit.php">Edit Profile</a></li>
-                            <li><a class="dropdown-item" href="change-password.php">Change Password</a></li>
-                            <li><a class="dropdown-item" href="medical-info.php">Medical Information</a></li>
-                        </ul>
-                    </li>
+
                     <li class="nav-item ms-lg-3">
-                        <a class="nav-link-login nav-link" href="/logout.php"
+                        <a class="nav-link-login nav-link" href="logout.php"
                             onclick="return confirm('Are you sure you want to logout?');">
                             <i class="bi bi-box-arrow-right"></i> Logout
                         </a>
@@ -87,6 +64,7 @@
             </div>
         </div>
     </nav>
+
 
     <!-- Page Header -->
     <div class="page-header">
@@ -146,8 +124,9 @@
                 <div class="col-md-6">
                     <div class="search-box">
                         <i class="bi bi-search"></i>
-                        <input type="text" class="form-control" placeholder="Search by invoice number, doctor, or date..." 
-                               id="searchInput" onkeyup="searchPayments()">
+                        <input type="text" class="form-control"
+                            placeholder="Search by invoice number, doctor, or date..." id="searchInput"
+                            onkeyup="searchPayments()">
                     </div>
                 </div>
             </div>
@@ -189,7 +168,8 @@
                             </span>
                         </div>
                         <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-outline-doctor invoice-btn" onclick="downloadInvoice('INV-2026-001')">
+                            <button class="btn btn-sm btn-outline-doctor invoice-btn"
+                                onclick="downloadInvoice('INV-2026-001')">
                                 <i class="bi bi-download"></i>
                             </button>
                         </div>
@@ -261,7 +241,8 @@
                             </span>
                         </div>
                         <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-outline-doctor invoice-btn" onclick="downloadInvoice('INV-2025-158')">
+                            <button class="btn btn-sm btn-outline-doctor invoice-btn"
+                                onclick="downloadInvoice('INV-2025-158')">
                                 <i class="bi bi-download"></i>
                             </button>
                         </div>
@@ -297,7 +278,8 @@
                             </span>
                         </div>
                         <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-outline-doctor invoice-btn" onclick="downloadInvoice('INV-2025-145')">
+                            <button class="btn btn-sm btn-outline-doctor invoice-btn"
+                                onclick="downloadInvoice('INV-2025-145')">
                                 <i class="bi bi-download"></i>
                             </button>
                         </div>
@@ -369,7 +351,8 @@
                             </span>
                         </div>
                         <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-outline-doctor invoice-btn" onclick="downloadInvoice('INV-2025-120')">
+                            <button class="btn btn-sm btn-outline-doctor invoice-btn"
+                                onclick="downloadInvoice('INV-2025-120')">
                                 <i class="bi bi-download"></i>
                             </button>
                         </div>
@@ -405,7 +388,7 @@
         </div>
     </div>
 
-    <!-- Footer -->
+     <!-- Footer -->
     <footer class="footer-doctor mt-5">
         <div class="container py-5">
             <div class="row g-4">
@@ -426,9 +409,9 @@
                         <li><a href="upcoming.php">Upcoming Appointments</a></li>
                         <li><a href="past.php">Past Appointments</a></li>
                         <li><a href="history.php">Appointment History</a></li>
-                        <li><a href="/payments.php">Payments</a></li>
-                        <li><a href="/support.php">Support</a></li>
-                        <li><a href="/profile/view.php">Profile</a></li>
+                        <li><a href="payments.php">Payments</a></li>
+                        <li><a href="support.php">Support</a></li>
+                        <li><a href="profile.php">Profile</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
@@ -455,71 +438,71 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Filter payments by status
-        function filterPayments(status) {
-            const tabs = document.querySelectorAll('.filter-tab');
-            tabs.forEach(tab => tab.classList.remove('active'));
-            event.target.classList.add('active');
+    // Filter payments by status
+    function filterPayments(status) {
+        const tabs = document.querySelectorAll('.filter-tab');
+        tabs.forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
 
-            const payments = document.querySelectorAll('.payment-card');
-            let visibleCount = 0;
+        const payments = document.querySelectorAll('.payment-card');
+        let visibleCount = 0;
 
-            payments.forEach(payment => {
-                if (status === 'all' || payment.dataset.status === status) {
-                    payment.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    payment.style.display = 'none';
-                }
-            });
-
-            // Show empty state if no results
-            document.getElementById('emptyState').style.display = visibleCount === 0 ? 'block' : 'none';
-            document.getElementById('paymentList').style.display = visibleCount === 0 ? 'none' : 'block';
-        }
-
-        // Search payments
-        function searchPayments() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const payments = document.querySelectorAll('.payment-card');
-            let visibleCount = 0;
-
-            payments.forEach(payment => {
-                const text = payment.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    payment.style.display = 'block';
-                    visibleCount++;
-                } else {
-                    payment.style.display = 'none';
-                }
-            });
-
-            // Show empty state if no results
-            document.getElementById('emptyState').style.display = visibleCount === 0 ? 'block' : 'none';
-            document.getElementById('paymentList').style.display = visibleCount === 0 ? 'none' : 'block';
-        }
-
-        // Download invoice
-        function downloadInvoice(invoiceNumber) {
-            alert(`Downloading invoice ${invoiceNumber}...`);
-            // In production, this would trigger actual PDF download
-        }
-
-        // Pay now for pending payments
-        function payNow(invoiceNumber) {
-            if (confirm(`Proceed to payment for ${invoiceNumber}?`)) {
-                alert('Redirecting to payment gateway...');
-                // In production, redirect to payment page
+        payments.forEach(payment => {
+            if (status === 'all' || payment.dataset.status === status) {
+                payment.style.display = 'block';
+                visibleCount++;
+            } else {
+                payment.style.display = 'none';
             }
-        }
+        });
 
-        // Retry failed payment
-        function retryPayment(invoiceNumber) {
-            if (confirm(`Retry payment for ${invoiceNumber}?`)) {
-                alert('Redirecting to payment gateway...');
-                // In production, redirect to payment page
+        // Show empty state if no results
+        document.getElementById('emptyState').style.display = visibleCount === 0 ? 'block' : 'none';
+        document.getElementById('paymentList').style.display = visibleCount === 0 ? 'none' : 'block';
+    }
+
+    // Search payments
+    function searchPayments() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const payments = document.querySelectorAll('.payment-card');
+        let visibleCount = 0;
+
+        payments.forEach(payment => {
+            const text = payment.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+                payment.style.display = 'block';
+                visibleCount++;
+            } else {
+                payment.style.display = 'none';
             }
+        });
+
+        // Show empty state if no results
+        document.getElementById('emptyState').style.display = visibleCount === 0 ? 'block' : 'none';
+        document.getElementById('paymentList').style.display = visibleCount === 0 ? 'none' : 'block';
+    }
+
+    // Download invoice
+    function downloadInvoice(invoiceNumber) {
+        alert(`Downloading invoice ${invoiceNumber}...`);
+        // In production, this would trigger actual PDF download
+    }
+
+    // Pay now for pending payments
+    function payNow(invoiceNumber) {
+        if (confirm(`Proceed to payment for ${invoiceNumber}?`)) {
+            alert('Redirecting to payment gateway...');
+            // In production, redirect to payment page
         }
+    }
+
+    // Retry failed payment
+    function retryPayment(invoiceNumber) {
+        if (confirm(`Retry payment for ${invoiceNumber}?`)) {
+            alert('Redirecting to payment gateway...');
+            // In production, redirect to payment page
+        }
+    }
     </script>
 </body>
 
