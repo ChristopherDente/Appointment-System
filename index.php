@@ -212,7 +212,7 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
-                <form method="POST" action="frontend/login_process.php">
+                <form id="loginForm">
                     <div class="modal-body">
 
                         <div class="position-relative mb-3">
@@ -337,49 +337,79 @@
     </script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
-    // Initialize Google Sign-In
-    function initializeGoogleSignIn() {
-        google.accounts.id.initialize({
-            client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com', // Replace with your actual Client ID
-            callback: handleGoogleSignIn
-        });
-    }
+        // Initialize Google Sign-In
+        function initializeGoogleSignIn() {
+            google.accounts.id.initialize({
+                client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com', // Replace with your actual Client ID
+                callback: handleGoogleSignIn
+            });
+        }
 
-    // Handle Google Sign-In response
-    function handleGoogleSignIn(response) {
-        // Send the credential token to your backend
-        fetch('frontend/google_login_process.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    credential: response.credential
+        // Handle Google Sign-In response
+        function handleGoogleSignIn(response) {
+            // Send the credential token to your backend
+            fetch('frontend/google_login_process.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        credential: response.credential
+                    })
                 })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.success) {
+                        // Redirect or close modal on success
+                        window.location.href = data.redirect || 'dashboard.php';
+                    } else {
+                        alert(data.message || 'Login failed. Please try again.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('An error occurred during login.');
+                });
+        }
+
+        // Button click handler
+        document.getElementById('googleSignInBtn')?.addEventListener('click', function() {
+            google.accounts.id.prompt(); // Show the One Tap dialog
+        });
+
+        // Initialize when page loads
+        window.addEventListener('load', initializeGoogleSignIn);
+    </script>
+    <script>
+        const loginForm = document.getElementById('loginForm');
+
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // prevent default form submit
+
+            const username = loginForm.username.value;
+            const password = loginForm.password.value;
+
+            fetch('http://appointment-system.test/backend/login.php', { // replace with your actual URL
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
             })
             .then(res => res.json())
             .then(data => {
                 if (data.success) {
-                    // Redirect or close modal on success
-                    window.location.href = data.redirect || 'dashboard.php';
+                    alert(data.message); // optional
+                    window.location.href = data.redirect;
                 } else {
-                    alert(data.message || 'Login failed. Please try again.');
+                    alert(data.message);
                 }
             })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('An error occurred during login.');
+            .catch(err => {
+                console.error(err);
+                alert("An error occurred while logging in.");
             });
-    }
-
-    // Button click handler
-    document.getElementById('googleSignInBtn')?.addEventListener('click', function() {
-        google.accounts.id.prompt(); // Show the One Tap dialog
-    });
-
-    // Initialize when page loads
-    window.addEventListener('load', initializeGoogleSignIn);
+        });
     </script>
+
 
 </body>
 
