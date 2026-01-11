@@ -31,8 +31,8 @@ if (mysqli_num_rows($result) > 0) {
     exit;
 }
 
-// Insert new user (plain text password)
-$sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
+// Insert new user with role 'user' by default (plain text password for now)
+$sql = "INSERT INTO users (username, password, role) VALUES ('$username', '$password', 'user')";
 if (mysqli_query($conn, $sql)) {
     echo json_encode(["success" => true, "message" => "Registration successful. You can now login"]);
 } else {
