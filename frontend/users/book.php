@@ -39,7 +39,7 @@
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="appointmentDropdown" role="button"
+                        <a class="nav-link dropdown-toggle active" href="#" id="appointmentDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Appointments
                         </a>
