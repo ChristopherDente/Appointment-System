@@ -9,7 +9,7 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="frontend/style.css">
+    <link rel="stylesheet" href="../css/style.css">
 
 </head>
 
@@ -33,172 +33,223 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="frontend/index.php">Home</a>
+                        <a class="nav-link active" href="dashboard.php">
+                            Dashboard
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="appointmentDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Appointments
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="appointmentDropdown">
+                            <li><a class="dropdown-item" href="book.php">Book Appointment</a></li>
+                            <li><a class="dropdown-item" href="upcoming.php">Upcoming
+                                    Appointments</a></li>
+                            <li><a class="dropdown-item" href="past.php">Past Appointments</a>
+                            </li>
+                            <li><a class="dropdown-item" href="history.php">Appointment
+                                    History</a></li>
+                        </ul>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="frontend/about-us.php">About Us</a>
+                        <a class="nav-link" href="frontend/payments.php">
+                            Payments
+                        </a>
                     </li>
+
+
                     <li class="nav-item">
-                        <a class="nav-link" href="frontend/doctor-list.php">Doctor List</a>
+                        <a class="nav-link" href="frontend/support.php">
+                            Support
+                        </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="frontend/departments.php">Departments & Services</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link position-relative d-flex align-items-center justify-content-center dropdown-toggle"
+                            href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="width: 40px; height: 40px;">
+
+                            <i class="bi bi-bell fs-5 text-white"></i>
+
+                            <span id="notificationBadge" class="notification-count">
+                                3
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
+                            aria-labelledby="notificationDropdown">
+
+                            <li class="dropdown-header fw-semibold">
+                                Notifications
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex gap-2" href="#">
+                                    <i class="bi bi-check-circle text-success"></i>
+                                    Appointment Confirmation
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex gap-2" href="#">
+                                    <i class="bi bi-alarm text-primary"></i>
+                                    Appointment Reminders
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex gap-2" href="#">
+                                    <i class="bi bi-x-circle text-danger"></i>
+                                    Cancellation Updates
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item text-center text-primary fw-semibold"
+                                    href="frontend/notifications.php">
+                                    View all notifications
+                                </a>
+                            </li>
+                        </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="frontend/contact.php">Contact Us</a>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Profile
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="frontend/profile/view.php">View Profile</a></li>
+                            <li><a class="dropdown-item" href="frontend/profile/edit.php">Edit Profile</a></li>
+                            <li><a class="dropdown-item" href="frontend/profile/change-password.php">Change Password</a>
+                            </li>
+                            <li><a class="dropdown-item" href="frontend/profile/medical-info.php">Medical
+                                    Information</a></li>
+                        </ul>
                     </li>
+
                     <li class="nav-item ms-lg-3">
-                        <span class="nav-link-login nav-link" role="button" data-bs-toggle="modal"
-                            data-bs-target="#loginModal">
-                            <i class="bi bi-box-arrow-in-right"></i> Login
-                        </span>
+                        <a class="nav-link-login nav-link" href="frontend/logout.php"
+                            onclick="return confirm('Are you sure you want to logout?');">
+                            <i class="bi bi-box-arrow-right"></i> Logout
+                        </a>
                     </li>
-
-
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <div class="container mt-5">
-        <div class="row align-items-start">
 
-            <!-- LEFT HERO TEXT -->
-            <div class="col-md-6 hero-left">
-                <div class="card card-doctor border-0">
-                    <div class="card-body p-5 text-left">
+    <!-- Dashboard Content -->
+    <div class="container dashboard-content">
+        <!-- Welcome Section -->
+        <div class="welcome-card">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h2 class="fw-bold mb-2">Welcome back, John!</h2>
+                    <p class="mb-0 opacity-90">Manage your appointments and health information in one place.</p>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <button class="btn btn-light btn-lg px-4">
+                        <i class="bi bi-calendar-plus"></i> Book New Appointment
+                    </button>
+                </div>
+            </div>
+        </div>
 
-                        <span class="text-uppercase text-doctor fw-semibold small">
-                            ACE Medical Center - Baypointe
-                        </span>
-
-                        <h1 class="fw-bold mt-2 mb-3">
-                            Online Appointment Booking System
-                        </h1>
-
-                        <p class="text-muted mb-4">
-                            Schedule, manage, and track your medical appointments easily
-                            using our secure and patient-friendly system.
-                        </p>
-
-                        <div class="d-flex d-flex-left gap-3 flex-wrap">
-                            <button class="btn btn-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#appointmentModal">
-                                <i class="bi bi-calendar-plus"></i> Book Appointment
-                            </button>
-
-                            <button class="btn btn-outline-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#trackModal">
-                                <i class="bi bi-search"></i> Track Appointment
-                            </button>
+        <!-- Stats Overview -->
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="stat-icon">
+                            <i class="bi bi-calendar-check"></i>
                         </div>
-
-                        <div class="mt-4 text-muted small">
-                            <i class="bi bi-shield-check text-doctor"></i>
-                            Secure • Confidential • Reliable
+                        <div>
+                            <h3 class="fw-bold mb-0">3</h3>
+                            <p class="text-muted mb-0 small">Upcoming</p>
                         </div>
-
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT IMAGE -->
-            <div class="col-md-6 text-center d-none d-md-block">
-                <img src="frontend/images/calendar.jpg" alt="Calendar" class="hero-img">
-            </div>
-
-        </div>
-    </div>
-
-    <!-- Book Appointment Modal -->
-    <div class="modal fade" id="appointmentModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content card-doctor border-0 shadow">
-
-                <div class="modal-header bg-doctor text-white">
-                    <h5 class="modal-title">
-                        <i class="bi bi-calendar-plus"></i> Book Appointment
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-
-                <form method="POST" action="frontend/save.php">
-                    <div class="modal-body">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Full Name</label>
-                                <input type="text" name="name" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" name="email" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Appointment Date</label>
-                                <input type="date" name="appointment_date" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Appointment Time</label>
-                                <input type="time" name="appointment_time" class="form-control" required>
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label">Reason for Visit</label>
-                                <textarea name="reason" class="form-control" rows="3" required></textarea>
-                            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="stat-icon">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <div>
+                            <h3 class="fw-bold mb-0">12</h3>
+                            <p class="text-muted mb-0 small">Completed</p>
                         </div>
                     </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-                        <button class="btn btn-doctor px-4">
-                            <i class="bi bi-check-circle"></i> Submit
-                        </button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Track Appointment Modal -->
-    <div class="modal fade" id="trackModal" tabindex="-1">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content card-doctor border-0 shadow">
-
-                <div class="modal-header bg-doctor text-white">
-                    <h5 class="modal-title">
-                        <i class="bi bi-search"></i> Track Appointment
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
+            </div>
 
-                <form>
-                    <div class="modal-body">
-                        <label class="form-label">Enter your email</label>
-                        <input type="email" class="form-control" required>
-                        <small class="text-muted">View your appointment status.</small>
+
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="stat-icon">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                        <div>
+                            <h3 class="fw-bold mb-0">₱0</h3>
+                            <p class="text-muted mb-0 small">Pending</p>
+                        </div>
                     </div>
+                </div>
+            </div>
+        </div>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <button class="btn btn-doctor px-4">
-                            <i class="bi bi-search"></i> Track
-                        </button>
+        <!-- Quick Actions -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4 class="fw-semibold mb-4">Quick Actions</h4>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="book-appointment.php" class="text-decoration-none">
+                    <div class="stat-card text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="bi bi-calendar-plus"></i>
+                        </div>
+                        <h5 class="fw-semibold text-doctor">Book Appointment</h5>
+                        <p class="text-muted small mb-0">Schedule a new appointment with a doctor</p>
                     </div>
-                </form>
-
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="upcoming-appointments.php" class="text-decoration-none">
+                    <div class="stat-card text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <h5 class="fw-semibold text-doctor">View Appointments</h5>
+                        <p class="text-muted small mb-0">Check your upcoming and past appointments</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="payments.php" class="text-decoration-none">
+                    <div class="stat-card text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                        <h5 class="fw-semibold text-doctor">Payment History</h5>
+                        <p class="text-muted small mb-0">View billing and payment records</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
+
+
+
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">
@@ -292,11 +343,14 @@
                 <div class="col-md-4">
                     <h6 class="text-white fw-semibold mb-3">Quick Links</h6>
                     <ul class="list-unstyled footer-links">
-                        <li><a href="frontend/index.php">Home</a></li>
-                        <li><a href="frontend/about-us.php">About Us</a></li>
-                        <li><a href="frontend/doctor-list.php">Doctor List</a></li>
-                        <li><a href="frontend/departments.php">Departments & Services</a></li>
-                        <li><a href="frontend/contact.php">Contact Us</a></li>
+                        <li><a href="dashboard.php">Dashboard</a></li>
+                        <li><a href="book.php">Book Appointment</a></li>
+                        <li><a href="upcoming.php">Upcoming Appointments</a></li>
+                        <li><a href="past.php">Past Appointments</a></li>
+                        <li><a href="history.php">Appointment History</a></li>
+                        <li><a href="frontend/payments.php">Payments</a></li>
+                        <li><a href="frontend/support.php">Support</a></li>
+                        <li><a href="frontend/profile/view.php">Profile</a></li>
                     </ul>
                 </div>
                 <div class="col-md-4">
