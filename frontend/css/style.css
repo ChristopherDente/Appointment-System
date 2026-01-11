@@ -269,7 +269,7 @@ h1 {
     margin-bottom: 2rem;
 }
 
-.stat-card {
+.stat-card1 {
     background-color: #ffffff;
     border-radius: 18px;
     padding: 1.5rem;
@@ -277,7 +277,7 @@ h1 {
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.stat-card:hover {
+.stat-card1:hover {
     transform: translateY(-4px);
     box-shadow: 0 8px 16px rgba(47, 158, 143, 0.15);
 }
