@@ -15,67 +15,365 @@
 
 <body>
     <script>
-        function searchHistory() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const items = document.querySelectorAll('.timeline-item');
+    function searchHistory() {
+        const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+        const items = document.querySelectorAll('.timeline-item');
 
-            items.forEach(item => {
-                const text = item.textContent.toLowerCase();
-                if (text.includes(searchTerm)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+        items.forEach(item => {
+            const text = item.textContent.toLowerCase();
+            if (text.includes(searchTerm)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    function filterByStatus(status) {
+        const items = document.querySelectorAll('.timeline-item');
+        const pills = document.querySelectorAll('.filter-pill');
+
+        pills.forEach(pill => pill.classList.remove('active'));
+        event.target.classList.add('active');
+
+        items.forEach(item => {
+            if (status === 'all' || item.dataset.status === status) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    function filterByYear(year) {
+        const items = document.querySelectorAll('.timeline-item');
+        const dividers = document.querySelectorAll('.year-divider');
+
+        items.forEach(item => {
+            if (year === 'all' || item.dataset.year === year) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        dividers.forEach(divider => {
+            const yearText = divider.querySelector('span').textContent;
+            if (year === 'all' || yearText === year) {
+                divider.style.display = 'flex';
+            } else {
+                divider.style.display = 'none';
+            }
+        });
+    }
+
+    const appointmentDetails = {
+        1: {
+            doctor: 'Dr. Juan Cruz',
+            specialty: 'Family Medicine',
+            date: 'January 8, 2026',
+            time: '10:00 AM',
+            reason: 'Annual physical examination and lab work review',
+            location: 'Room 201, Building A',
+            duration: '30 minutes',
+            status: 'Completed',
+            notes: 'Patient is in good health. Blood pressure normal. Cholesterol levels slightly elevated - recommend dietary changes.',
+            prescription: 'Multivitamin (1x daily)',
+            nextVisit: 'January 2027'
+        },
+        2: {
+            doctor: 'Dr. Emily Rodriguez',
+            specialty: 'Dermatology',
+            date: 'January 5, 2026',
+            time: '2:30 PM',
+            reason: 'Skin condition follow-up and treatment review',
+            location: 'Room 315, Building B',
+            duration: '25 minutes',
+            status: 'Completed',
+            notes: 'Skin condition showing improvement. Continue current treatment regimen.',
+            prescription: 'Topical cream (2x daily)',
+            nextVisit: 'March 2026'
+        },
+        3: {
+            doctor: 'Dr. Patricia Gomez',
+            specialty: 'General Dentist',
+            date: 'December 20, 2025',
+            time: '11:00 AM',
+            reason: 'Routine dental cleaning and checkup',
+            location: 'Room 401, Dental Wing',
+            duration: '45 minutes',
+            status: 'Completed',
+            notes: 'No cavities detected. Gums healthy. Continue regular flossing.',
+            prescription: 'Fluoride toothpaste',
+            nextVisit: 'June 2026'
+        },
+        4: {
+            doctor: 'Dr. James Wong',
+            specialty: 'Orthopedic Surgeon',
+            date: 'December 10, 2025',
+            time: '3:00 PM',
+            reason: 'Knee pain consultation',
+            location: 'N/A',
+            duration: 'N/A',
+            status: 'Cancelled',
+            notes: 'Cancelled by patient on December 9, 2025',
+            prescription: 'N/A',
+            nextVisit: 'Reschedule if needed'
+        },
+        5: {
+            doctor: 'Dr. Robert Chen',
+            specialty: 'Cardiologist',
+            date: 'November 15, 2025',
+            time: '9:30 AM',
+            reason: 'Heart health screening and blood pressure monitoring',
+            location: 'Room 305, Building B',
+            duration: '40 minutes',
+            status: 'Completed',
+            notes: 'Blood pressure within normal range. Heart rhythm regular. Continue exercise routine.',
+            prescription: 'N/A',
+            nextVisit: 'May 2026'
+        },
+        6: {
+            doctor: 'Dr. Sarah Williams',
+            specialty: 'Internal Medicine',
+            date: 'October 28, 2025',
+            time: '1:00 PM',
+            reason: 'Follow-up consultation for chronic condition',
+            location: 'N/A',
+            duration: 'N/A',
+            status: 'No Show',
+            notes: 'Patient did not show up for appointment',
+            prescription: 'N/A',
+            nextVisit: 'Please reschedule'
+        }
+    };
+
+    function viewFullDetails(appointmentId) {
+        const details = appointmentDetails[appointmentId] || {
+            doctor: 'Dr. Unknown',
+            specialty: 'General',
+            date: 'N/A',
+            time: 'N/A',
+            reason: 'Consultation',
+            location: 'N/A',
+            duration: 'N/A',
+            status: 'Completed',
+            notes: 'No additional details available.',
+            prescription: 'N/A',
+            nextVisit: 'N/A'
+        };
+
+        const modalHTML = `
+                <div class="modal fade" id="detailsModal" tabindex="-1">
+                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                        <div class="modal-content" style="border-radius: 18px; border: none;">
+                            <div class="modal-header" style="background: linear-gradient(135deg, #2f9e8f 0%, #268c7f 100%); color: white; border-radius: 18px 18px 0 0;">
+                                <h5 class="modal-title fw-bold">
+                                    <i class="bi bi-file-medical"></i> Appointment Details
+                                </h5>
+                                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                            </div>
+                            <div class="modal-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <div class="p-3" style="background-color: #f9fafb; border-radius: 12px;">
+                                            <small class="text-muted d-block mb-1"><i class="bi bi-person-fill text-doctor"></i> Doctor</small>
+                                            <strong>${details.doctor}</strong>
+                                            <p class="mb-0 small text-muted">${details.specialty}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3" style="background-color: #f9fafb; border-radius: 12px;">
+                                            <small class="text-muted d-block mb-1"><i class="bi bi-calendar3 text-doctor"></i> Date & Time</small>
+                                            <strong>${details.date}</strong>
+                                            <p class="mb-0 small text-muted">${details.time}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3" style="background-color: #f9fafb; border-radius: 12px;">
+                                            <small class="text-muted d-block mb-1"><i class="bi bi-geo-alt-fill text-doctor"></i> Location</small>
+                                            <strong>${details.location}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3" style="background-color: #f9fafb; border-radius: 12px;">
+                                            <small class="text-muted d-block mb-1"><i class="bi bi-clock-fill text-doctor"></i> Duration</small>
+                                            <strong>${details.duration}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="p-3" style="background-color: #f9fafb; border-radius: 12px;">
+                                            <small class="text-muted d-block mb-1"><i class="bi bi-chat-left-text-fill text-doctor"></i> Reason for Visit</small>
+                                            <p class="mb-0">${details.reason}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="p-3" style="background-color: #e6f4f1; border-radius: 12px; border-left: 4px solid #2f9e8f;">
+                                            <small class="text-muted d-block mb-2"><i class="bi bi-journal-medical text-doctor"></i> Doctor's Notes</small>
+                                            <p class="mb-0">${details.notes}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3" style="background-color: #f9fafb; border-radius: 12px;">
+                                            <small class="text-muted d-block mb-1"><i class="bi bi-capsule text-doctor"></i> Prescription</small>
+                                            <strong>${details.prescription}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="p-3" style="background-color: #f9fafb; border-radius: 12px;">
+                                            <small class="text-muted d-block mb-1"><i class="bi bi-arrow-repeat text-doctor"></i> Next Visit</small>
+                                            <strong>${details.nextVisit}</strong>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="p-2 text-center" style="background-color: ${details.status === 'Completed' ? '#d1fae5' : details.status === 'Cancelled' ? '#fee2e2' : '#fef3c7'}; border-radius: 12px;">
+                                            <strong style="color: ${details.status === 'Completed' ? '#065f46' : details.status === 'Cancelled' ? '#991b1b' : '#92400e'};">
+                                                Status: ${details.status}
+                                            </strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer" style="border-top: 1px solid #e5e7eb;">
+                                <button type="button" class="btn btn-outline-doctor" data-bs-dismiss="modal">
+                                    <i class="bi bi-x-circle"></i> Close
+                                </button>
+                                <button type="button" class="btn btn-doctor" onclick="printAppointment(${appointmentId})">
+                                    <i class="bi bi-printer"></i> Print
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+        const existingModal = document.getElementById('detailsModal');
+        if (existingModal) {
+            existingModal.remove();
         }
 
-        function filterByStatus(status) {
-            const items = document.querySelectorAll('.timeline-item');
-            const pills = document.querySelectorAll('.filter-pill');
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+        modal.show();
+    }
 
-            pills.forEach(pill => pill.classList.remove('active'));
-            event.target.classList.add('active');
+    function printAppointment(appointmentId) {
+        const details = appointmentDetails[appointmentId];
+        const printWindow = window.open('', '', 'height=600,width=800');
+        printWindow.document.write(`
+                <html>
+                <head>
+                    <title>Appointment Details - ${details.doctor}</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 40px; }
+                        h1 { color: #2f9e8f; }
+                        .info-row { margin: 15px 0; padding: 10px; background: #f9fafb; border-radius: 8px; }
+                        .label { font-weight: bold; color: #6b7280; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Appointment Details</h1>
+                    <div class="info-row"><span class="label">Doctor:</span> ${details.doctor} - ${details.specialty}</div>
+                    <div class="info-row"><span class="label">Date & Time:</span> ${details.date} at ${details.time}</div>
+                    <div class="info-row"><span class="label">Location:</span> ${details.location}</div>
+                    <div class="info-row"><span class="label">Duration:</span> ${details.duration}</div>
+                    <div class="info-row"><span class="label">Reason:</span> ${details.reason}</div>
+                    <div class="info-row"><span class="label">Notes:</span> ${details.notes}</div>
+                    <div class="info-row"><span class="label">Prescription:</span> ${details.prescription}</div>
+                    <div class="info-row"><span class="label">Next Visit:</span> ${details.nextVisit}</div>
+                    <div class="info-row"><span class="label">Status:</span> ${details.status}</div>
+                </body>
+                </html>
+            `);
+        printWindow.document.close();
+        printWindow.print();
+    }
 
-            items.forEach(item => {
-                if (status === 'all' || item.dataset.status === status) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
+    function exportHistory() {
+        const printWindow = window.open('', '', 'height=800,width=1000');
+        const items = document.querySelectorAll('.timeline-item');
+        let appointmentsList = '';
 
-        function filterByYear(year) {
-            const items = document.querySelectorAll('.timeline-item');
-            const dividers = document.querySelectorAll('.year-divider');
+        items.forEach((item, index) => {
+            if (item.style.display !== 'none') {
+                const date = item.querySelector('.timeline-date').textContent.trim();
+                const doctor = item.querySelector('.doctor-info-small h6').textContent;
+                const specialty = item.querySelector('.doctor-info-small p').textContent;
+                const reason = item.querySelector('.mb-2 p').textContent;
+                const status = item.querySelector('.status-badge').textContent;
 
-            items.forEach(item => {
-                if (year === 'all' || item.dataset.year === year) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+                appointmentsList += `
+                            <div style="margin: 20px 0; padding: 15px; border: 1px solid #e5e7eb; border-radius: 8px; page-break-inside: avoid;">
+                                <h3 style="color: #2f9e8f; margin: 0 0 10px 0;">Appointment #${index + 1}</h3>
+                                <p><strong>Date:</strong> ${date}</p>
+                                <p><strong>Doctor:</strong> ${doctor}</p>
+                                <p><strong>Specialty:</strong> ${specialty}</p>
+                                <p><strong>Reason:</strong> ${reason}</p>
+                                <p><strong>Status:</strong> <span style="background: ${status.includes('Completed') ? '#d1fae5' : status.includes('Cancelled') ? '#fee2e2' : '#fef3c7'}; padding: 4px 12px; border-radius: 12px;">${status}</span></p>
+                            </div>
+                        `;
+            }
+        });
 
-            dividers.forEach(divider => {
-                const yearText = divider.querySelector('span').textContent;
-                if (year === 'all' || yearText === year) {
-                    divider.style.display = 'flex';
-                } else {
-                    divider.style.display = 'none';
-                }
-            });
-        }
+        printWindow.document.write(`
+                    <html>
+                    <head>
+                        <title>Appointment History Report</title>
+                        <style>
+                            body { font-family: Arial, sans-serif; padding: 40px; }
+                            .header { text-align: center; border-bottom: 3px solid #2f9e8f; padding-bottom: 20px; margin-bottom: 30px; }
+                            .header h1 { color: #2f9e8f; margin: 0; }
+                            .stats { display: flex; gap: 20px; margin: 20px 0; justify-content: center; }
+                            .stat-box { padding: 15px 30px; background: #f9fafb; border-radius: 8px; text-align: center; }
+                            .stat-number { font-size: 28px; font-weight: bold; color: #2f9e8f; }
+                            .stat-label { font-size: 14px; color: #6b7280; }
+                            @media print { 
+                                button { display: none; }
+                                .no-print { display: none; }
+                            }
+                        </style>
+                    </head>
+                    <body>
+                        <div class="header">
+                            <h1>📋 Appointment History Report</h1>
+                            <p>Generated on ${new Date().toLocaleDateString()}</p>
+                        </div>
+                        
+                        <div class="stats">
+                            <div class="stat-box">
+                                <div class="stat-number">18</div>
+                                <div class="stat-label">Total Visits</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">15</div>
+                                <div class="stat-label">Completed</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">2</div>
+                                <div class="stat-label">Cancelled</div>
+                            </div>
+                            <div class="stat-box">
+                                <div class="stat-number">1</div>
+                                <div class="stat-label">No Show</div>
+                            </div>
+                        </div>
 
-        function viewFullDetails(appointmentId) {
-            alert('Viewing details for appointment #' + appointmentId +
-                '\n\nThis would typically open a modal or navigate to a detailed view page.');
-        }
+                        <h2 style="color: #2f9e8f; margin-top: 40px;">Appointment Details</h2>
+                        ${appointmentsList}
 
-        function exportHistory() {
-            alert(
-                'Exporting appointment history to PDF...\n\nThis would typically generate a PDF report of all appointments.');
-        }
+                        <div class="no-print" style="text-align: center; margin-top: 40px;">
+                            <button onclick="window.print()" style="padding: 12px 30px; background: #2f9e8f; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">
+                                🖨️ Print / Save as PDF
+                            </button>
+                            <button onclick="window.close()" style="padding: 12px 30px; background: #6b7280; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer; margin-left: 10px;">
+                                ❌ Close
+                            </button>
+                        </div>
+                    </body>
+                    </html>
+                `);
+        printWindow.document.close();
+    }
     </script>
 
     <!-- Navbar -->
@@ -206,6 +504,7 @@
             </div>
         </div>
     </nav>
+
     <!-- Page Header -->
     <div class="page-header">
         <div class="container">
