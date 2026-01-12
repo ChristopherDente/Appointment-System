@@ -246,9 +246,13 @@
     <!-- FAQ Section -->
     <div class="container my-5">
         <h3 class="fw-bold text-center mb-4">Frequently Asked Questions</h3>
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
+
+        <div class="row align-items-center g-4">
+
+            <!-- FAQ Accordion (RIGHT) -->
+            <div class="col-lg-7">
                 <div class="accordion" id="faqAccordion">
+
                     <div class="accordion-item card-doctor border mb-3">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
@@ -257,7 +261,7 @@
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                You can book an appointment online through our website by clicking the "Book Appointment" button, 
+                                You can book an appointment online through our website by clicking the "Book Appointment" button,
                                 or call us at +63 9127339200 during office hours.
                             </div>
                         </div>
@@ -271,7 +275,7 @@
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                Yes, we accept walk-in patients, but we recommend booking an appointment in advance to minimize wait times.
+                                Yes, we accept walk-in patients, but we recommend booking an appointment in advance.
                             </div>
                         </div>
                     </div>
@@ -284,7 +288,7 @@
                         </h2>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                We accept most major health insurance plans. Please contact our billing department for specific insurance inquiries.
+                                We accept most major health insurance plans. Please contact billing for details.
                             </div>
                         </div>
                     </div>
@@ -297,15 +301,22 @@
                         </h2>
                         <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                You can request your medical records by visiting our Medical Records department with a valid ID, 
-                                or submit a written request via email to onlineappointmentsystem00@gmail.com.
+                                Request your medical records by visiting our Medical Records department or emailing us.
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
+            <!-- FAQ Image (LEFT) -->
+            <div class="col-lg-5 text-center">
+                <img src="images/FAQ.jpg" alt="FAQ" class="img-fluid rounded-4">
+            </div>
+
         </div>
     </div>
+
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">
