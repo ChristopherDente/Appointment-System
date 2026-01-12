@@ -114,11 +114,7 @@
             color: white;
         }
 
-        .footer-doctor {
-            background: linear-gradient(135deg, var(--doctor-primary) 0%, var(--doctor-dark) 100%);
-            color: white;
-            margin-top: 3rem;
-        }
+       
 
         .item-image {
             width: 60px;
@@ -592,12 +588,9 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer-doctor">
+     <footer class="footer-doctor mt-5">
         <div class="container py-4">
-            <div class="text-center small opacity-75">
-                © 2026 Online Appointment Booking System. All rights reserved.
-            </div>
+            <div class="text-center small text-light opacity-75">© 2026 Online Appointment Booking System</div>
         </div>
     </footer>
 
