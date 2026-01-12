@@ -1,7 +1,7 @@
 <?php
 
 // CHANGE THIS ONLY
-$DB_DRIVER = 'sqlsrv'; // 'mysql' or 'sqlsrv'
+$DB_DRIVER = 'mysql'; // 'mysql' or 'sqlsrv'
 
 if ($DB_DRIVER === 'mysql') {
 

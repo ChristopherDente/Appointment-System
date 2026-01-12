@@ -246,9 +246,13 @@
     <!-- FAQ Section -->
     <div class="container my-5">
         <h3 class="fw-bold text-center mb-4">Frequently Asked Questions</h3>
-        <div class="row justify-content-center">
-            <div class="col-lg-12">
+
+        <div class="row align-items-center g-4">
+
+            <!-- FAQ Accordion (RIGHT) -->
+            <div class="col-lg-7">
                 <div class="accordion" id="faqAccordion">
+
                     <div class="accordion-item card-doctor border mb-3">
                         <h2 class="accordion-header">
                             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
@@ -257,7 +261,7 @@
                         </h2>
                         <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                You can book an appointment online through our website by clicking the "Book Appointment" button, 
+                                You can book an appointment online through our website by clicking the "Book Appointment" button,
                                 or call us at +63 9127339200 during office hours.
                             </div>
                         </div>
@@ -271,7 +275,7 @@
                         </h2>
                         <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                Yes, we accept walk-in patients, but we recommend booking an appointment in advance to minimize wait times.
+                                Yes, we accept walk-in patients, but we recommend booking an appointment in advance.
                             </div>
                         </div>
                     </div>
@@ -284,7 +288,7 @@
                         </h2>
                         <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                We accept most major health insurance plans. Please contact our billing department for specific insurance inquiries.
+                                We accept most major health insurance plans. Please contact billing for details.
                             </div>
                         </div>
                     </div>
@@ -297,64 +301,156 @@
                         </h2>
                         <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
                             <div class="accordion-body text-muted">
-                                You can request your medical records by visiting our Medical Records department with a valid ID, 
-                                or submit a written request via email to onlineappointmentsystem00@gmail.com.
+                                Request your medical records by visiting our Medical Records department or emailing us.
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
+
+            <!-- FAQ Image (LEFT) -->
+            <div class="col-lg-5 text-center">
+                <img src="images/FAQ.jpg" alt="FAQ" class="img-fluid rounded-4">
+            </div>
+
         </div>
     </div>
 
-    <!-- Login Modal -->
+
+    <!-- Login / Register Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content card-doctor border-0 shadow">
+
+                <!-- Modal Header -->
                 <div class="modal-header bg-doctor text-white">
-                    <h5 class="modal-title">
+                    <h5 class="modal-title" id="modalTitle">
                         <i class="bi bi-box-arrow-in-right"></i> Login
                     </h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <form method="POST" action="login_process.php">
-                    <div class="modal-body">
-                        <div class="position-relative mb-3">
-                            <i class="bi bi-person form-icon"></i>
-                            <input type="text" name="username" class="form-control form-input" placeholder="Username" required>
+
+                <div class="modal-body">
+
+                    <!-- LOGIN FORM -->
+                    <form id="loginForm">
+                        <div class="form-section" id="loginSection">
+
+                            <div class="position-relative mb-3">
+                                <i class="bi bi-person form-icon"></i>
+                                <input type="text" name="username" class="form-control form-input" placeholder="Username" required>
+                            </div>
+
+                            <div class="position-relative mb-2">
+                                <i class="bi bi-lock form-icon"></i>
+                                <input type="password" id="passwordField" name="password" class="form-control form-input" placeholder="Password" required>
+                                <i class="bi bi-eye eye-icon" id="togglePassword"></i>
+                            </div>
+
+                            <div class="mb-3">
+                                <a href="frontend/forgot_password.php" class="forgot-link">Forgot Password?</a>
+                            </div>
+
+                            <!-- Divider -->
+                            <div class="position-relative my-4">
+                                <hr>
+                                <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
+                                    OR
+                                </span>
+                            </div>
+
+                            <!-- Google Sign-In Button -->
+                            <div class="d-grid mb-3">
+                                <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtn">
+                                    <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+                                        style="vertical-align: middle; margin-right: 8px;">
+                                        <path fill="#EA4335"
+                                            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                                        <path fill="#4285F4"
+                                            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                                        <path fill="#FBBC05"
+                                            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                                        <path fill="#34A853"
+                                            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                                        <path fill="none" d="M0 0h48v48H0z" />
+                                    </svg>
+                                    Continue with Google
+                                </button>
+                            </div>
+
+                            <div class="text-center small mb-3">
+                                Don't have an account? 
+                                <a href="#" id="showRegister">Register here</a>
+                            </div>
+
                         </div>
-                        <div class="position-relative mb-2">
-                            <i class="bi bi-lock form-icon"></i>
-                            <input type="password" id="passwordField" name="password" class="form-control form-input" placeholder="Password" required>
-                            <i class="bi bi-eye eye-icon" id="togglePassword"></i>
-                        </div>
-                        <div class="mb-3">
-                            <a href="forgot_password.php" class="forgot-link">Forgot Password?</a>
-                        </div>
-                        <div class="position-relative my-4">
-                            <hr>
-                            <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">OR</span>
-                        </div>
-                        <div class="d-grid">
-                            <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtn">
-                                <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" style="vertical-align: middle; margin-right: 8px;">
-                                    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
-                                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
-                                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
-                                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
-                                    <path fill="none" d="M0 0h48v48H0z"/>
-                                </svg>
-                                Continue with Google
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-doctor px-4">
+                                <i class="bi bi-box-arrow-in-right"></i> Login
                             </button>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-doctor px-4">
-                            <i class="bi bi-box-arrow-in-right"></i> Login
-                        </button>
-                    </div>
-                </form>
+                    </form>
+
+                    <!-- REGISTER FORM -->
+                    <form id="registerForm" style="display: none;">
+                        <div class="form-section" id="registerSection">
+                            <!-- Google Sign-In Button -->
+                            <div class="d-grid mb-3">
+                                <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtn">
+                                    <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
+                                        style="vertical-align: middle; margin-right: 8px;">
+                                        <path fill="#EA4335"
+                                            d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z" />
+                                        <path fill="#4285F4"
+                                            d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z" />
+                                        <path fill="#FBBC05"
+                                            d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z" />
+                                        <path fill="#34A853"
+                                            d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z" />
+                                        <path fill="none" d="M0 0h48v48H0z" />
+                                    </svg>
+                                    Continue with Google
+                                </button>
+                            </div>
+
+                            <!-- Divider -->
+                            <div class="position-relative my-4">
+                                <hr>
+                                <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
+                                    OR
+                                </span>
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="text" name="username" class="form-control form-input" placeholder="Username" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="password" name="password" class="form-control form-input" placeholder="Password" required>
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="password" name="confirm_password" class="form-control form-input" placeholder="Confirm Password" required>
+                            </div>
+
+                            <div class="d-grid mb-2">
+                                <button type="submit" class="btn btn-doctor px-4">
+                                    <i class="bi bi-person-plus"></i> Register
+                                </button>
+                            </div>
+
+                            <div class="text-center small mb-3">
+                                Already have an account? 
+                                <a href="#" id="showLogin">Login here</a>
+                            </div>                        
+
+                        </div>
+                        
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
@@ -459,6 +555,75 @@
             passwordField.setAttribute('type', type);
             togglePassword.classList.toggle('bi-eye');
             togglePassword.classList.toggle('bi-eye-slash');
+        });
+    </script>
+
+    <script>
+        // Toggle between Login and Register forms
+        document.getElementById('showRegister').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('registerForm').style.display = 'block';
+            document.getElementById('modalTitle').innerHTML = '<i class="bi bi-person-plus"></i> Register';
+        });
+
+        document.getElementById('showLogin').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('registerForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+            document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+        });
+
+        // LOGIN AJAX
+        const loginForm = document.getElementById('loginForm');
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = loginForm.username.value;
+            const password = loginForm.password.value;
+
+            fetch('http://appointment-system.test/backend/login.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) window.location.href = data.redirect;
+            })
+            .catch(err => {
+                console.error(err);
+                alert("An error occurred while logging in.");
+            });
+        });
+
+        // REGISTER AJAX
+        const registerForm = document.getElementById('registerForm');
+        registerForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const username = registerForm.username.value;
+            const password = registerForm.password.value;
+            const confirm_password = registerForm.confirm_password.value;
+
+            fetch('http://appointment-system.test/backend/register.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password, confirm_password })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) {
+                    // Switch to login after successful registration
+                    document.getElementById('registerForm').style.display = 'none';
+                    document.getElementById('loginForm').style.display = 'block';
+                    document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("An error occurred during registration");
+            });
         });
     </script>
 </body>
