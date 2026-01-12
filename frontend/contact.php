@@ -145,11 +145,29 @@
         </div>
     </div>
 
-    <!-- Contact Form -->
+    <!-- Contact Form + Map -->
     <div class="container my-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card card-doctor">
+        <div class="row g-4 align-items-stretch">
+
+            <!-- Map (Left) -->
+            <div class="col-lg-6">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-0" style="border-radius: 18px; overflow: hidden;">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1621.6804713896681!2d120.27176484339998!3d14.82369164341832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3396713dc6158cd5%3A0xce084c90e0457df1!2sAllied%20Care%20Experts%20(ACE)%20Medical%20Center%20-%20Baypointe%2C%20Inc.!5e0!3m2!1sen!2sph!4v1768089940140!5m2!1sen!2sph"
+                            width="100%"
+                            height="100%"
+                            style="border:0; min-height: 100%;"
+                            allowfullscreen
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Form (Right) -->
+            <div class="col-lg-6">
+                <div class="card card-doctor h-100">
                     <div class="card-body p-5">
                         <h3 class="fw-bold text-center mb-4">Send Us a Message</h3>
                         <form method="POST" action="contact_process.php">
@@ -197,8 +215,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
+
 
     <!-- Office Hours -->
     <div class="container my-5">
@@ -223,28 +243,11 @@
         </div>
     </div>
 
-    <!-- Map Section -->
-    <div class="container my-5">
-        <div class="card card-doctor">
-            <div class="card-body p-0" style="height: 400px; border-radius: 18px; overflow: hidden;">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1621.6804713896681!2d120.27176484339998!3d14.82369164341832!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3396713dc6158cd5%3A0xce084c90e0457df1!2sAllied%20Care%20Experts%20(ACE)%20Medical%20Center%20-%20Baypointe%2C%20Inc.!5e0!3m2!1sen!2sph!4v1768089940140!5m2!1sen!2sph" 
-                    width="100%" 
-                    height="400" 
-                    style="border:0;" 
-                    allowfullscreen="" 
-                    loading="lazy" 
-                    referrerpolicy="no-referrer-when-downgrade">
-                </iframe>
-            </div>
-        </div>
-    </div>
-
     <!-- FAQ Section -->
     <div class="container my-5">
         <h3 class="fw-bold text-center mb-4">Frequently Asked Questions</h3>
         <div class="row justify-content-center">
-            <div class="col-lg-8">
+            <div class="col-lg-12">
                 <div class="accordion" id="faqAccordion">
                     <div class="accordion-item card-doctor border mb-3">
                         <h2 class="accordion-header">
