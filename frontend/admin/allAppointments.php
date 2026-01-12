@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>All Appointments - Online Appointment Booking System</title>
@@ -10,46 +11,46 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .filter-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-            margin-bottom: 2rem;
-        }
+    .filter-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+    }
 
-        .table-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        }
+    .table-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
 
-        .badge-status {
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
+    .badge-status {
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+    }
 
-        .action-btn {
-            padding: 0.25rem 0.5rem;
-            font-size: 0.875rem;
-            margin: 0 0.125rem;
-        }
+    .action-btn {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        margin: 0 0.125rem;
+    }
 
-        .search-input {
-            border-radius: 8px;
-            padding: 0.5rem 1rem 0.5rem 2.5rem;
-        }
+    .search-input {
+        border-radius: 8px;
+        padding: 0.5rem 1rem 0.5rem 2.5rem;
+    }
 
-        .search-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-        }
+    .search-icon {
+        position: absolute;
+        left: 1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #6c757d;
+    }
     </style>
 </head>
 
@@ -85,20 +86,65 @@
                     <li class="nav-item">
                         <a class="nav-link" href="patients.php">Patients</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Reports</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="dailyAppointments.php">Daily Appointments</a></li>
-                            <li><a class="dropdown-item" href="monthreport.php">Monthly/Yearly</a></li>
-                            <li><a class="dropdown-item" href="revenue_reports.php">Revenue Reports</a></li>
-                            <li><a class="dropdown-item" href="docPerformance.php">Doctors Performance</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.php">Reports</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="inventory.php">Inventory</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">Profile</a>
+                    </li>
+                       <li class="nav-item dropdown">
+                        <a class="nav-link position-relative d-flex align-items-center justify-content-center dropdown-toggle"
+                            href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false" style="width: 40px; height: 40px;">
+
+                            <i class="bi bi-bell fs-5 text-white"></i>
+
+                            <span id="notificationBadge" class="notification-count">
+                                3
+                            </span>
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
+                            aria-labelledby="notificationDropdown">
+
+                            <li class="dropdown-header fw-semibold">
+                                Notifications
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex gap-2" href="#">
+                                    <i class="bi bi-check-circle text-success"></i>
+                                    Appointment Confirmation
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex gap-2" href="#">
+                                    <i class="bi bi-alarm text-primary"></i>
+                                    Appointment Reminders
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item d-flex gap-2" href="#">
+                                    <i class="bi bi-x-circle text-danger"></i>
+                                    Cancellation Updates
+                                </a>
+                            </li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item text-center text-primary fw-semibold" href="/notifications.php">
+                                    View all notifications
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item ms-lg-3">
                         <a class="nav-link-login nav-link" href="logout.php"
@@ -128,7 +174,8 @@
                     <label class="form-label small fw-semibold">Search</label>
                     <div class="position-relative">
                         <i class="bi bi-search search-icon"></i>
-                        <input type="text" id="searchInput" class="form-control search-input" placeholder="Patient name, ID...">
+                        <input type="text" id="searchInput" class="form-control search-input"
+                            placeholder="Patient name, ID...">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -216,13 +263,16 @@
                             <td><span class="badge bg-info">Online</span></td>
                             <td><span class="badge badge-status bg-success">Completed</span></td>
                             <td>
-                                <button class="btn btn-sm btn-outline-primary action-btn" onclick="viewDetails(1)" title="View">
+                                <button class="btn btn-sm btn-outline-primary action-btn" onclick="viewDetails(1)"
+                                    title="View">
                                     <i class="bi bi-eye"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-warning action-btn" onclick="editAppointment(1)" title="Edit">
+                                <button class="btn btn-sm btn-outline-warning action-btn" onclick="editAppointment(1)"
+                                    title="Edit">
                                     <i class="bi bi-pencil"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-danger action-btn" onclick="cancelAppointment(1)" title="Cancel">
+                                <button class="btn btn-sm btn-outline-danger action-btn" onclick="cancelAppointment(1)"
+                                    title="Cancel">
                                     <i class="bi bi-x-circle"></i>
                                 </button>
                             </td>
@@ -430,51 +480,52 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function viewDetails(id) {
-            const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
-            modal.show();
+    function viewDetails(id) {
+        const modal = new bootstrap.Modal(document.getElementById('detailsModal'));
+        modal.show();
+    }
+
+    function editAppointment(id) {
+        if (confirm('Do you want to edit this appointment?')) {
+            window.location.href = 'manageStatus.php?id=' + id;
         }
+    }
 
-        function editAppointment(id) {
-            if (confirm('Do you want to edit this appointment?')) {
-                window.location.href = 'manageStatus.php?id=' + id;
-            }
+    function cancelAppointment(id) {
+        if (confirm('Are you sure you want to cancel this appointment?')) {
+            alert('Appointment #' + id + ' has been cancelled');
+            // Add your cancellation logic here
         }
+    }
 
-        function cancelAppointment(id) {
-            if (confirm('Are you sure you want to cancel this appointment?')) {
-                alert('Appointment #' + id + ' has been cancelled');
-                // Add your cancellation logic here
-            }
-        }
+    function resetFilters() {
+        document.getElementById('searchInput').value = '';
+        document.getElementById('filterStatus').value = '';
+        document.getElementById('filterDepartment').value = '';
+        document.getElementById('dateFrom').value = '';
+        document.getElementById('dateTo').value = '';
+    }
 
-        function resetFilters() {
-            document.getElementById('searchInput').value = '';
-            document.getElementById('filterStatus').value = '';
-            document.getElementById('filterDepartment').value = '';
-            document.getElementById('dateFrom').value = '';
-            document.getElementById('dateTo').value = '';
-        }
+    function exportToExcel() {
+        alert('Exporting appointments to Excel...');
+        // Add your export logic here
+    }
 
-        function exportToExcel() {
-            alert('Exporting appointments to Excel...');
-            // Add your export logic here
-        }
+    // Search functionality
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+        // Add your search logic here
+        console.log('Searching for:', e.target.value);
+    });
 
-        // Search functionality
-        document.getElementById('searchInput').addEventListener('input', function(e) {
-            // Add your search logic here
-            console.log('Searching for:', e.target.value);
-        });
+    // Filter functionality
+    document.getElementById('filterStatus').addEventListener('change', function(e) {
+        console.log('Filter by status:', e.target.value);
+    });
 
-        // Filter functionality
-        document.getElementById('filterStatus').addEventListener('change', function(e) {
-            console.log('Filter by status:', e.target.value);
-        });
-
-        document.getElementById('filterDepartment').addEventListener('change', function(e) {
-            console.log('Filter by department:', e.target.value);
-        });
+    document.getElementById('filterDepartment').addEventListener('change', function(e) {
+        console.log('Filter by department:', e.target.value);
+    });
     </script>
 </body>
+
 </html>

@@ -51,7 +51,7 @@
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">Profile</a>
                     </li>
-                       <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a class="nav-link position-relative d-flex align-items-center justify-content-center dropdown-toggle"
                             href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false" style="width: 40px; height: 40px;">
@@ -117,7 +117,7 @@
     <div class="page-header">
         <div class="container">
             <div class="d-flex align-items-center">
-               <div class="col-md-8">
+                <div class="col-md-8">
                     <h2 class="fw-bold mb-2">Welcome back, John!</h2>
                     <p class="mb-0 opacity-90">Manage your appointments and health information in one place.</p>
                 </div>
@@ -132,7 +132,7 @@
 
     <!-- Dashboard Content -->
     <div class="container dashboard-content">
-         
+
         <!-- Stats Overview -->
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
