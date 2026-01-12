@@ -65,10 +65,8 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center fw-semibold" href="#">
-                <span class="navbar-brand fw-semibold">
-                    <i class="bi bi-heart-pulse"></i> Online Appointment Booking System
-                </span>
+            <a class="navbar-brand d-flex align-items-center fw-semibold" href="dashboard.php">
+                <i class="bi bi-heart-pulse"></i> Online Appointment Booking System
             </a>
 
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
@@ -82,24 +80,22 @@
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="appointmentDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Appointments</a>
-                        <ul class="dropdown-menu" aria-labelledby="appointmentDropdown">
+                            data-bs-toggle="dropdown">Appointments</a>
+                        <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="allAppointments.php">All Appointments</a></li>
                             <li><a class="dropdown-item" href="walkin.php">Book Walk-in</a></li>
                             <li><a class="dropdown-item" href="manageStatus.php">Manage Status</a></li>
                         </ul>
                     </li>
-
                     <li class="nav-item">
-                        <a class="nav-link" href="docotors.php">Doctors</a>
+                        <a class="nav-link" href="doctors.php">Doctors</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="patients.php">Patients</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="appointmentDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Reports</a>
-                        <ul class="dropdown-menu" aria-labelledby="appointmentDropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Reports</a>
+                        <ul class="dropdown-menu">
                             <li><a class="dropdown-item" href="dailyAppointments.php">Daily Appointments</a></li>
                             <li><a class="dropdown-item" href="monthreport.php">Monthly/Yearly</a></li>
                             <li><a class="dropdown-item" href="revenue_reports.php">Revenue Reports</a></li>
@@ -111,57 +107,6 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">Profile</a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link position-relative d-flex align-items-center justify-content-center dropdown-toggle"
-                            href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
-                            aria-expanded="false" style="width: 40px; height: 40px;">
-
-                            <i class="bi bi-bell fs-5 text-white"></i>
-
-                            <span id="notificationBadge" class="notification-count">
-                                3
-                            </span>
-                        </a>
-
-                        <ul class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
-                            aria-labelledby="notificationDropdown">
-
-                            <li class="dropdown-header fw-semibold">
-                                Notifications
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex gap-2" href="#">
-                                    <i class="bi bi-check-circle text-success"></i>
-                                    Appointment Confirmation
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex gap-2" href="#">
-                                    <i class="bi bi-alarm text-primary"></i>
-                                    Appointment Reminders
-                                </a>
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item d-flex gap-2" href="#">
-                                    <i class="bi bi-x-circle text-danger"></i>
-                                    Cancellation Updates
-                                </a>
-                            </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
-                            <li>
-                                <a class="dropdown-item text-center text-primary fw-semibold" href="/notifications.php">
-                                    View all notifications
-                                </a>
-                            </li>
-                        </ul>
                     </li>
                     <li class="nav-item ms-lg-3">
                         <a class="nav-link-login nav-link" href="logout.php"
@@ -182,7 +127,7 @@
                     <h2 class="fw-bold mb-2">Admin Dashboard</h2>
                     <p class="mb-0 opacity-90">Welcome back! Here's what's happening today.</p>
                 </div>
-                 
+
             </div>
         </div>
     </div>
@@ -544,8 +489,16 @@
             </div>
         </div>
     </div>
- 
-    <br>
+
+    <!-- Footer -->
+    <footer class="footer-doctor mt-5">
+        <div class="container py-4">
+            <div class="text-center small text-light opacity-75">
+                © 2026 Online Appointment Booking System. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
