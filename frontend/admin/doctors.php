@@ -8,6 +8,20 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
+        :root {
+            --doctor-primary: #0d6efd;
+            --doctor-light: #e7f1ff;
+        }
+        
+        
+        .text-doctor {
+            color: var(--doctor-primary);
+        }
+        
+        .bg-doctor-light {
+            background-color: var(--doctor-light);
+        }
+        
         .doctor-grid-card {
             background: white;
             border-radius: 12px;
@@ -52,6 +66,34 @@
             padding: 1.5rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.08);
         }
+        
+         
+       
+        .modal-doctor-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--doctor-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+        .info-row {
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #495057;
+            min-width: 150px;
+        }
+        .info-value {
+            color: #212529;
+        }
     </style>
 </head>
 <body>
@@ -95,50 +137,35 @@
                     <li class="nav-item">
                         <a class="nav-link" href="profile.php">Profile</a>
                     </li>
-                       <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a class="nav-link position-relative d-flex align-items-center justify-content-center dropdown-toggle"
                             href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false" style="width: 40px; height: 40px;">
-
                             <i class="bi bi-bell fs-5 text-white"></i>
-
-                            <span id="notificationBadge" class="notification-count">
-                                3
-                            </span>
+                            <span id="notificationBadge" class="notification-count">3</span>
                         </a>
-
                         <ul class="dropdown-menu dropdown-menu-end shadow notification-dropdown"
                             aria-labelledby="notificationDropdown">
-
-                            <li class="dropdown-header fw-semibold">
-                                Notifications
-                            </li>
-
+                            <li class="dropdown-header fw-semibold">Notifications</li>
                             <li>
                                 <a class="dropdown-item d-flex gap-2" href="#">
                                     <i class="bi bi-check-circle text-success"></i>
                                     Appointment Confirmation
                                 </a>
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex gap-2" href="#">
                                     <i class="bi bi-alarm text-primary"></i>
                                     Appointment Reminders
                                 </a>
                             </li>
-
                             <li>
                                 <a class="dropdown-item d-flex gap-2" href="#">
                                     <i class="bi bi-x-circle text-danger"></i>
                                     Cancellation Updates
                                 </a>
                             </li>
-
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-
+                            <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item text-center text-primary fw-semibold" href="/notifications.php">
                                     View all notifications
@@ -413,6 +440,114 @@
         </div>
     </div>
 
+    <!-- View Doctor Modal -->
+    <div class="modal fade" id="viewDoctorModal" tabindex="-1" aria-labelledby="viewDoctorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-doctor text-white">
+                    <h5 class="modal-title" id="viewDoctorModalLabel">
+                        <i class="bi bi-person-badge"></i> Doctor Details
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-doctor-avatar">
+                        <i class="bi bi-person-fill text-doctor" style="font-size: 4rem;"></i>
+                    </div>
+                    
+                    <div class="text-center mb-4">
+                        <h4 class="fw-bold mb-1" id="doctorName">Dr. Sarah Smith</h4>
+                        <p class="text-muted mb-2" id="doctorDept">Cardiology Specialist</p>
+                        <span class="badge bg-success" id="doctorStatus">Active</span>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-row d-flex">
+                                    <span class="info-label"><i class="bi bi-credit-card me-2"></i>Doctor ID:</span>
+                                    <span class="info-value ms-auto" id="doctorId">#DOC001</span>
+                                </div>
+                                <div class="info-row d-flex">
+                                    <span class="info-label"><i class="bi bi-telephone me-2"></i>Contact:</span>
+                                    <span class="info-value ms-auto" id="doctorContact">+63 912 345 6789</span>
+                                </div>
+                                <div class="info-row d-flex">
+                                    <span class="info-label"><i class="bi bi-envelope me-2"></i>Email:</span>
+                                    <span class="info-value ms-auto" id="doctorEmail">sarah.smith@clinic.com</span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-row d-flex">
+                                    <span class="info-label"><i class="bi bi-hospital me-2"></i>Department:</span>
+                                    <span class="info-value ms-auto" id="doctorDepartment">Cardiology</span>
+                                </div>
+                                <div class="info-row d-flex">
+                                    <span class="info-label"><i class="bi bi-clock-history me-2"></i>Experience:</span>
+                                    <span class="info-value ms-auto" id="doctorExperience">5 years</span>
+                                </div>
+                                <div class="info-row d-flex">
+                                    <span class="info-label"><i class="bi bi-award me-2"></i>License No:</span>
+                                    <span class="info-value ms-auto" id="doctorLicense">LIC-12345</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h6 class="fw-semibold mb-3"><i class="bi bi-calendar-week me-2"></i>Working Schedule</h6>
+                            <div class="table-responsive">
+                                <table class="table table-sm table-bordered">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th>Day</th>
+                                            <th>Time</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="doctorSchedule">
+                                        <tr>
+                                            <td>Monday - Friday</td>
+                                            <td>9:00 AM - 5:00 PM</td>
+                                            <td><span class="badge bg-success">Available</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Saturday</td>
+                                            <td>9:00 AM - 1:00 PM</td>
+                                            <td><span class="badge bg-success">Available</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sunday</td>
+                                            <td>-</td>
+                                            <td><span class="badge bg-secondary">Off</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="mt-4">
+                            <h6 class="fw-semibold mb-2"><i class="bi bi-info-circle me-2"></i>Specializations</h6>
+                            <div id="doctorSpecializations">
+                                <span class="badge bg-primary me-2 mb-2">Heart Surgery</span>
+                                <span class="badge bg-primary me-2 mb-2">Cardiac Care</span>
+                                <span class="badge bg-primary me-2 mb-2">ECG Analysis</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning" onclick="editDoctorFromModal()">
+                        <i class="bi bi-pencil"></i> Edit Doctor
+                    </button>
+                    <button type="button" class="btn btn-info" onclick="manageScheduleFromModal()">
+                        <i class="bi bi-calendar"></i> Manage Schedule
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer class="footer-doctor mt-5">
         <div class="container py-4">
             <div class="text-center small text-light opacity-75">© 2026 Online Appointment Booking System</div>
@@ -421,6 +556,64 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Sample doctor data
+        const doctorsData = {
+            1: {
+                id: '#DOC001',
+                name: 'Dr. Sarah Smith',
+                department: 'Cardiology',
+                specialty: 'Cardiology Specialist',
+                contact: '+63 912 345 6789',
+                email: 'sarah.smith@clinic.com',
+                experience: '5 years',
+                license: 'LIC-12345',
+                status: 'Active',
+                statusClass: 'success',
+                specializations: ['Heart Surgery', 'Cardiac Care', 'ECG Analysis']
+            },
+            2: {
+                id: '#DOC002',
+                name: 'Dr. Michael Johnson',
+                department: 'Pediatrics',
+                specialty: 'Pediatrics Specialist',
+                contact: '+63 912 345 6790',
+                email: 'michael.j@clinic.com',
+                experience: '8 years',
+                license: 'LIC-12346',
+                status: 'Active',
+                statusClass: 'success',
+                specializations: ['Child Health', 'Vaccinations', 'Growth Monitoring']
+            },
+            3: {
+                id: '#DOC003',
+                name: 'Dr. Emily Brown',
+                department: 'Orthopedics',
+                specialty: 'Orthopedics Specialist',
+                contact: '+63 912 345 6791',
+                email: 'emily.b@clinic.com',
+                experience: '10 years',
+                license: 'LIC-12347',
+                status: 'Active',
+                statusClass: 'success',
+                specializations: ['Bone Surgery', 'Joint Replacement', 'Sports Medicine']
+            },
+            4: {
+                id: '#DOC004',
+                name: 'Dr. Robert Martinez',
+                department: 'Dermatology',
+                specialty: 'Dermatology Specialist',
+                contact: '+63 912 345 6792',
+                email: 'robert.m@clinic.com',
+                experience: '6 years',
+                license: 'LIC-12348',
+                status: 'Inactive',
+                statusClass: 'danger',
+                specializations: ['Skin Care', 'Cosmetic Dermatology', 'Laser Treatment']
+            }
+        };
+
+        let currentDoctorId = null;
+
         function switchView(view) {
             if (view === 'grid') {
                 document.getElementById('gridViewContent').style.display = 'block';
@@ -442,7 +635,33 @@
         }
 
         function viewDoctor(id) {
-            window.location.href = 'viewDoctor.php?id=' + id;
+            currentDoctorId = id;
+            const doctor = doctorsData[id];
+            
+            if (doctor) {
+                // Update modal content
+                document.getElementById('doctorName').textContent = doctor.name;
+                document.getElementById('doctorDept').textContent = doctor.specialty;
+                document.getElementById('doctorStatus').textContent = doctor.status;
+                document.getElementById('doctorStatus').className = `badge bg-${doctor.statusClass}`;
+                
+                document.getElementById('doctorId').textContent = doctor.id;
+                document.getElementById('doctorContact').textContent = doctor.contact;
+                document.getElementById('doctorEmail').textContent = doctor.email;
+                document.getElementById('doctorDepartment').textContent = doctor.department;
+                document.getElementById('doctorExperience').textContent = doctor.experience;
+                document.getElementById('doctorLicense').textContent = doctor.license;
+                
+                // Update specializations
+                const specializationsHTML = doctor.specializations
+                    .map(spec => `<span class="badge bg-primary me-2 mb-2">${spec}</span>`)
+                    .join('');
+                document.getElementById('doctorSpecializations').innerHTML = specializationsHTML;
+                
+                // Show modal
+                const modal = new bootstrap.Modal(document.getElementById('viewDoctorModal'));
+                modal.show();
+            }
         }
 
         function editDoctor(id) {
@@ -451,6 +670,18 @@
 
         function manageSchedule(id) {
             window.location.href = 'doctorSchedule.php?id=' + id;
+        }
+
+        function editDoctorFromModal() {
+            if (currentDoctorId) {
+                window.location.href = 'editDoctor.php?id=' + currentDoctorId;
+            }
+        }
+
+        function manageScheduleFromModal() {
+            if (currentDoctorId) {
+                window.location.href = 'doctorSchedule.php?id=' + currentDoctorId;
+            }
         }
     </script>
 </body>
