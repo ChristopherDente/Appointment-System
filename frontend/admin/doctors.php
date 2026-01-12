@@ -86,14 +86,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="patients.php">Patients</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Reports</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="dailyAppointments.php">Daily Appointments</a></li>
-                            <li><a class="dropdown-item" href="monthreport.php">Monthly/Yearly</a></li>
-                            <li><a class="dropdown-item" href="revenue_reports.php">Revenue Reports</a></li>
-                            <li><a class="dropdown-item" href="docPerformance.php">Doctors Performance</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.php">Reports</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="inventory.php">Inventory</a>

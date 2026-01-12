@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Edit Doctor - Online Appointment Booking System</title>
@@ -8,17 +9,56 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .form-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 8px rgba(0,0,0,0.08); margin-bottom: 2rem; }
-        .section-title { color: var(--doctor-primary); border-bottom: 2px solid var(--doctor-light); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
-        .upload-area { border: 2px dashed #dee2e6; border-radius: 8px; padding: 2rem; text-align: center; cursor: pointer; transition: all 0.3s; }
-        .upload-area:hover { border-color: var(--doctor-primary); background: var(--doctor-light); }
-        .preview-image { max-width: 200px; max-height: 200px; border-radius: 8px; margin-top: 1rem; }
-        .activity-item { padding: 0.75rem; border-left: 3px solid #e9ecef; margin-bottom: 0.5rem; }
-        .activity-item:hover { background: #f8f9fa; }
+    .form-card {
+        background: white;
+        border-radius: 12px;
+        padding: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        color: var(--doctor-primary);
+        border-bottom: 2px solid var(--doctor-light);
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .upload-area {
+        border: 2px dashed #dee2e6;
+        border-radius: 8px;
+        padding: 2rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .upload-area:hover {
+        border-color: var(--doctor-primary);
+        background: var(--doctor-light);
+    }
+
+    .preview-image {
+        max-width: 200px;
+        max-height: 200px;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+
+    .activity-item {
+        padding: 0.75rem;
+        border-left: 3px solid #e9ecef;
+        margin-bottom: 0.5rem;
+    }
+
+    .activity-item:hover {
+        background: #f8f9fa;
+    }
     </style>
 </head>
+
 <body>
-        <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-semibold" href="dashboard.php">
@@ -49,14 +89,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="patients.php">Patients</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Reports</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="dailyAppointments.php">Daily Appointments</a></li>
-                            <li><a class="dropdown-item" href="monthreport.php">Monthly/Yearly</a></li>
-                            <li><a class="dropdown-item" href="revenue_reports.php">Revenue Reports</a></li>
-                            <li><a class="dropdown-item" href="docPerformance.php">Doctors Performance</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.php">Reports</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="inventory.php">Inventory</a>
@@ -90,10 +124,15 @@
                         <i class="bi bi-three-dots-vertical"></i> More Actions
                     </button>
                     <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#" onclick="viewSchedule()"><i class="bi bi-calendar"></i> View Schedule</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="viewAppointments()"><i class="bi bi-list-check"></i> View Appointments</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item text-danger" href="#" onclick="deactivateDoctor()"><i class="bi bi-x-circle"></i> Deactivate Account</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="viewSchedule()"><i class="bi bi-calendar"></i>
+                                View Schedule</a></li>
+                        <li><a class="dropdown-item" href="#" onclick="viewAppointments()"><i
+                                    class="bi bi-list-check"></i> View Appointments</a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item text-danger" href="#" onclick="deactivateDoctor()"><i
+                                    class="bi bi-x-circle"></i> Deactivate Account</a></li>
                     </ul>
                 </div>
             </div>
@@ -133,7 +172,8 @@
                             </div>
                             <div class="col-12">
                                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                                <textarea class="form-control" id="address" rows="2" required>123 Medical Center Drive, Manila, Philippines</textarea>
+                                <textarea class="form-control" id="address" rows="2"
+                                    required>123 Medical Center Drive, Manila, Philippines</textarea>
                             </div>
                         </div>
                     </div>
@@ -148,7 +188,8 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Email Address <span class="text-danger">*</span></label>
-                                <input type="email" class="form-control" id="email" value="sarah.smith@clinic.com" required>
+                                <input type="email" class="form-control" id="email" value="sarah.smith@clinic.com"
+                                    required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Emergency Contact Name</label>
@@ -167,11 +208,13 @@
                         <div class="row g-3">
                             <div class="col-md-6">
                                 <label class="form-label">License Number <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="licenseNumber" value="PRC-12345678" required>
+                                <input type="text" class="form-control" id="licenseNumber" value="PRC-12345678"
+                                    required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Specialization <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="specialization" value="Interventional Cardiology" required>
+                                <input type="text" class="form-control" id="specialization"
+                                    value="Interventional Cardiology" required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Department <span class="text-danger">*</span></label>
@@ -190,11 +233,13 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label">Qualifications</label>
-                                <textarea class="form-control" id="qualifications" rows="3">MD, FPCP, Board Certified in Cardiology, Fellowship in Interventional Cardiology</textarea>
+                                <textarea class="form-control" id="qualifications"
+                                    rows="3">MD, FPCP, Board Certified in Cardiology, Fellowship in Interventional Cardiology</textarea>
                             </div>
                             <div class="col-md-12">
                                 <label class="form-label">Biography</label>
-                                <textarea class="form-control" id="biography" rows="4">Dr. Sarah Smith is a highly experienced cardiologist with over 12 years of practice. She specializes in interventional cardiology and has helped numerous patients with complex heart conditions.</textarea>
+                                <textarea class="form-control" id="biography"
+                                    rows="4">Dr. Sarah Smith is a highly experienced cardiologist with over 12 years of practice. She specializes in interventional cardiology and has helped numerous patients with complex heart conditions.</textarea>
                             </div>
                         </div>
                     </div>
@@ -204,12 +249,15 @@
                         <h5 class="section-title"><i class="bi bi-currency-dollar"></i> Consultation Fees</h5>
                         <div class="row g-3">
                             <div class="col-md-6">
-                                <label class="form-label">Regular Consultation Fee (₱) <span class="text-danger">*</span></label>
-                                <input type="number" class="form-control" id="regularFee" value="1500" min="0" step="0.01" required>
+                                <label class="form-label">Regular Consultation Fee (₱) <span
+                                        class="text-danger">*</span></label>
+                                <input type="number" class="form-control" id="regularFee" value="1500" min="0"
+                                    step="0.01" required>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Follow-up Consultation Fee (₱)</label>
-                                <input type="number" class="form-control" id="followupFee" value="1000" min="0" step="0.01">
+                                <input type="number" class="form-control" id="followupFee" value="1000" min="0"
+                                    step="0.01">
                             </div>
                         </div>
                     </div>
@@ -220,7 +268,8 @@
                     <div class="form-card">
                         <h5 class="section-title"><i class="bi bi-image"></i> Profile Picture</h5>
                         <div class="text-center mb-3">
-                            <div class="bg-doctor-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width:120px;height:120px;">
+                            <div class="bg-doctor-light rounded-circle d-inline-flex align-items-center justify-content-center mb-3"
+                                style="width:120px;height:120px;">
                                 <i class="bi bi-person-fill text-doctor" style="font-size:4rem;"></i>
                             </div>
                         </div>
@@ -228,7 +277,8 @@
                             <i class="bi bi-cloud-upload text-muted" style="font-size:2rem;"></i>
                             <p class="text-muted mb-0 small">Click to change photo</p>
                         </div>
-                        <input type="file" id="photoUpload" accept="image/*" style="display:none;" onchange="previewImage(this)">
+                        <input type="file" id="photoUpload" accept="image/*" style="display:none;"
+                            onchange="previewImage(this)">
                     </div>
 
                     <!-- Account Settings -->
@@ -355,75 +405,76 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let passwordModal;
+    let passwordModal;
 
-        document.addEventListener('DOMContentLoaded', function() {
-            passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        passwordModal = new bootstrap.Modal(document.getElementById('passwordModal'));
+    });
 
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    alert('Image uploaded successfully!');
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
+    function previewImage(input) {
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                alert('Image uploaded successfully!');
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.getElementById('editDoctorForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (confirm('Save all changes?')) {
+            alert('Doctor information updated successfully!');
+            window.location.href = 'doctors.php';
+        }
+    });
+
+    function changePassword() {
+        passwordModal.show();
+    }
+
+    function savePassword() {
+        const current = document.getElementById('currentPassword').value;
+        const newPass = document.getElementById('newPassword').value;
+        const confirm = document.getElementById('confirmNewPassword').value;
+
+        if (!current || !newPass || !confirm) {
+            alert('Please fill in all fields');
+            return;
         }
 
-        document.getElementById('editDoctorForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            if (confirm('Save all changes?')) {
-                alert('Doctor information updated successfully!');
-                window.location.href = 'doctors.php';
-            }
-        });
-
-        function changePassword() {
-            passwordModal.show();
+        if (newPass !== confirm) {
+            alert('New passwords do not match');
+            return;
         }
 
-        function savePassword() {
-            const current = document.getElementById('currentPassword').value;
-            const newPass = document.getElementById('newPassword').value;
-            const confirm = document.getElementById('confirmNewPassword').value;
-
-            if (!current || !newPass || !confirm) {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            if (newPass !== confirm) {
-                alert('New passwords do not match');
-                return;
-            }
-
-            if (newPass.length < 6) {
-                alert('Password must be at least 6 characters');
-                return;
-            }
-
-            alert('Password changed successfully!');
-            passwordModal.hide();
-            document.getElementById('currentPassword').value = '';
-            document.getElementById('newPassword').value = '';
-            document.getElementById('confirmNewPassword').value = '';
+        if (newPass.length < 6) {
+            alert('Password must be at least 6 characters');
+            return;
         }
 
-        function viewSchedule() {
-            window.location.href = 'doctorSchedule.php?id=1';
-        }
+        alert('Password changed successfully!');
+        passwordModal.hide();
+        document.getElementById('currentPassword').value = '';
+        document.getElementById('newPassword').value = '';
+        document.getElementById('confirmNewPassword').value = '';
+    }
 
-        function viewAppointments() {
-            window.location.href = 'allAppointments.php?doctor=1';
-        }
+    function viewSchedule() {
+        window.location.href = 'doctorSchedule.php?id=1';
+    }
 
-        function deactivateDoctor() {
-            if (confirm('Are you sure you want to deactivate this doctor account? This action can be reversed later.')) {
-                alert('Doctor account deactivated');
-                window.location.href = 'doctors.php';
-            }
+    function viewAppointments() {
+        window.location.href = 'allAppointments.php?doctor=1';
+    }
+
+    function deactivateDoctor() {
+        if (confirm('Are you sure you want to deactivate this doctor account? This action can be reversed later.')) {
+            alert('Doctor account deactivated');
+            window.location.href = 'doctors.php';
         }
+    }
     </script>
 </body>
+
 </html>

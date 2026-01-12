@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Doctor Schedule - Online Appointment Booking System</title>
@@ -8,65 +9,75 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <style>
-        .schedule-card {
-            background: white;
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            margin-bottom: 1.5rem;
-        }
-        .day-card {
-            border: 2px solid #e9ecef;
-            border-radius: 8px;
-            padding: 1rem;
-            margin-bottom: 1rem;
-            transition: all 0.3s;
-        }
-        .day-card.active {
-            border-color: var(--doctor-primary);
-            background: var(--doctor-light);
-        }
-        .time-slot-badge {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background: #e9ecef;
-            border-radius: 20px;
-            margin: 0.25rem;
-            font-size: 0.875rem;
-        }
-        .time-slot-badge .remove-btn {
-            cursor: pointer;
-            margin-left: 0.5rem;
-            color: #dc3545;
-        }
-        .calendar-view {
-            background: white;
-            border-radius: 8px;
-            padding: 1rem;
-        }
-        .calendar-day {
-            aspect-ratio: 1;
-            border: 1px solid #dee2e6;
-            padding: 0.5rem;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-        .calendar-day:hover {
-            background: var(--doctor-light);
-        }
-        .calendar-day.has-schedule {
-            background: #d4edda;
-            border-color: #28a745;
-        }
-        .calendar-day.selected {
-            background: var(--doctor-primary);
-            color: white;
-        }
+    .schedule-card {
+        background: white;
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        margin-bottom: 1.5rem;
+    }
+
+    .day-card {
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        transition: all 0.3s;
+    }
+
+    .day-card.active {
+        border-color: var(--doctor-primary);
+        background: var(--doctor-light);
+    }
+
+    .time-slot-badge {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #e9ecef;
+        border-radius: 20px;
+        margin: 0.25rem;
+        font-size: 0.875rem;
+    }
+
+    .time-slot-badge .remove-btn {
+        cursor: pointer;
+        margin-left: 0.5rem;
+        color: #dc3545;
+    }
+
+    .calendar-view {
+        background: white;
+        border-radius: 8px;
+        padding: 1rem;
+    }
+
+    .calendar-day {
+        aspect-ratio: 1;
+        border: 1px solid #dee2e6;
+        padding: 0.5rem;
+        text-align: center;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+
+    .calendar-day:hover {
+        background: var(--doctor-light);
+    }
+
+    .calendar-day.has-schedule {
+        background: #d4edda;
+        border-color: #28a745;
+    }
+
+    .calendar-day.selected {
+        background: var(--doctor-primary);
+        color: white;
+    }
     </style>
 </head>
+
 <body>
-        <!-- Navbar -->
+    <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-semibold" href="dashboard.php">
@@ -97,14 +108,8 @@
                     <li class="nav-item">
                         <a class="nav-link" href="patients.php">Patients</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Reports</a>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="dailyAppointments.php">Daily Appointments</a></li>
-                            <li><a class="dropdown-item" href="monthreport.php">Monthly/Yearly</a></li>
-                            <li><a class="dropdown-item" href="revenue_reports.php">Revenue Reports</a></li>
-                            <li><a class="dropdown-item" href="docPerformance.php">Doctors Performance</a></li>
-                        </ul>
+                    <li class="nav-item">
+                        <a class="nav-link" href="reports.php">Reports</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="inventory.php">Inventory</a>
@@ -157,7 +162,8 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="flex-grow-1">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="monday" checked onchange="toggleDay(this, 'mondaySlots')">
+                                        <input class="form-check-input" type="checkbox" id="monday" checked
+                                            onchange="toggleDay(this, 'mondaySlots')">
                                         <label class="form-check-label fw-semibold" for="monday">Monday</label>
                                     </div>
                                     <div id="mondaySlots">
@@ -182,7 +188,8 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="flex-grow-1">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="tuesday" checked onchange="toggleDay(this, 'tuesdaySlots')">
+                                        <input class="form-check-input" type="checkbox" id="tuesday" checked
+                                            onchange="toggleDay(this, 'tuesdaySlots')">
                                         <label class="form-check-label fw-semibold" for="tuesday">Tuesday</label>
                                     </div>
                                     <div id="tuesdaySlots">
@@ -207,7 +214,8 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="flex-grow-1">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="wednesday" checked onchange="toggleDay(this, 'wednesdaySlots')">
+                                        <input class="form-check-input" type="checkbox" id="wednesday" checked
+                                            onchange="toggleDay(this, 'wednesdaySlots')">
                                         <label class="form-check-label fw-semibold" for="wednesday">Wednesday</label>
                                     </div>
                                     <div id="wednesdaySlots">
@@ -228,7 +236,8 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="flex-grow-1">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="thursday" checked onchange="toggleDay(this, 'thursdaySlots')">
+                                        <input class="form-check-input" type="checkbox" id="thursday" checked
+                                            onchange="toggleDay(this, 'thursdaySlots')">
                                         <label class="form-check-label fw-semibold" for="thursday">Thursday</label>
                                     </div>
                                     <div id="thursdaySlots">
@@ -253,7 +262,8 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="flex-grow-1">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="friday" checked onchange="toggleDay(this, 'fridaySlots')">
+                                        <input class="form-check-input" type="checkbox" id="friday" checked
+                                            onchange="toggleDay(this, 'fridaySlots')">
                                         <label class="form-check-label fw-semibold" for="friday">Friday</label>
                                     </div>
                                     <div id="fridaySlots">
@@ -274,7 +284,8 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="flex-grow-1">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="saturday" onchange="toggleDay(this, 'saturdaySlots')">
+                                        <input class="form-check-input" type="checkbox" id="saturday"
+                                            onchange="toggleDay(this, 'saturdaySlots')">
                                         <label class="form-check-label fw-semibold" for="saturday">Saturday</label>
                                     </div>
                                     <div id="saturdaySlots" style="display:none;"></div>
@@ -290,7 +301,8 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div class="flex-grow-1">
                                     <div class="form-check mb-2">
-                                        <input class="form-check-input" type="checkbox" id="sunday" onchange="toggleDay(this, 'sundaySlots')">
+                                        <input class="form-check-input" type="checkbox" id="sunday"
+                                            onchange="toggleDay(this, 'sundaySlots')">
                                         <label class="form-check-label fw-semibold" for="sunday">Sunday</label>
                                     </div>
                                     <div id="sundaySlots" style="display:none;"></div>
@@ -400,7 +412,8 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Reason</label>
-                        <input type="text" class="form-control" id="leaveReason" placeholder="e.g., Conference, Personal Leave">
+                        <input type="text" class="form-control" id="leaveReason"
+                            placeholder="e.g., Conference, Personal Leave">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -419,82 +432,83 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let currentSlotContainer = '';
-        let timeSlotModal, leaveModal;
+    let currentSlotContainer = '';
+    let timeSlotModal, leaveModal;
 
-        document.addEventListener('DOMContentLoaded', function() {
-            timeSlotModal = new bootstrap.Modal(document.getElementById('timeSlotModal'));
-            leaveModal = new bootstrap.Modal(document.getElementById('leaveModal'));
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        timeSlotModal = new bootstrap.Modal(document.getElementById('timeSlotModal'));
+        leaveModal = new bootstrap.Modal(document.getElementById('leaveModal'));
+    });
 
-        function toggleDay(checkbox, slotId) {
-            const slotContainer = document.getElementById(slotId);
-            const dayCard = checkbox.closest('.day-card');
-            if (checkbox.checked) {
-                slotContainer.style.display = 'block';
-                dayCard.classList.add('active');
-            } else {
-                slotContainer.style.display = 'none';
-                dayCard.classList.remove('active');
-            }
+    function toggleDay(checkbox, slotId) {
+        const slotContainer = document.getElementById(slotId);
+        const dayCard = checkbox.closest('.day-card');
+        if (checkbox.checked) {
+            slotContainer.style.display = 'block';
+            dayCard.classList.add('active');
+        } else {
+            slotContainer.style.display = 'none';
+            dayCard.classList.remove('active');
+        }
+    }
+
+    function addTimeSlot(container) {
+        currentSlotContainer = container;
+        timeSlotModal.show();
+    }
+
+    function confirmTimeSlot() {
+        const startTime = document.getElementById('startTime').value;
+        const endTime = document.getElementById('endTime').value;
+
+        if (!startTime || !endTime) {
+            alert('Please fill in both start and end times');
+            return;
         }
 
-        function addTimeSlot(container) {
-            currentSlotContainer = container;
-            timeSlotModal.show();
+        const container = document.getElementById(currentSlotContainer);
+        const slot = document.createElement('span');
+        slot.className = 'time-slot-badge';
+        slot.innerHTML =
+            `${formatTime(startTime)} - ${formatTime(endTime)} <i class="bi bi-x-circle remove-btn" onclick="removeSlot(this)"></i>`;
+        container.appendChild(slot);
+
+        timeSlotModal.hide();
+        document.getElementById('startTime').value = '';
+        document.getElementById('endTime').value = '';
+    }
+
+    function formatTime(time) {
+        const [hours, minutes] = time.split(':');
+        const hour = parseInt(hours);
+        const ampm = hour >= 12 ? 'PM' : 'AM';
+        const displayHour = hour % 12 || 12;
+        return `${displayHour}:${minutes} ${ampm}`;
+    }
+
+    function removeSlot(btn) {
+        if (confirm('Remove this time slot?')) {
+            btn.closest('.time-slot-badge').remove();
+        }
+    }
+
+    function addLeaveDate() {
+        leaveModal.show();
+    }
+
+    function confirmLeave() {
+        const date = document.getElementById('leaveDate').value;
+        const reason = document.getElementById('leaveReason').value;
+
+        if (!date || !reason) {
+            alert('Please fill in all fields');
+            return;
         }
 
-        function confirmTimeSlot() {
-            const startTime = document.getElementById('startTime').value;
-            const endTime = document.getElementById('endTime').value;
-            
-            if (!startTime || !endTime) {
-                alert('Please fill in both start and end times');
-                return;
-            }
-
-            const container = document.getElementById(currentSlotContainer);
-            const slot = document.createElement('span');
-            slot.className = 'time-slot-badge';
-            slot.innerHTML = `${formatTime(startTime)} - ${formatTime(endTime)} <i class="bi bi-x-circle remove-btn" onclick="removeSlot(this)"></i>`;
-            container.appendChild(slot);
-            
-            timeSlotModal.hide();
-            document.getElementById('startTime').value = '';
-            document.getElementById('endTime').value = '';
-        }
-
-        function formatTime(time) {
-            const [hours, minutes] = time.split(':');
-            const hour = parseInt(hours);
-            const ampm = hour >= 12 ? 'PM' : 'AM';
-            const displayHour = hour % 12 || 12;
-            return `${displayHour}:${minutes} ${ampm}`;
-        }
-
-        function removeSlot(btn) {
-            if (confirm('Remove this time slot?')) {
-                btn.closest('.time-slot-badge').remove();
-            }
-        }
-
-        function addLeaveDate() {
-            leaveModal.show();
-        }
-
-        function confirmLeave() {
-            const date = document.getElementById('leaveDate').value;
-            const reason = document.getElementById('leaveReason').value;
-            
-            if (!date || !reason) {
-                alert('Please fill in all fields');
-                return;
-            }
-
-            const container = document.getElementById('leaveDates');
-            const leaveDiv = document.createElement('div');
-            leaveDiv.className = 'alert alert-warning d-flex justify-content-between align-items-center p-2 mb-2';
-            leaveDiv.innerHTML = `
+        const container = document.getElementById('leaveDates');
+        const leaveDiv = document.createElement('div');
+        leaveDiv.className = 'alert alert-warning d-flex justify-content-between align-items-center p-2 mb-2';
+        leaveDiv.innerHTML = `
                 <div>
                     <small class="fw-semibold d-block">${new Date(date).toLocaleDateString('en-US', {month: 'short', day: 'numeric', year: 'numeric'})}</small>
                     <small class="text-muted">${reason}</small>
@@ -503,26 +517,27 @@
                     <i class="bi bi-trash"></i>
                 </button>
             `;
-            container.appendChild(leaveDiv);
-            
-            leaveModal.hide();
-            document.getElementById('leaveDate').value = '';
-            document.getElementById('leaveReason').value = '';
-        }
+        container.appendChild(leaveDiv);
 
-        function removeLeave(btn) {
-            if (confirm('Remove this leave date?')) {
-                btn.closest('.alert').remove();
-            }
-        }
+        leaveModal.hide();
+        document.getElementById('leaveDate').value = '';
+        document.getElementById('leaveReason').value = '';
+    }
 
-        function saveSchedule() {
-            alert('Schedule saved successfully!');
+    function removeLeave(btn) {
+        if (confirm('Remove this leave date?')) {
+            btn.closest('.alert').remove();
         }
+    }
 
-        function openAvailabilityModal() {
-            alert('Opening availability settings...');
-        }
+    function saveSchedule() {
+        alert('Schedule saved successfully!');
+    }
+
+    function openAvailabilityModal() {
+        alert('Opening availability settings...');
+    }
     </script>
 </body>
+
 </html>
