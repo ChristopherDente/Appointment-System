@@ -31,7 +31,7 @@ if ($user) {
     echo json_encode([
         "success" => true,
         "message" => "Login successful",
-        "redirect" => "../frontend/user/dashboard.php" // adjust path if needed
+        "redirect" => "../frontend/users/dashboard.php" // adjust path if needed
     ]);
 } else {
     echo json_encode(["success" => false, "message" => "Invalid credentials"]);
