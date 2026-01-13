@@ -75,7 +75,7 @@
 
                         <div class="d-flex d-flex-left gap-3 flex-wrap">
                             <button class="btn btn-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#appointmentModal">
+                                data-bs-target="#loginModal">
                                 <i class="bi bi-calendar-plus"></i> Book Appointment
                             </button>
                         </div>

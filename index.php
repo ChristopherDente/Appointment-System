@@ -84,7 +84,7 @@
 
                         <div class="d-flex d-flex-left gap-3 flex-wrap">
                             <button class="btn btn-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#appointmentModal">
+                                data-bs-target="#loginModal">
                                 <i class="bi bi-calendar-plus"></i> Book Appointment
                             </button>
 
@@ -445,78 +445,73 @@
 
 
 <script>
-// Toggle between Login and Register forms
-document.getElementById('showRegister').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('loginForm').style.display = 'none';
-    document.getElementById('registerForm').style.display = 'block';
-    document.getElementById('modalTitle').innerHTML = '<i class="bi bi-person-plus"></i> Register';
-});
-
-document.getElementById('showLogin').addEventListener('click', function(e) {
-    e.preventDefault();
-    document.getElementById('registerForm').style.display = 'none';
-    document.getElementById('loginForm').style.display = 'block';
-    document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
-});
-
-// LOGIN AJAX
-const loginForm = document.getElementById('loginForm');
-loginForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const username = loginForm.username.value;
-    const password = loginForm.password.value;
-
-    fetch('http://appointment-system.test/backend/login.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    })
-    .then(res => res.json())
-    .then(data => {
-        alert(data.message);
-        if (data.success) window.location.href = data.redirect;
-    })
-    .catch(err => {
-        console.error(err);
-        alert("An error occurred while logging in.");
+    // Toggle between Login and Register forms
+    document.getElementById('showRegister').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+        document.getElementById('modalTitle').innerHTML = '<i class="bi bi-person-plus"></i> Register';
     });
-});
 
-// REGISTER AJAX
-const registerForm = document.getElementById('registerForm');
-registerForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    const username = registerForm.username.value;
-    const password = registerForm.password.value;
-    const confirm_password = registerForm.confirm_password.value;
-
-    fetch('http://appointment-system.test/backend/register.php', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password, confirm_password })
-    })
-    .then(res => res.json())
-    .then(data => {
-        alert(data.message);
-        if (data.success) {
-            // Switch to login after successful registration
-            document.getElementById('registerForm').style.display = 'none';
-            document.getElementById('loginForm').style.display = 'block';
-            document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
-        }
-    })
-    .catch(err => {
-        console.error(err);
-        alert("An error occurred during registration");
+    document.getElementById('showLogin').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+        document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
     });
-});
+
+    // LOGIN AJAX
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = loginForm.username.value;
+        const password = loginForm.password.value;
+
+        fetch('http://appointment-system.test/backend/login.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            if (data.success) window.location.href = data.redirect;
+        })
+        .catch(err => {
+            console.error(err);
+            alert("An error occurred while logging in.");
+        });
+    });
+
+    // REGISTER AJAX
+    const registerForm = document.getElementById('registerForm');
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const username = registerForm.username.value;
+        const password = registerForm.password.value;
+        const confirm_password = registerForm.confirm_password.value;
+
+        fetch('http://appointment-system.test/backend/register.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password, confirm_password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            if (data.success) {
+                // Switch to login after successful registration
+                document.getElementById('registerForm').style.display = 'none';
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("An error occurred during registration");
+        });
+    });
 </script>
-
-
-
-
-
 
 </body>
 
