@@ -14,7 +14,7 @@
 
 <body>
 
-  <!-- NAVBAR (UNCHANGED FORMAT) -->
+    <!-- NAVBAR (UNCHANGED FORMAT) -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center fw-semibold" href="#">

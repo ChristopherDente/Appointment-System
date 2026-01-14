@@ -708,10 +708,10 @@
         timeSlotsContainer.innerHTML = '';
 
         const slots = [
-            '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM',
-            '11:00 AM', '11:30 AM', '01:00 PM', '01:30 PM',
-            '02:00 PM', '02:30 PM', '03:00 PM', '03:30 PM',
-            '04:00 PM', '04:30 PM'
+            '09:00:00', '09:30:00', '10:00:00', '10:30:00',
+            '11:00:00', '11:30:00', '13:00:00', '13:30:00',
+            '13:00:00', '14:30:00', '15:00:00', '15:30:00',
+            '16:00:00', '16:30:00'
         ];
 
         slots.forEach(time => {
@@ -902,12 +902,51 @@
 
         // Show confirmation
         const total = consultationFee + serviceFee;
-        if (confirm(`Confirm payment of ₱${total.toLocaleString()} and book this appointment?`)) {
-            // In production, this would submit to your backend
-            alert(
-                'Payment successful! Your appointment has been booked. You will receive a confirmation email shortly.');
-            window.location.href = 'dashboard.php';
+        const selectedDepartment = document.getElementById('departmentInput').value;
+        const selectedDate = document.getElementById('appointmentDate').value;
+        const selectedTime = document.getElementById('timeInput').value;
+
+        const reason = this.querySelector('[name="reason"]').value;
+        const contact = this.querySelector('[name="contact"]').value;
+        const email = this.querySelector('[name="email"]').value;
+        const notes = this.querySelector('[name="notes"]').value;
+
+        if (!selectedDepartment) {
+            alert('Please select a department');
+            return;
         }
+
+        if (confirm('Are you sure you want to book this appointment?')) {
+            fetch('http://appointment-system.test/backend/appointment.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    department: selectedDepartment,// send dynamic department
+                    date: selectedDate,
+                    time: selectedTime,
+                    reason: reason,
+                    contact_number: contact,
+                    email: email,
+                    additional_information: notes,
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Appointment successfully booked!');
+                    window.location.href = 'dashboard.php';
+                } else {
+                    alert('Error: ' + data.message);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert('Something went wrong. Please try again.');
+            });
+        }
+
     });
     </script>
 </body>
