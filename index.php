@@ -512,80 +512,30 @@
     const registerForm = document.getElementById('registerForm');
     registerForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        hideAlert();
+        
+        const username = registerForm.username.value.trim();
+        const password = registerForm.password.value;
+        const confirm_password = registerForm.confirm_password.value;
 
-        const submitBtn = registerForm.querySelector('button[type="submit"]');
-        const username = document.getElementById('registerUsername').value.trim();
-        const password = document.getElementById('passwordFieldRegister').value;
-        const confirmPassword = document.getElementById('confirmPasswordField').value;
-
-        // Validation
-        if (!username || !password || !confirmPassword) {
-            showAlert('Please fill in all fields', 'warning');
-            return;
-        }
-
-        if (username.length < 3) {
-            showAlert('Username must be at least 3 characters long', 'warning');
-            return;
-        }
-
-        if (password.length < 6) {
-            showAlert('Password must be at least 6 characters long', 'warning');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            showAlert('Passwords do not match', 'warning');
-            return;
-        }
-
-        setButtonLoading(submitBtn, true, 'Registering...');
-
-        fetch('backend/login.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    action: 'register',
-                    username: username,
-                    password: password,
-                    confirm_password: confirmPassword
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                setButtonLoading(submitBtn, false);
-
-                if (data.success) {
-                    showAlert(data.message || 'Registration successful! Please login.', 'success');
-
-                    setTimeout(() => {
-                        // Switch to login form
-                        document.getElementById('registerFormContainer').style.display = 'none';
-                        document.getElementById('loginFormContainer').style.display = 'block';
-                        document.getElementById('modalTitle').innerHTML =
-                            '<i class="bi bi-box-arrow-in-right"></i> Login';
-
-                        // Clear register form
-                        registerForm.reset();
-                        passwordMatchMessage.style.display = 'none';
-                        confirmPasswordField.classList.remove('is-invalid', 'is-valid');
-
-                        // Pre-fill username in login form
-                        document.getElementById('loginUsername').value = username;
-                    }, 1500);
-                } else {
-                    showAlert(data.message || 'Registration failed. Please try again.', 'danger');
-                }
-            })
-            .catch(err => {
-                console.error('Registration error:', err);
-                setButtonLoading(submitBtn, false);
-                showAlert('An error occurred. Please try again.', 'danger');
-            });
+        fetch('http://appointment-system.test/backend/register.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password, confirm_password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message); // optional, can remove if you want silent redirect
+            if (data.success && data.redirect) {
+                window.location.href = data.redirect;
+            }
+        })
+        .catch(err => {
+            console.error(err);
+            alert("An error occurred during registration");
+        });
     });
+
+
 
     // ===== TRACK APPOINTMENT FORM =====
 
