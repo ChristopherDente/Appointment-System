@@ -1,3 +1,7 @@
+<?php 
+    session_start();
+    include 'backend/db_conn/conn.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,56 +13,12 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="frontend/style.css">
-
+    <link rel="stylesheet" href="frontend/assets/styles/style.css">
 </head>
 
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
-        <div class="container">
-            <a class="navbar-brand d-flex align-items-center fw-semibold" href="#">
-                <span class="navbar-brand fw-semibold">
-                    <i class="bi bi-heart-pulse"></i> Online Appointment Booking System
-                </span>
-
-            </a>
-
-            <!-- Mobile toggle -->
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Navbar links -->
-            <div class="collapse navbar-collapse" id="mainNavbar">
-                <ul class="navbar-nav ms-auto align-items-lg-center">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="frontend/index.php">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="frontend/about-us.php">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="frontend/doctor-list.php">Doctor List</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="frontend/departments.php">Departments & Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="frontend/contact.php">Contact Us</a>
-                    </li>
-                    <li class="nav-item ms-lg-3">
-                        <span class="nav-link-login nav-link" role="button" data-bs-toggle="modal"
-                            data-bs-target="#loginModal">
-                            <i class="bi bi-box-arrow-in-right"></i> Login
-                        </span>
-                    </li>
-
-
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <!-- navbar -->
+    <?php include 'frontend/context/navbar.php'; ?>
 
     <!-- Hero -->
     <div class="container mt-5">
@@ -105,98 +65,9 @@
 
             <!-- RIGHT IMAGE -->
             <div class="col-md-6 text-center d-none d-md-block">
-                <img src="frontend/images/calendar.jpg" alt="Calendar" class="hero-img">
+                <img src="frontend/assets/images/calendar.jpg" alt="Calendar" class="hero-img">
             </div>
 
-        </div>
-    </div>
-
-    <!-- Book Appointment Modal -->
-    <div class="modal fade" id="appointmentModal" tabindex="-1">
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content card-doctor border-0 shadow">
-
-                <div class="modal-header bg-doctor text-white">
-                    <h5 class="modal-title">
-                        <i class="bi bi-calendar-plus"></i> Book Appointment
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-
-                <form method="POST" action="frontend/save.php">
-                    <div class="modal-body">
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <label class="form-label">Full Name</label>
-                                <input type="text" name="name" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Email Address</label>
-                                <input type="email" name="email" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Appointment Date</label>
-                                <input type="date" name="appointment_date" class="form-control" required>
-                            </div>
-
-                            <div class="col-md-6">
-                                <label class="form-label">Appointment Time</label>
-                                <input type="time" name="appointment_time" class="form-control" required>
-                            </div>
-
-                            <div class="col-12">
-                                <label class="form-label">Reason for Visit</label>
-                                <textarea name="reason" class="form-control" rows="3" required></textarea>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-                        <button class="btn btn-doctor px-4">
-                            <i class="bi bi-check-circle"></i> Submit
-                        </button>
-                    </div>
-                </form>
-
-            </div>
-        </div>
-    </div>
-
-    <!-- Track Appointment Modal -->
-    <div class="modal fade" id="trackModal" tabindex="-1">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content card-doctor border-0 shadow">
-
-                <div class="modal-header bg-doctor text-white">
-                    <h5 class="modal-title">
-                        <i class="bi bi-search"></i> Track Appointment
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-
-                <form>
-                    <div class="modal-body">
-                        <label class="form-label">Enter your email</label>
-                        <input type="email" class="form-control" required>
-                        <small class="text-muted">View your appointment status.</small>
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                            Close
-                        </button>
-                        <button class="btn btn-doctor px-4">
-                            <i class="bi bi-search"></i> Track
-                        </button>
-                    </div>
-                </form>
-
-            </div>
         </div>
     </div>
 
@@ -213,38 +84,21 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
 
-                <div class="modal-body">
+                <div class="modal-body p-4">
+                    
+                    <!-- Alert Messages -->
+                    <div id="alertMessage" class="alert alert-dismissible fade" role="alert" style="display: none;">
+                        <span id="alertText"></span>
+                        <button type="button" class="btn-close" onclick="hideAlert()"></button>
+                    </div>
 
                     <!-- LOGIN FORM -->
-                    <form id="loginForm">
-                        <div class="form-section" id="loginSection">
-
-                            <div class="position-relative mb-3">
-                                <i class="bi bi-person form-icon"></i>
-                                <input type="text" name="username" class="form-control form-input" placeholder="Username" required>
-                            </div>
-
-                            <div class="position-relative mb-2">
-                                <i class="bi bi-lock form-icon"></i>
-                                <input type="password" id="passwordField" name="password" class="form-control form-input" placeholder="Password" required>
-                                <i class="bi bi-eye eye-icon" id="togglePassword"></i>
-                            </div>
-
-                            <div class="mb-3">
-                                <a href="frontend/forgot_password.php" class="forgot-link">Forgot Password?</a>
-                            </div>
-
-                            <!-- Divider -->
-                            <div class="position-relative my-4">
-                                <hr>
-                                <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
-                                    OR
-                                </span>
-                            </div>
-
+                    <div id="loginFormContainer">
+                        <form id="loginForm">
+                            
                             <!-- Google Sign-In Button -->
                             <div class="d-grid mb-3">
-                                <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtn">
+                                <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtnLogin">
                                     <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
                                         style="vertical-align: middle; margin-right: 8px;">
                                         <path fill="#EA4335"
@@ -261,26 +115,60 @@
                                 </button>
                             </div>
 
-                            <div class="text-center small mb-3">
-                                Don't have an account? 
-                                <a href="#" id="showRegister">Register here</a>
+                            <!-- Divider -->
+                            <div class="position-relative my-4">
+                                <hr>
+                                <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
+                                    OR
+                                </span>
                             </div>
 
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-doctor px-4">
-                                <i class="bi bi-box-arrow-in-right"></i> Login
-                            </button>
-                        </div>
-                    </form>
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Username</label>
+                                <div class="position-relative">
+                                    <i class="bi bi-person form-icon"></i>
+                                    <input type="text" name="username" id="loginUsername" class="form-control form-input" 
+                                           placeholder="Enter your username" required>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Password</label>
+                                <div class="position-relative">
+                                    <i class="bi bi-lock form-icon"></i>
+                                    <input type="password" id="passwordFieldLogin" name="password" 
+                                           class="form-control form-input" placeholder="Enter your password" required>
+                                    <i class="bi bi-eye eye-icon" id="togglePasswordLogin" style="cursor: pointer;"></i>
+                                </div>
+                            </div>
+
+                            <div class="mb-4">
+                                <a href="frontend/forgot_password.php" class="forgot-link">
+                                    <i class="bi bi-question-circle"></i> Forgot Password?
+                                </a>
+                            </div>
+
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-doctor btn-lg">
+                                    <i class="bi bi-box-arrow-in-right"></i> Login
+                                </button>
+                            </div>
+
+                            <div class="text-center">
+                                <span class="text-muted">Don't have an account?</span>
+                                <a href="#" id="showRegister" class="text-doctor fw-semibold ms-1">Register here</a>
+                            </div>
+
+                        </form>
+                    </div>
 
                     <!-- REGISTER FORM -->
-                    <form id="registerForm" style="display: none;">
-                        <div class="form-section" id="registerSection">
+                    <div id="registerFormContainer" style="display: none;">
+                        <form id="registerForm">
+                            
                             <!-- Google Sign-In Button -->
                             <div class="d-grid mb-3">
-                                <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtn">
+                                <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtnRegister">
                                     <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
                                         style="vertical-align: middle; margin-right: 8px;">
                                         <path fill="#EA4335"
@@ -306,213 +194,490 @@
                             </div>
 
                             <div class="mb-3">
-                                <input type="text" name="username" class="form-control form-input" placeholder="Username" required>
+                                <label class="form-label fw-semibold">Username</label>
+                                <input type="text" name="username" id="registerUsername" class="form-control form-input" 
+                                       placeholder="Choose a username" required minlength="3">
+                                <small class="text-muted">
+                                    <i class="bi bi-info-circle"></i> At least 3 characters
+                                </small>
                             </div>
 
                             <div class="mb-3">
-                                <input type="password" name="password" class="form-control form-input" placeholder="Password" required>
+                                <label class="form-label fw-semibold">Password</label>
+                                <div class="position-relative">
+                                    <input type="password" id="passwordFieldRegister" name="password" 
+                                           class="form-control form-input" placeholder="Create a password" 
+                                           required minlength="6">
+                                    <i class="bi bi-eye eye-icon" id="togglePasswordRegister" style="cursor: pointer;"></i>
+                                </div>
+                                <small class="text-muted">
+                                    <i class="bi bi-info-circle"></i> At least 6 characters
+                                </small>
                             </div>
 
                             <div class="mb-3">
-                                <input type="password" name="confirm_password" class="form-control form-input" placeholder="Confirm Password" required>
+                                <label class="form-label fw-semibold">Confirm Password</label>
+                                <div class="position-relative">
+                                    <input type="password" id="confirmPasswordField" name="confirm_password" 
+                                           class="form-control form-input" placeholder="Re-enter your password" required>
+                                    <i class="bi bi-eye eye-icon" id="toggleConfirmPassword" style="cursor: pointer;"></i>
+                                </div>
+                                <div id="passwordMatchMessage" class="mt-1" style="display: none;">
+                                    <small class="text-danger">
+                                        <i class="bi bi-x-circle"></i> Passwords do not match
+                                    </small>
+                                </div>
                             </div>
 
-                            <div class="d-grid mb-2">
-                                <button type="submit" class="btn btn-doctor px-4">
+                            <div class="d-grid mb-3">
+                                <button type="submit" class="btn btn-doctor btn-lg">
                                     <i class="bi bi-person-plus"></i> Register
                                 </button>
                             </div>
 
-                            <div class="text-center small mb-3">
-                                Already have an account? 
-                                <a href="#" id="showLogin">Login here</a>
-                            </div>                        
+                            <div class="text-center">
+                                <span class="text-muted">Already have an account?</span>
+                                <a href="#" id="showLogin" class="text-doctor fw-semibold ms-1">Login here</a>
+                            </div>
 
-                        </div>
-                        
-                    </form>
+                        </form>
+                    </div>
 
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer-doctor mt-5">
-        <div class="container py-5">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <h5 class="fw-semibold text-white mb-3">
-                        <i class="bi bi-heart-pulse"></i> Online Appointment Booking System
+    <!-- Track Appointment Modal -->
+    <div class="modal fade" id="trackModal" tabindex="-1">
+        <div class="modal-dialog modal-md modal-dialog-centered">
+            <div class="modal-content card-doctor border-0 shadow">
+                <div class="modal-header bg-doctor text-white">
+                    <h5 class="modal-title">
+                        <i class="bi bi-search"></i> Track Appointment
                     </h5>
-                    <p class="small text-light opacity-75">
-                        A secure and easy-to-use online appointment booking platform
-                        designed for patients and healthcare providers.
-                    </p>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
                 </div>
-                <div class="col-md-4">
-                    <h6 class="text-white fw-semibold mb-3">Quick Links</h6>
-                    <ul class="list-unstyled footer-links">
-                        <li><a href="frontend/index.php">Home</a></li>
-                        <li><a href="frontend/about-us.php">About Us</a></li>
-                        <li><a href="frontend/doctor-list.php">Doctor List</a></li>
-                        <li><a href="frontend/departments.php">Departments & Services</a></li>
-                        <li><a href="frontend/contact.php">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h6 class="text-white fw-semibold mb-3">Contact</h6>
-                    <p class="small text-light opacity-75 mb-2">
-                        <i class="bi bi-envelope"></i> onlineappointmentsystem00@gmail.com
-                    </p>
-                    <p class="small text-light opacity-75 mb-3">
-                        <i class="bi bi-telephone"></i> +63 9127339200
-                    </p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="footer-social"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="footer-social"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="footer-social"><i class="bi bi-instagram"></i></a>
+                <div class="modal-body p-4">
+                    
+                    <!-- Alert for Track Modal -->
+                    <div id="trackAlertMessage" class="alert alert-dismissible fade" role="alert" style="display: none;">
+                        <span id="trackAlertText"></span>
+                        <button type="button" class="btn-close" onclick="hideTrackAlert()"></button>
                     </div>
+
+                    <form id="trackForm">
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold">Appointment Reference Number</label>
+                            <input type="text" name="reference" class="form-control form-input" 
+                                   placeholder="e.g., APT-2024-001234" required>
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle"></i> Enter the reference number from your appointment confirmation
+                            </small>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold">Email Address</label>
+                            <input type="email" name="email" class="form-control form-input" 
+                                   placeholder="your@email.com" required>
+                            <small class="text-muted">
+                                <i class="bi bi-info-circle"></i> The email used when booking the appointment
+                            </small>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-doctor btn-lg">
+                                <i class="bi bi-search"></i> Track Appointment
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </div>
-            <hr class="footer-divider my-4">
-            <div class="text-center small text-light opacity-75">
-                © 2026 Online Appointment Booking System. All rights reserved.
             </div>
         </div>
-    </footer>
+    </div>
 
+    <!-- Footer -->
+    <?php include 'frontend/context/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-    const togglePassword = document.querySelector('#togglePassword');
-    const passwordField = document.querySelector('#passwordField');
-
-    togglePassword.addEventListener('click', () => {
-        const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordField.setAttribute('type', type);
-        togglePassword.classList.toggle('bi-eye');
-        togglePassword.classList.toggle('bi-eye-slash');
-    });
-    </script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
+
     <script>
-        // Initialize Google Sign-In
-        function initializeGoogleSignIn() {
-            google.accounts.id.initialize({
-                client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com', // Replace with your actual Client ID
-                callback: handleGoogleSignIn
+    // ===== UTILITY FUNCTIONS =====
+    
+    function showAlert(message, type = 'danger') {
+        const alertBox = document.getElementById('alertMessage');
+        const alertText = document.getElementById('alertText');
+        
+        alertBox.className = `alert alert-${type} alert-dismissible fade show`;
+        alertText.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+        alertBox.style.display = 'block';
+        
+        // Auto hide after 5 seconds
+        setTimeout(() => {
+            hideAlert();
+        }, 5000);
+    }
+
+    function hideAlert() {
+        const alertBox = document.getElementById('alertMessage');
+        alertBox.style.display = 'none';
+        alertBox.className = 'alert alert-dismissible fade';
+    }
+
+    function showTrackAlert(message, type = 'danger') {
+        const alertBox = document.getElementById('trackAlertMessage');
+        const alertText = document.getElementById('trackAlertText');
+        
+        alertBox.className = `alert alert-${type} alert-dismissible fade show`;
+        alertText.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+        alertBox.style.display = 'block';
+        
+        setTimeout(() => {
+            hideTrackAlert();
+        }, 5000);
+    }
+
+    function hideTrackAlert() {
+        const alertBox = document.getElementById('trackAlertMessage');
+        alertBox.style.display = 'none';
+        alertBox.className = 'alert alert-dismissible fade';
+    }
+
+    function setButtonLoading(button, isLoading, loadingText = 'Processing...') {
+        if (isLoading) {
+            button.dataset.originalText = button.innerHTML;
+            button.disabled = true;
+            button.innerHTML = `<span class="spinner-border spinner-border-sm me-2"></span>${loadingText}`;
+        } else {
+            button.disabled = false;
+            button.innerHTML = button.dataset.originalText || button.innerHTML;
+        }
+    }
+
+    // ===== PASSWORD TOGGLE FUNCTIONALITY =====
+    
+    function setupPasswordToggle(toggleId, fieldId) {
+        const toggle = document.getElementById(toggleId);
+        const field = document.getElementById(fieldId);
+        
+        if (toggle && field) {
+            toggle.addEventListener('click', () => {
+                const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
+                field.setAttribute('type', type);
+                toggle.classList.toggle('bi-eye');
+                toggle.classList.toggle('bi-eye-slash');
             });
         }
+    }
 
-        // Handle Google Sign-In response
-        function handleGoogleSignIn(response) {
-            // Send the credential token to your backend
-            fetch('frontend/google_login_process.php', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        credential: response.credential
-                    })
-                })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.success) {
-                        // Redirect or close modal on success
-                        window.location.href = data.redirect || 'dashboard.php';
-                    } else {
-                        alert(data.message || 'Login failed. Please try again.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('An error occurred during login.');
-                });
-        }
+    setupPasswordToggle('togglePasswordLogin', 'passwordFieldLogin');
+    setupPasswordToggle('togglePasswordRegister', 'passwordFieldRegister');
+    setupPasswordToggle('toggleConfirmPassword', 'confirmPasswordField');
 
-        // Button click handler
-        document.getElementById('googleSignInBtn')?.addEventListener('click', function() {
-            google.accounts.id.prompt(); // Show the One Tap dialog
-        });
-
-        // Initialize when page loads
-        window.addEventListener('load', initializeGoogleSignIn);
-    </script>
+    // ===== PASSWORD MATCH VALIDATION =====
     
+    const passwordFieldRegister = document.getElementById('passwordFieldRegister');
+    const confirmPasswordField = document.getElementById('confirmPasswordField');
+    const passwordMatchMessage = document.getElementById('passwordMatchMessage');
 
+    function checkPasswordMatch() {
+        if (confirmPasswordField.value.length > 0) {
+            if (passwordFieldRegister.value !== confirmPasswordField.value) {
+                passwordMatchMessage.style.display = 'block';
+                confirmPasswordField.classList.add('is-invalid');
+                return false;
+            } else {
+                passwordMatchMessage.style.display = 'none';
+                confirmPasswordField.classList.remove('is-invalid');
+                confirmPasswordField.classList.add('is-valid');
+                return true;
+            }
+        }
+        return true;
+    }
 
-<script>
-    // Toggle between Login and Register forms
-    document.getElementById('showRegister').addEventListener('click', function(e) {
+    confirmPasswordField?.addEventListener('input', checkPasswordMatch);
+    passwordFieldRegister?.addEventListener('input', checkPasswordMatch);
+
+    // ===== FORM SWITCHING =====
+    
+    document.getElementById('showRegister')?.addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById('loginForm').style.display = 'none';
-        document.getElementById('registerForm').style.display = 'block';
+        hideAlert();
+        document.getElementById('loginFormContainer').style.display = 'none';
+        document.getElementById('registerFormContainer').style.display = 'block';
         document.getElementById('modalTitle').innerHTML = '<i class="bi bi-person-plus"></i> Register';
+        
+        // Reset forms
+        document.getElementById('loginForm').reset();
     });
 
-    document.getElementById('showLogin').addEventListener('click', function(e) {
+    document.getElementById('showLogin')?.addEventListener('click', function(e) {
         e.preventDefault();
-        document.getElementById('registerForm').style.display = 'none';
-        document.getElementById('loginForm').style.display = 'block';
+        hideAlert();
+        document.getElementById('registerFormContainer').style.display = 'none';
+        document.getElementById('loginFormContainer').style.display = 'block';
         document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+        
+        // Reset forms
+        document.getElementById('registerForm').reset();
+        passwordMatchMessage.style.display = 'none';
+        confirmPasswordField.classList.remove('is-invalid', 'is-valid');
     });
 
-    // LOGIN AJAX
+    // ===== LOGIN FORM SUBMISSION =====
+    
     const loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const username = loginForm.username.value;
-        const password = loginForm.password.value;
+        hideAlert();
+        
+        const submitBtn = loginForm.querySelector('button[type="submit"]');
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('passwordFieldLogin').value;
 
-        fetch('http://appointment-system.test/backend/login.php', {
+        // Validation
+        if (!username || !password) {
+            showAlert('Please fill in all fields', 'warning');
+            return;
+        }
+
+        setButtonLoading(submitBtn, true, 'Logging in...');
+
+        fetch('backend/login.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
+            body: JSON.stringify({ 
+                action: 'login',
+                username: username, 
+                password: password 
+            })
         })
         .then(res => res.json())
         .then(data => {
-            alert(data.message);
-            if (data.success) window.location.href = data.redirect;
-        })
-        .catch(err => {
-            console.error(err);
-            alert("An error occurred while logging in.");
-        });
-    });
-
-    // REGISTER AJAX
-    const registerForm = document.getElementById('registerForm');
-    registerForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const username = registerForm.username.value;
-        const password = registerForm.password.value;
-        const confirm_password = registerForm.confirm_password.value;
-
-        fetch('http://appointment-system.test/backend/register.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password, confirm_password })
-        })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message);
+            setButtonLoading(submitBtn, false);
+            
             if (data.success) {
-                // Switch to login after successful registration
-                document.getElementById('registerForm').style.display = 'none';
-                document.getElementById('loginForm').style.display = 'block';
-                document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+                showAlert(data.message || 'Login successful! Redirecting...', 'success');
+                
+                setTimeout(() => {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                    if (modal) modal.hide();
+                    window.location.href = data.redirect || 'dashboard.php';
+                }, 1000);
+            } else {
+                showAlert(data.message || 'Invalid username or password', 'danger');
             }
         })
         .catch(err => {
-            console.error(err);
-            alert("An error occurred during registration");
+            console.error('Login error:', err);
+            setButtonLoading(submitBtn, false);
+            showAlert('An error occurred. Please try again.', 'danger');
         });
     });
-</script>
+
+    // ===== REGISTER FORM SUBMISSION =====
+    
+    const registerForm = document.getElementById('registerForm');
+    registerForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        hideAlert();
+        
+        const submitBtn = registerForm.querySelector('button[type="submit"]');
+        const username = document.getElementById('registerUsername').value.trim();
+        const password = document.getElementById('passwordFieldRegister').value;
+        const confirmPassword = document.getElementById('confirmPasswordField').value;
+
+        // Validation
+        if (!username || !password || !confirmPassword) {
+            showAlert('Please fill in all fields', 'warning');
+            return;
+        }
+
+        if (username.length < 3) {
+            showAlert('Username must be at least 3 characters long', 'warning');
+            return;
+        }
+
+        if (password.length < 6) {
+            showAlert('Password must be at least 6 characters long', 'warning');
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showAlert('Passwords do not match', 'warning');
+            return;
+        }
+
+        setButtonLoading(submitBtn, true, 'Registering...');
+
+        fetch('backend/login.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                action: 'register',
+                username: username, 
+                password: password, 
+                confirm_password: confirmPassword 
+            })
+        })
+        .then(res => res.json())
+        .then(data => {
+            setButtonLoading(submitBtn, false);
+            
+            if (data.success) {
+                showAlert(data.message || 'Registration successful! Please login.', 'success');
+                
+                setTimeout(() => {
+                    // Switch to login form
+                    document.getElementById('registerFormContainer').style.display = 'none';
+                    document.getElementById('loginFormContainer').style.display = 'block';
+                    document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+                    
+                    // Clear register form
+                    registerForm.reset();
+                    passwordMatchMessage.style.display = 'none';
+                    confirmPasswordField.classList.remove('is-invalid', 'is-valid');
+                    
+                    // Pre-fill username in login form
+                    document.getElementById('loginUsername').value = username;
+                }, 1500);
+            } else {
+                showAlert(data.message || 'Registration failed. Please try again.', 'danger');
+            }
+        })
+        .catch(err => {
+            console.error('Registration error:', err);
+            setButtonLoading(submitBtn, false);
+            showAlert('An error occurred. Please try again.', 'danger');
+        });
+    });
+
+    // ===== TRACK APPOINTMENT FORM =====
+    
+    const trackForm = document.getElementById('trackForm');
+    trackForm?.addEventListener('submit', function(e) {
+        e.preventDefault();
+        hideTrackAlert();
+        
+        const submitBtn = trackForm.querySelector('button[type="submit"]');
+        const reference = trackForm.reference.value.trim();
+        const email = trackForm.email.value.trim();
+
+        if (!reference || !email) {
+            showTrackAlert('Please fill in all fields', 'warning');
+            return;
+        }
+
+        setButtonLoading(submitBtn, true, 'Tracking...');
+
+        fetch('backend/track_appointment.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ reference: reference, email: email })
+        })
+        .then(res => res.json())
+        .then(data => {
+            setButtonLoading(submitBtn, false);
+            
+            if (data.success) {
+                showTrackAlert('Appointment found! Redirecting...', 'success');
+                setTimeout(() => {
+                    window.location.href = data.redirect || `track_result.php?ref=${reference}`;
+                }, 1500);
+            } else {
+                showTrackAlert(data.message || 'Appointment not found. Please check your details.', 'danger');
+            }
+        })
+        .catch(err => {
+            console.error('Track error:', err);
+            setButtonLoading(submitBtn, false);
+            showTrackAlert('An error occurred. Please try again.', 'danger');
+        });
+    });
+
+    // ===== GOOGLE SIGN-IN =====
+    
+    function initializeGoogleSignIn() {
+        if (typeof google !== 'undefined' && google.accounts) {
+            google.accounts.id.initialize({
+                client_id: 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com',
+                callback: handleGoogleSignIn
+            });
+        }
+    }
+
+    function handleGoogleSignIn(response) {
+        hideAlert();
+        
+        fetch('frontend/google_login_process.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ credential: response.credential })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                showAlert('Login successful! Redirecting...', 'success');
+                setTimeout(() => {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                    if (modal) modal.hide();
+                    window.location.href = data.redirect || 'dashboard.php';
+                }, 1000);
+            } else {
+                showAlert(data.message || 'Google login failed. Please try again.', 'danger');
+            }
+        })
+        .catch(error => {
+            console.error('Google Sign-In error:', error);
+            showAlert('An error occurred during Google login.', 'danger');
+        });
+    }
+
+    document.getElementById('googleSignInBtnLogin')?.addEventListener('click', function() {
+        if (typeof google !== 'undefined' && google.accounts) {
+            google.accounts.id.prompt();
+        } else {
+            showAlert('Google Sign-In is not available. Please use regular login.', 'warning');
+        }
+    });
+
+    document.getElementById('googleSignInBtnRegister')?.addEventListener('click', function() {
+        if (typeof google !== 'undefined' && google.accounts) {
+            google.accounts.id.prompt();
+        } else {
+            showAlert('Google Sign-In is not available. Please use regular registration.', 'warning');
+        }
+    });
+
+    window.addEventListener('load', initializeGoogleSignIn);
+
+    // ===== MODAL RESET ON CLOSE =====
+    
+    document.getElementById('loginModal')?.addEventListener('hidden.bs.modal', function() {
+        hideAlert();
+        document.getElementById('loginForm').reset();
+        document.getElementById('registerForm').reset();
+        
+        // Reset to login form
+        document.getElementById('loginFormContainer').style.display = 'block';
+        document.getElementById('registerFormContainer').style.display = 'none';
+        document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
+        
+        // Clear validation states
+        passwordMatchMessage.style.display = 'none';
+        confirmPasswordField.classList.remove('is-invalid', 'is-valid');
+    });
+
+    document.getElementById('trackModal')?.addEventListener('hidden.bs.modal', function() {
+        hideTrackAlert();
+        document.getElementById('trackForm')?.reset();
+    });
+    </script>
 
 </body>
-
 </html>
