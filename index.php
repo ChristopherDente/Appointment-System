@@ -517,7 +517,7 @@
         const password = registerForm.password.value;
         const confirm_password = registerForm.confirm_password.value;
 
-        fetch('http://appointment-system.test/backend/register.php', {
+        fetch('backend/register.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password, confirm_password })

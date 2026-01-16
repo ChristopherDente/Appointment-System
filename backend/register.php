@@ -23,7 +23,7 @@ $mname = trim($input['mname'] ?? 'Middle');
 $csuffix = trim($input['csuffix'] ?? 'Jr.');
 $address = trim($input['address'] ?? '123 Default Street');
 $cpnumber = trim($input['cpnumber'] ?? '09171234567');
-$FK_tblRole = intval($input['FK_tblRole'] ?? 2); // 2 = customer
+$FK_tblRole = intval($input['FK_tblRole'] ?? 1); // 1 = customer
 $FK_tblDepartment = intval($input['FK_tblDepartment'] ?? 1); // default department
 $is_Doctor = intval($input['is_Doctor'] ?? 0);
 $is_Customer = intval($input['is_Customer'] ?? 1);
@@ -75,7 +75,7 @@ if (mysqli_query($conn, $sql_insert)) {
     echo json_encode([
         "success" => true,
         "message" => "Registration successful. Redirecting...",
-        "redirect" => "http://appointment-system.test/frontend/pages/home.php"
+        "redirect" => "../../frontend/pages/home.php"
     ]);
 } else {
     echo json_encode([
