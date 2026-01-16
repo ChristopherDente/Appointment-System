@@ -1,6 +1,6 @@
 <?php
 
-$changethis = "tope"; #kapagod mag update ehh hahaha
+$changethis = "jian"; #kapagod mag update ehh hahaha
 
 if($changethis == "jian"){
     $servername = "localhost";

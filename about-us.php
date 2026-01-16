@@ -1,13 +1,9 @@
-<?php 
-    session_start();
-    include 'backend/config/conn.php';
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
-    <title>Online Appointment Booking System</title>
+    <title>About Us - Online Appointment Booking System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
@@ -17,6 +13,7 @@
 </head>
 
 <body>
+
     <!-- navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-doctor shadow-sm">
         <div class="container">
@@ -36,10 +33,10 @@
             <div class="collapse navbar-collapse" id="mainNavbar">
                 <ul class="navbar-nav ms-auto align-items-lg-center">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php">Home</a>
+                        <a class="nav-link" href="index.php">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="about-us.php">About Us</a>
+                        <a class="nav-link active" href="about-us.php">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="doctor-list.php">Doctor List</a>
@@ -63,54 +60,154 @@
 
         </div>
     </nav>
-    <!-- Hero -->
+
+    <!-- Hero Section -->
     <div class="container mt-5">
         <div class="row align-items-start">
-
-            <!-- LEFT HERO TEXT -->
             <div class="col-md-6 hero-left">
                 <div class="card card-doctor border-0">
                     <div class="card-body p-5 text-left">
-
                         <span class="text-uppercase text-doctor fw-semibold small">
-                            ACE Medical Center - Baypointe
+                            Who We Are
                         </span>
 
                         <h1 class="fw-bold mt-2 mb-3">
-                            Online Appointment Booking System
+                            About Our Medical Center
                         </h1>
 
                         <p class="text-muted mb-4">
-                            Schedule, manage, and track your medical appointments easily
-                            using our secure and patient-friendly system.
+                            ACE Medical Center - Baypointe has been serving our community with excellence,
+                            compassion, and innovation in healthcare for over 20 years.
                         </p>
 
                         <div class="d-flex d-flex-left gap-3 flex-wrap">
                             <button class="btn btn-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#loginModal">
+                                data-bs-target="#appointmentModal">
                                 <i class="bi bi-calendar-plus"></i> Book Appointment
                             </button>
-
-                            <button class="btn btn-outline-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#trackModal">
-                                <i class="bi bi-search"></i> Track Appointment
-                            </button>
                         </div>
-
-                        <div class="mt-4 text-muted small">
-                            <i class="bi bi-shield-check text-doctor"></i>
-                            Secure • Confidential • Reliable
-                        </div>
-
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT IMAGE -->
             <div class="col-md-6 text-center d-none d-md-block">
-                <img src="frontend/assets/images/calendar.jpg" alt="Calendar" class="hero-img">
+                <img src="frontend/images/calendar.jpg" alt="About Us" class="hero-img">
+            </div>
+        </div>
+    </div>
+
+    <!-- Mission & Vision -->
+    <div class="container my-5">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-4">
+                        <div class="step-icon mb-3">
+                            <i class="bi bi-bullseye fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold text-center mb-3">Our Mission</h4>
+                        <p class="text-muted text-center">
+                            To provide accessible, compassionate, and quality healthcare services to our community
+                            through innovation, expertise, and patient-centered care. We strive to improve health
+                            outcomes and enhance the well-being of every individual we serve.
+                        </p>
+                    </div>
+                </div>
             </div>
 
+            <div class="col-md-6">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-4">
+                        <div class="step-icon mb-3">
+                            <i class="bi bi-eye fs-2"></i>
+                        </div>
+                        <h4 class="fw-bold text-center mb-3">Our Vision</h4>
+                        <p class="text-muted text-center">
+                            To be the leading healthcare provider in the region, recognized for excellence in
+                            patient care, medical innovation, and community health. We envision a healthier
+                            future where quality healthcare is accessible to all.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Values -->
+    <div class="container my-5">
+        <h2 class="text-center fw-bold mb-5">Our Core Values</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-4 text-center">
+                        <div class="step-icon mb-3">
+                            <i class="bi bi-heart-pulse fs-2"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Compassion</h5>
+                        <p class="text-muted">
+                            We treat every patient with empathy, respect, and understanding,
+                            ensuring their comfort and dignity.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-4 text-center">
+                        <div class="step-icon mb-3">
+                            <i class="bi bi-award fs-2"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Excellence</h5>
+                        <p class="text-muted">
+                            We maintain the highest standards in medical care, continuously
+                            improving our services and expertise.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card card-doctor h-100">
+                    <div class="card-body p-4 text-center">
+                        <div class="step-icon mb-3">
+                            <i class="bi bi-shield-check fs-2"></i>
+                        </div>
+                        <h5 class="fw-bold mb-3">Integrity</h5>
+                        <p class="text-muted">
+                            We uphold ethical practices, transparency, and accountability
+                            in all our interactions and decisions.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="container my-5">
+        <div class="card card-doctor">
+            <div class="card-body p-5">
+                <h2 class="text-center fw-bold mb-5">Our Impact</h2>
+                <div class="row text-center g-4">
+                    <div class="col-md-3">
+                        <h1 class="text-doctor fw-bold">20+</h1>
+                        <p class="text-muted">Years of Service</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h1 class="text-doctor fw-bold">50+</h1>
+                        <p class="text-muted">Medical Specialists</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h1 class="text-doctor fw-bold">100K+</h1>
+                        <p class="text-muted">Patients Served</p>
+                    </div>
+                    <div class="col-md-3">
+                        <h1 class="text-doctor fw-bold">98%</h1>
+                        <p class="text-muted">Satisfaction Rate</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -297,9 +394,9 @@
         </div>
     </div>
 
-     
+    
 
-  <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer-doctor mt-5">
         <div class="container py-5">
             <div class="row g-4">
@@ -344,10 +441,7 @@
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-
-    <script>
+  <script>
     // ===== UTILITY FUNCTIONS =====
 
     function showAlert(message, type = 'danger') {
