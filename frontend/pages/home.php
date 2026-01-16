@@ -1,6 +1,6 @@
 <?php 
     session_start();
-    include 'backend/db_conn/conn.php';
+    include '../../backend/config/conn.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -65,7 +65,7 @@
 
             <!-- RIGHT IMAGE -->
             <div class="col-md-6 text-center d-none d-md-block">
-                <img src="frontend/assets/images/calendar.jpg" alt="Calendar" class="hero-img">
+                <img src="../assets/images/calendar.jpg" alt="Calendar" class="hero-img">
             </div>
 
         </div>
@@ -300,7 +300,7 @@
     </div>
 
     <!-- Footer -->
-    <?php include 'frontend/context/footer.php'; ?>
+    <?php include '../context/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://accounts.google.com/gsi/client" async defer></script>
