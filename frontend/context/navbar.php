@@ -194,7 +194,7 @@
                 <?php endif; ?>
 
                 <!-- ================= Doctor ================= -->
-                <?php if ($_SESSION['role'] == 4): ?>
+                <?php if ($_SESSION['is_Doctor'] == 1): ?>
                  <li class="nav-item">
                     <a class="nav-link active" href="dashboard.php">Dashboard</a>
                 </li>
