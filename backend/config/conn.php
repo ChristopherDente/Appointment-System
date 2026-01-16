@@ -1,9 +1,19 @@
 <?php
 
-$servername = "localhost";
-$username   = "root";
-$password   = "";
-$dbname     = "appoitmentsystem";
+$changethis = "tope"; #kapagod mag update ehh hahaha
+
+if($changethis == "jian"){
+    $servername = "localhost";
+    $username   = "root";
+    $password   = "";
+    $dbname     = "appoitmentsystem";
+}
+else{
+    $servername = "127.0.0.1";
+    $username   = "root";
+    $password   = "@ABC12abc";
+    $dbname     = "appoitmentsystem";
+}
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
 

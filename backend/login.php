@@ -50,7 +50,8 @@ if ($user && password_verify($password, $user['password'])) {
     echo json_encode([
         "success" => true,
         "message" => "Login successful",
-        "redirect" => "frontend/pages/home.php"
+        // "redirect" => "frontend/pages/home.php"
+        "redirect" => "http://appointment-system.test/frontend/pages/home.php"
     ]);
     exit;
 }

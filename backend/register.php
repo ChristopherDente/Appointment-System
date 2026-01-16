@@ -75,7 +75,8 @@ if (mysqli_query($conn, $sql_insert)) {
     echo json_encode([
         "success" => true,
         "message" => "Registration successful. Redirecting...",
-        "redirect" => "../../frontend/pages/home.php"
+        // "redirect" => "../../frontend/pages/home.php"
+        "redirect" => "http://appointment-system.test/frontend/pages/home.php"
     ]);
 } else {
     echo json_encode([
