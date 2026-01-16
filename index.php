@@ -487,54 +487,25 @@
     const loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        hideAlert();
+        const username = loginForm.username.value;
+        const password = loginForm.password.value;
 
-        const submitBtn = loginForm.querySelector('button[type="submit"]');
-        const username = document.getElementById('loginUsername').value.trim();
-        const password = document.getElementById('passwordFieldLogin').value;
-
-        // Validation
-        if (!username || !password) {
-            showAlert('Please fill in all fields', 'warning');
-            return;
-        }
-
-        setButtonLoading(submitBtn, true, 'Logging in...');
-
-        fetch('backend/login.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    action: 'login',
-                    username: username,
-                    password: password
-                })
-            })
-            .then(res => res.json())
-            .then(data => {
-                setButtonLoading(submitBtn, false);
-
-                if (data.success) {
-                    showAlert(data.message || 'Login successful! Redirecting...', 'success');
-
-                    setTimeout(() => {
-                        const modal = bootstrap.Modal.getInstance(document.getElementById(
-                            'loginModal'));
-                        if (modal) modal.hide();
-                        window.location.href = data.redirect || 'dashboard.php';
-                    }, 1000);
-                } else {
-                    showAlert(data.message || 'Invalid username or password', 'danger');
-                }
-            })
-            .catch(err => {
-                console.error('Login error:', err);
-                setButtonLoading(submitBtn, false);
-                showAlert('An error occurred. Please try again.', 'danger');
-            });
+        fetch('http://appointment-system.test/backend/login.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ username, password })
+        })
+        .then(res => res.json())
+        .then(data => {
+            alert(data.message);
+            if (data.success) window.location.href = data.redirect;
+        })
+        .catch(err => {
+            console.error(err);
+            alert("An error occurred while logging in.");
+        });
     });
+
 
     // ===== REGISTER FORM SUBMISSION =====
 
