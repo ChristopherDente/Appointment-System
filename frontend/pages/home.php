@@ -1,7 +1,13 @@
-<?php 
-    session_start();
-    include '../../backend/config/conn.php';
+<?php
+session_start();
+
+if (empty($_SESSION['is_login'])) {
+    header("Location: ../../index.php");
+    exit;
+}
 ?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

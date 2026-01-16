@@ -29,14 +29,32 @@ if (!$result) {
 $user = mysqli_fetch_assoc($result);
 
 if ($user && password_verify($password, $user['password'])) {
+    // Update is_login in database
+    $update_sql = "UPDATE tbluser SET is_login = 1 WHERE PK_tbluser = ?";
+    $stmt = mysqli_prepare($conn, $update_sql);
+    mysqli_stmt_bind_param($stmt, "i", $user['PK_tbluser']);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+
+    // Start session and set session variables
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    $_SESSION['is_login'] = true;
+    $_SESSION['PK_tbluser'] = $user['PK_tbluser'];
+    $_SESSION['username'] = $user['username'];
+    $_SESSION['FK_tblRole'] = $user['FK_tblRole']; 
+ 
+
     // Login successful
     echo json_encode([
         "success" => true,
         "message" => "Login successful",
-        "redirect" => "http://appointment-system.test/frontend/pages/home.php"
+        "redirect" => "frontend/pages/home.php"
     ]);
     exit;
 }
+
 
 // Invalid credentials
 echo json_encode(["success" => false, "message" => "Invalid username or password"]);

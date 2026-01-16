@@ -490,7 +490,7 @@
         const username = loginForm.username.value;
         const password = loginForm.password.value;
 
-        fetch('http://appointment-system.test/backend/login.php', {
+        fetch('backend/login.php', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username, password })
