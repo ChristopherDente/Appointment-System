@@ -13,22 +13,6 @@
 
         <div class="collapse navbar-collapse" id="mainNavbar">
             <ul class="navbar-nav ms-auto align-items-lg-center">
-
-                <!-- ================= GUEST ================= -->
-                <?php if (!isset($_SESSION['is_login'])): ?>
-                    <li class="nav-item"><a class="nav-link" href="frontend/index.php">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="frontend/about-us.php">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="frontend/doctor-list.php">Doctor List</a></li>
-                    <li class="nav-item"><a class="nav-link" href="frontend/departments.php">Departments</a></li>
-                    <li class="nav-item"><a class="nav-link" href="frontend/contact.php">Contact</a></li>
-
-                    <li class="nav-item ms-lg-3">
-                        <span class="nav-link-login nav-link" data-bs-toggle="modal" data-bs-target="#loginModal">
-                            <i class="bi bi-box-arrow-in-right"></i> Login
-                        </span>
-                    </li>
-                <?php endif; ?>
-
                 <!-- ================= ADMIN ================= -->
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1): ?>
                     <li class="nav-item"><a class="nav-link" href="dashboard.php">Dashboard</a></li>
