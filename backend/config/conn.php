@@ -1,8 +1,8 @@
 <?php
 
-$servername = "localhost";
+$servername = "127.0.0.1";
 $username   = "root";
-$password   = "";
+$password   = "@ABC12abc";
 $dbname     = "appoitmentsystem";
 
 mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
