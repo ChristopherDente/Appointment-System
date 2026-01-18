@@ -1,3 +1,4 @@
+ <link rel="stylesheet" href="../assets/styles/style.css">
  <!-- Page Header -->
  <div class="page-header">
      <div class="container">

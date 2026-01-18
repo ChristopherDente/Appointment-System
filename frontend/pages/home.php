@@ -25,187 +25,112 @@ if (empty($_SESSION['is_login'])) {
     <!-- navbar -->
     <?php include '../context/navbar.php'; ?>
 
-    <?php if (isset($_SESSION['is_login']) && $_SESSION['is_login']): ?>
-    <?php $role = $_SESSION['FK_tblRole']; ?>
+     <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <div class="d-flex align-items-center">
+                <div class="col-md-8">
+                    <h2 class="fw-bold mb-2">Welcome back, John!</h2>
+                    <p class="mb-0 opacity-90">Manage your appointments and health information in one place.</p>
+                </div>
+                <div class="col-md-4 text-md-end mt-3 mt-md-0">
+                    <button class="btn btn-light btn-lg px-4">
+                        <i class="bi bi-calendar-plus"></i> Book New Appointment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <!-- ================= User ================= -->
-    <?php if ($role == 1): ?>
+    <!-- Dashboard Content -->
+    <div class="container dashboard-content">
 
-    <?php
-        switch ($current_page) {
-            case 'home.php':
-                include_once '../users/home.php';
-                break;
-            case 'book.php':
-                include_once '../users/book.php';
-                break;
-            case 'upcoming.php':
-                include_once '../users/upcoming.php';
-                break;
-            case 'past.php':
-                include_once '../users/past.php';
-                break;
-            case 'history.php':
-                include_once '../users/history.php';
-                break;
-            case 'payments.php':
-                include_once '../users/payments.php';
-                break;
-            case 'support.php':
-                include_once '../users/support.php';
-                break;
-            case 'profile.php':
-                include_once '../users/profile.php';
-                break;
-            default:
-                include_once '../users/home.php'; // Default page
-                break;
-           
-        }
-        ?>
-    <?php endif; ?>
-
-    <!-- ================= Admin ================= -->
-    <?php if ($role == 2): ?>
-    <?php
-        switch ($current_page) {
-            case 'dashboard.php':
-                include_once '../admin/dashboard.php';
-                break;
-            case 'allAppointments.php':
-                include_once '../admin/allAppointments.php';
-                break;
-            case 'walkin.php':
-                include_once '../admin/walkin.php';
-                break;
-            case 'manageStatus.php':
-                include_once '../admin/manageStatus.php';
-                break;
-            case 'doctors.php':
-                include_once '../admin/doctors.php';
-                break;
-            case 'patients.php':
-                include_once '../admin/patients.php';
-                break;
-            case 'reports.php':
-                include_once '../admin/reports.php';
-                break;
-            case 'inventory.php':
-                include_once '../admin/inventory.php';
-                break;
-            case 'profile.php':
-                include_once '../admin/profile.php';
-                break;
-            default:
-                include_once '../admin/dashboard.php'; // Default page
-                break;
-        }
-        ?>
-    <?php endif; ?>
-
-    <!-- ================= Super Admin ================= -->
-    <?php if ($role == 3): ?>
-    <?php
-        switch ($current_page) {
-            case 'dashboard.php':
-                include_once '../superadmin/dashboard.php';
-                break;
-            case 'allAppointments.php':
-                include_once '../superadmin/allAppointments.php';
-                break;
-            case 'walkin.php':
-                include_once '../superadmin/walkin.php';
-                break;
-            case 'manageStatus.php':
-                include_once '../superadmin/manageStatus.php';
-                break;
-            case 'doctors.php':
-                include_once '../superadmin/doctors.php';
-                break;
-            case 'patients.php':
-                include_once '../superadmin/patients.php';
-                break;
-            case 'reports.php':
-                include_once '../superadmin/reports.php';
-                break;
-            case 'profile.php':
-                include_once '../superadmin/profile.php';
-                break;
-            default:
-                include_once '../superadmin/dashboard.php'; // Default page
-                break;
-        }
-        ?>
-    <?php endif; ?>
-
-    <!-- ================= Doctor ================= -->
-    <?php if ($role == 4): ?>
-    <?php
-        switch ($current_page) {
-            case 'dashboard.php':
-                include_once '../doctor/dashboard.php';
-                break;
-            case 'myschedule.php':
-                include_once '../doctor/myschedule.php';
-                break;
-            case 'myappointment.php':
-                include_once '../doctor/myappointment.php';
-                break;
-            case 'profile.php':
-                include_once '../doctor/profile.php';
-                break;
-            default:
-                include_once '../doctor/dashboard.php'; // Default page
-                break;
-        }
-        ?>
-    <?php endif; ?>
-
-    <!-- ================= Public/Guest ================= -->
-    <?php else: ?>
-    <!-- Hero -->
-    <div class="container mt-5">
-        <div class="row align-items-start">
-            <!-- LEFT HERO TEXT -->
-            <div class="col-md-6 hero-left">
-                <div class="card card-doctor border-0">
-                    <div class="card-body p-5 text-left">
-                        <span class="text-uppercase text-doctor fw-semibold small">
-                            ACE Medical Center - Baypointe
-                        </span>
-
-                        <h1 class="fw-bold mt-2 mb-3">
-                            Online Appointment Booking System
-                        </h1>
-
-                        <p class="text-muted mb-4">
-                            Schedule, manage, and track your medical appointments easily
-                            using our secure and patient-friendly system.
-                        </p>
-
-                        <div class="d-flex d-flex-left gap-3 flex-wrap">
-                            <button class="btn btn-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#loginModal">
-                                <i class="bi bi-calendar-plus"></i> Book Appointment
-                            </button>
+        <!-- Stats Overview -->
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card1">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="stat-icon">
+                            <i class="bi bi-calendar-check"></i>
                         </div>
-
-                        <div class="mt-4 text-muted small">
-                            <i class="bi bi-shield-check text-doctor"></i>
-                            Secure • Confidential • Reliable
+                        <div>
+                            <h3 class="fw-bold mb-0">3</h3>
+                            <p class="text-muted mb-0 small">Upcoming</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT IMAGE -->
-            <div class="col-md-6 text-center d-none d-md-block">
-                <img src="../assets/images/calendar.jpg" alt="Calendar" class="hero-img">
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card1">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="stat-icon">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <div>
+                            <h3 class="fw-bold mb-0">12</h3>
+                            <p class="text-muted mb-0 small">Completed</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-3 col-sm-6">
+                <div class="stat-card1">
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="stat-icon">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                        <div>
+                            <h3 class="fw-bold mb-0">₱0</h3>
+                            <p class="text-muted mb-0 small">Pending</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4 class="fw-semibold mb-4">Quick Actions</h4>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="book-appointment.php" class="text-decoration-none">
+                    <div class="stat-card1 text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="bi bi-calendar-plus"></i>
+                        </div>
+                        <h5 class="fw-semibold text-doctor">Book Appointment</h5>
+                        <p class="text-muted small mb-0">Schedule a new appointment with a doctor</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="upcoming-appointments.php" class="text-decoration-none">
+                    <div class="stat-card1 text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="bi bi-clock-history"></i>
+                        </div>
+                        <h5 class="fw-semibold text-doctor">View Appointments</h5>
+                        <p class="text-muted small mb-0">Check your upcoming and past appointments</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="payments.php" class="text-decoration-none">
+                    <div class="stat-card1 text-center">
+                        <div class="stat-icon mx-auto mb-3">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                        <h5 class="fw-semibold text-doctor">Payment History</h5>
+                        <p class="text-muted small mb-0">View billing and payment records</p>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
-    <?php endif; ?>
-
 
 
     <!-- Login / Register Modal -->
