@@ -172,7 +172,7 @@ if ($current_dir == 'users' || $current_dir == 'admin' || $current_dir == 'docto
 
                 <!-- ================= Logout Button ================= -->
                 <li class="nav-item ms-lg-3">
-                    <a class="nav-link-login nav-link" href="<?php echo $pathPrefix; ?>backend/logout.php"
+                    <a class="nav-link-login nav-link" href="../../backend/logout.php"
                         onclick="return confirm('Are you sure you want to logout?');">
                         <i class="bi bi-box-arrow-right"></i> Logout
                     </a>

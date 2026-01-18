@@ -44,6 +44,12 @@ if ($user && password_verify($password, $user['password'])) {
     $_SESSION['PK_tbluser'] = $user['PK_tbluser'];
     $_SESSION['username'] = $user['username'];
     $_SESSION['FK_tblRole'] = $user['FK_tblRole']; 
+    $_SESSION['fname'] = $user['fname']; 
+    $_SESSION['mname'] = $user['mname']; 
+    $_SESSION['lname'] = $user['lname']; 
+ 
+
+
  
 
     // Login successful

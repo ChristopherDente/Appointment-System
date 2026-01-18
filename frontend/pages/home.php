@@ -5,6 +5,130 @@ if (empty($_SESSION['is_login'])) {
     header("Location: ../../index.php");
     exit;
 }
+
+// At the top of your home.php file (after session_start)
+require_once '../../backend/config/conn.php'; // Adjust path as needed
+
+// Get current user ID from session
+$user_id = $_SESSION['PK_tbluser'] ?? null;
+$patient_id = null;
+
+if ($user_id) {
+    // Get patient ID from tblpatient
+    $patient_query = "SELECT PK_tblpatient FROM tblpatient WHERE FK_tbluser = ?";
+    $stmt = $conn->prepare($patient_query);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $patient_id = $row['PK_tblpatient'];
+    }
+    $stmt->close();
+}
+
+// Initialize stats
+$upcoming_count = 0;
+$completed_count = 0;
+$pending_payments = 0;
+
+if ($patient_id) {
+    // Get upcoming appointments count
+    $upcoming_query = "SELECT COUNT(*) as count 
+                      FROM tblappointments 
+                      WHERE FK_tblpatient = ? 
+                      AND appointment_date >= CURDATE() 
+                      AND status IN ('Confirmed', 'Pending')
+                      AND is_active = 1";
+    $stmt = $conn->prepare($upcoming_query);
+    $stmt->bind_param("i", $patient_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $upcoming_count = $row['count'];
+    }
+    $stmt->close();
+
+    // Get completed appointments count
+    $completed_query = "SELECT COUNT(*) as count 
+                       FROM tblappointments 
+                       WHERE FK_tblpatient = ? 
+                       AND status = 'Done'
+                       AND is_active = 1";
+    $stmt = $conn->prepare($completed_query);
+    $stmt->bind_param("i", $patient_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $completed_count = $row['count'];
+    }
+    $stmt->close();
+
+    // Get pending payments (if you have a payments table)
+    // Assuming you have tblpayments with amount and status fields
+    $payment_query = "SELECT COALESCE(SUM(amount), 0) as total 
+                     FROM tblpayments 
+                     WHERE FK_tblpatient = ? 
+                     AND status = 'Pending'
+                     AND is_active = 1";
+    $stmt = $conn->prepare($payment_query);
+    $stmt->bind_param("i", $patient_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($row = $result->fetch_assoc()) {
+        $pending_payments = $row['total'];
+    }
+    $stmt->close();
+}
+
+$calendar_start = date('Y-m-01'); // First day of current month
+$calendar_end = date('Y-m-t', strtotime('+1 month')); // Last day of next month
+
+
+$calendar_query = "SELECT 
+    a.PK_tblappointments,
+    a.appointment_date,
+    a.appointment_time,
+    a.status,
+    CONCAT(u.fname, ' ', u.lname) AS doctor_name,
+    doc.specialization,
+    s.servicename
+FROM tblappointments a
+LEFT JOIN tbldoctors doc ON a.FK_tbldoctors = doc.PK_tbldoctors
+LEFT JOIN tbluser u ON doc.FK_tbluser = u.PK_tbluser
+LEFT JOIN tblservices s ON a.FK_tblservices = s.PK_tblservices
+WHERE a.FK_tblpatient = ?
+  AND a.appointment_date BETWEEN ? AND ?
+  AND a.is_active = 1
+ORDER BY a.appointment_date, a.appointment_time";
+
+
+$appointments = [];
+if ($patient_id) {
+    $stmt = $conn->prepare($calendar_query);
+    $stmt->bind_param(
+        "iss",
+        $patient_id,
+        $calendar_start,
+        $calendar_end
+    );
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    while ($row = $result->fetch_assoc()) {
+        $date = $row['appointment_date'];
+        $appointments[$date][] = $row;
+    }
+
+    $stmt->close();
+}
+
+
+// Get current month info
+$current_year = date('Y');
+$current_month = date('m');
+$month_name = date('F Y');
+$first_day = date('w', strtotime($calendar_start)); // Day of week (0=Sunday)
+$days_in_month = date('t');
 ?>
 
 <!DOCTYPE html>
@@ -25,12 +149,12 @@ if (empty($_SESSION['is_login'])) {
     <!-- navbar -->
     <?php include '../context/navbar.php'; ?>
 
-     <!-- Page Header -->
+    <!-- Page Header -->
     <div class="page-header">
         <div class="container">
             <div class="d-flex align-items-center">
                 <div class="col-md-8">
-                    <h2 class="fw-bold mb-2">Welcome back, John!</h2>
+                    <h2 class="fw-bold mb-2">Welcome back, <?php echo $_SESSION['fname']; ?></h2>
                     <p class="mb-0 opacity-90">Manage your appointments and health information in one place.</p>
                 </div>
                 <div class="col-md-4 text-md-end mt-3 mt-md-0">
@@ -42,19 +166,20 @@ if (empty($_SESSION['is_login'])) {
         </div>
     </div>
 
+
+
     <!-- Dashboard Content -->
     <div class="container dashboard-content">
-
         <!-- Stats Overview -->
         <div class="row g-4">
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card1">
+                <div class="stat-card">
                     <div class="d-flex align-items-center gap-3">
                         <div class="stat-icon">
                             <i class="bi bi-calendar-check"></i>
                         </div>
                         <div>
-                            <h3 class="fw-bold mb-0">3</h3>
+                            <h3 class="fw-bold mb-0"><?php echo $upcoming_count; ?></h3>
                             <p class="text-muted mb-0 small">Upcoming</p>
                         </div>
                     </div>
@@ -62,43 +187,41 @@ if (empty($_SESSION['is_login'])) {
             </div>
 
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card1">
+                <div class="stat-card">
                     <div class="d-flex align-items-center gap-3">
                         <div class="stat-icon">
                             <i class="bi bi-clock-history"></i>
                         </div>
                         <div>
-                            <h3 class="fw-bold mb-0">12</h3>
+                            <h3 class="fw-bold mb-0"><?php echo $completed_count; ?></h3>
                             <p class="text-muted mb-0 small">Completed</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-
             <div class="col-md-3 col-sm-6">
-                <div class="stat-card1">
+                <div class="stat-card">
                     <div class="d-flex align-items-center gap-3">
                         <div class="stat-icon">
                             <i class="bi bi-credit-card"></i>
                         </div>
                         <div>
-                            <h3 class="fw-bold mb-0">₱0</h3>
+                            <h3 class="fw-bold mb-0">₱<?php echo number_format($pending_payments, 2); ?></h3>
                             <p class="text-muted mb-0 small">Pending</p>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- Quick Actions -->
+        <!-- Quick Actions & Calendar -->
         <div class="row mt-5">
             <div class="col-12">
                 <h4 class="fw-semibold mb-4">Quick Actions</h4>
             </div>
             <div class="col-md-4 mb-3">
-                <a href="book-appointment.php" class="text-decoration-none">
-                    <div class="stat-card1 text-center">
+                <a href="book.php" class="text-decoration-none">
+                    <div class="stat-card text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-calendar-plus"></i>
                         </div>
@@ -108,8 +231,8 @@ if (empty($_SESSION['is_login'])) {
                 </a>
             </div>
             <div class="col-md-4 mb-3">
-                <a href="upcoming-appointments.php" class="text-decoration-none">
-                    <div class="stat-card1 text-center">
+                <a href="upcoming.php" class="text-decoration-none">
+                    <div class="stat-card text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-clock-history"></i>
                         </div>
@@ -120,7 +243,7 @@ if (empty($_SESSION['is_login'])) {
             </div>
             <div class="col-md-4 mb-3">
                 <a href="payments.php" class="text-decoration-none">
-                    <div class="stat-card1 text-center">
+                    <div class="stat-card text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-credit-card"></i>
                         </div>
@@ -130,6 +253,107 @@ if (empty($_SESSION['is_login'])) {
                 </a>
             </div>
         </div>
+
+        <!-- Appointment Calendar -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <h4 class="fw-semibold mb-4">
+                    <i class="bi bi-calendar3"></i> Appointment Calendar
+                </h4>
+            </div>
+            <div class="col-12">
+                <div class="card-doctor p-4">
+                    <!-- Calendar Header -->
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h5 class="fw-bold mb-0 text-doctor"><?php echo $month_name; ?></h5>
+                        <div class="btn-group">
+                            <a href="?month=<?php echo date('Y-m', strtotime('-1 month')); ?>"
+                                class="btn btn-outline-doctor btn-sm">
+                                <i class="bi bi-chevron-left"></i> Prev
+                            </a>
+                            <a href="?month=<?php echo date('Y-m'); ?>" class="btn btn-outline-doctor btn-sm">
+                                Today
+                            </a>
+                            <a href="?month=<?php echo date('Y-m', strtotime('+1 month')); ?>"
+                                class="btn btn-outline-doctor btn-sm">
+                                Next <i class="bi bi-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Calendar Grid -->
+                    <div class="calendar-wrapper">
+                        <!-- Day Headers -->
+                        <div class="calendar-header">
+                            <div class="calendar-day-header">Sun</div>
+                            <div class="calendar-day-header">Mon</div>
+                            <div class="calendar-day-header">Tue</div>
+                            <div class="calendar-day-header">Wed</div>
+                            <div class="calendar-day-header">Thu</div>
+                            <div class="calendar-day-header">Fri</div>
+                            <div class="calendar-day-header">Sat</div>
+                        </div>
+
+                        <!-- Calendar Days -->
+                        <div class="calendar-grid">
+                            <?php
+                    // Empty cells before first day
+                    for ($i = 0; $i < $first_day; $i++) {
+                        echo '<div class="calendar-day empty"></div>';
+                    }
+
+                    // Days of the month
+                    for ($day = 1; $day <= $days_in_month; $day++) {
+                        $date = sprintf('%s-%s-%02d', $current_year, $current_month, $day);
+                        $is_today = ($date == date('Y-m-d'));
+                        $has_appointments = isset($appointments[$date]);
+                        
+                        $day_class = 'calendar-day';
+                        if ($is_today) $day_class .= ' today';
+                        if ($has_appointments) $day_class .= ' has-appointment';
+                        
+                        echo '<div class="' . $day_class . '">';
+                        echo '<div class="day-number">' . $day . '</div>';
+                        
+                        if ($has_appointments) {
+                            echo '<div class="appointments-list">';
+                            foreach ($appointments[$date] as $apt) {
+                                $status_class = strtolower($apt['status']);
+                                $time = date('g:i A', strtotime($apt['appointment_time']));
+                                echo '<div class="appointment-item status-' . $status_class . '" title="' . htmlspecialchars($apt['doctor_name'] . ' - ' . $apt['servicename']) . '">';
+                                echo '<i class="bi bi-clock"></i> ' . $time;
+                                echo '</div>';
+                            }
+                            echo '</div>';
+                        }
+                        
+                        echo '</div>';
+                    }
+                    ?>
+                        </div>
+                    </div>
+
+                    <!-- Legend -->
+                    <div class="calendar-legend mt-4">
+                        <div class="d-flex flex-wrap gap-3 justify-content-center">
+                            <div class="legend-item">
+                                <span class="legend-dot status-confirmed"></span> Confirmed
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot status-pending"></span> Pending
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot status-completed"></span> Completed
+                            </div>
+                            <div class="legend-item">
+                                <span class="legend-dot status-cancelled"></span> Cancelled
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 
