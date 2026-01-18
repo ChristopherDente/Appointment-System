@@ -146,7 +146,7 @@ while ($row = $dept_result->fetch_assoc()) {
     <div class="page-header">
         <div class="container">
             <div class="d-flex align-items-center">
-                <a href="dashboard.php" class="text-white text-decoration-none me-3">
+                <a href="home.php" class="text-white text-decoration-none me-3">
                     <i class="bi bi-arrow-left fs-4"></i>
                 </a>
                 <div>
