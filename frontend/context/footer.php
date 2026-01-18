@@ -7,6 +7,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $isInFrontend = strpos($_SERVER['PHP_SELF'], '/frontend/') !== false;
 $pathPrefix = $isInFrontend ? '' : 'frontend/';
 ?>
+ 
 
 <footer class="footer-doctor mt-5">
     <div class="container py-5">

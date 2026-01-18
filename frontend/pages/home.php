@@ -7,7 +7,6 @@ if (empty($_SESSION['is_login'])) {
 }
 ?>
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,15 +25,151 @@ if (empty($_SESSION['is_login'])) {
     <!-- navbar -->
     <?php include '../context/navbar.php'; ?>
 
+    <?php if (isset($_SESSION['is_login']) && $_SESSION['is_login']): ?>
+    <?php $role = $_SESSION['FK_tblRole']; ?>
+
+    <!-- ================= User ================= -->
+    <?php if ($role == 1): ?>
+
+    <?php
+        switch ($current_page) {
+            case 'home.php':
+                include_once '../users/home.php';
+                break;
+            case 'book.php':
+                include_once '../users/book.php';
+                break;
+            case 'upcoming.php':
+                include_once '../users/upcoming.php';
+                break;
+            case 'past.php':
+                include_once '../users/past.php';
+                break;
+            case 'history.php':
+                include_once '../users/history.php';
+                break;
+            case 'payments.php':
+                include_once '../users/payments.php';
+                break;
+            case 'support.php':
+                include_once '../users/support.php';
+                break;
+            case 'profile.php':
+                include_once '../users/profile.php';
+                break;
+            default:
+                include_once '../users/home.php'; // Default page
+                break;
+           
+        }
+        ?>
+    <?php endif; ?>
+
+    <!-- ================= Admin ================= -->
+    <?php if ($role == 2): ?>
+    <?php
+        switch ($current_page) {
+            case 'dashboard.php':
+                include_once '../admin/dashboard.php';
+                break;
+            case 'allAppointments.php':
+                include_once '../admin/allAppointments.php';
+                break;
+            case 'walkin.php':
+                include_once '../admin/walkin.php';
+                break;
+            case 'manageStatus.php':
+                include_once '../admin/manageStatus.php';
+                break;
+            case 'doctors.php':
+                include_once '../admin/doctors.php';
+                break;
+            case 'patients.php':
+                include_once '../admin/patients.php';
+                break;
+            case 'reports.php':
+                include_once '../admin/reports.php';
+                break;
+            case 'inventory.php':
+                include_once '../admin/inventory.php';
+                break;
+            case 'profile.php':
+                include_once '../admin/profile.php';
+                break;
+            default:
+                include_once '../admin/dashboard.php'; // Default page
+                break;
+        }
+        ?>
+    <?php endif; ?>
+
+    <!-- ================= Super Admin ================= -->
+    <?php if ($role == 3): ?>
+    <?php
+        switch ($current_page) {
+            case 'dashboard.php':
+                include_once '../superadmin/dashboard.php';
+                break;
+            case 'allAppointments.php':
+                include_once '../superadmin/allAppointments.php';
+                break;
+            case 'walkin.php':
+                include_once '../superadmin/walkin.php';
+                break;
+            case 'manageStatus.php':
+                include_once '../superadmin/manageStatus.php';
+                break;
+            case 'doctors.php':
+                include_once '../superadmin/doctors.php';
+                break;
+            case 'patients.php':
+                include_once '../superadmin/patients.php';
+                break;
+            case 'reports.php':
+                include_once '../superadmin/reports.php';
+                break;
+            case 'profile.php':
+                include_once '../superadmin/profile.php';
+                break;
+            default:
+                include_once '../superadmin/dashboard.php'; // Default page
+                break;
+        }
+        ?>
+    <?php endif; ?>
+
+    <!-- ================= Doctor ================= -->
+    <?php if ($role == 4): ?>
+    <?php
+        switch ($current_page) {
+            case 'dashboard.php':
+                include_once '../doctor/dashboard.php';
+                break;
+            case 'myschedule.php':
+                include_once '../doctor/myschedule.php';
+                break;
+            case 'myappointment.php':
+                include_once '../doctor/myappointment.php';
+                break;
+            case 'profile.php':
+                include_once '../doctor/profile.php';
+                break;
+            default:
+                include_once '../doctor/dashboard.php'; // Default page
+                break;
+        }
+        ?>
+    <?php endif; ?>
+
+    <!-- ================= Public/Guest ================= -->
+    <?php else: ?>
     <!-- Hero -->
     <div class="container mt-5">
         <div class="row align-items-start">
-
             <!-- LEFT HERO TEXT -->
             <div class="col-md-6 hero-left">
                 <div class="card card-doctor border-0">
                     <div class="card-body p-5 text-left">
-
                         <span class="text-uppercase text-doctor fw-semibold small">
                             ACE Medical Center - Baypointe
                         </span>
@@ -53,15 +188,12 @@ if (empty($_SESSION['is_login'])) {
                                 data-bs-target="#loginModal">
                                 <i class="bi bi-calendar-plus"></i> Book Appointment
                             </button>
-
-                          
                         </div>
 
                         <div class="mt-4 text-muted small">
                             <i class="bi bi-shield-check text-doctor"></i>
                             Secure • Confidential • Reliable
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -70,9 +202,11 @@ if (empty($_SESSION['is_login'])) {
             <div class="col-md-6 text-center d-none d-md-block">
                 <img src="../assets/images/calendar.jpg" alt="Calendar" class="hero-img">
             </div>
-
         </div>
     </div>
+    <?php endif; ?>
+
+
 
     <!-- Login / Register Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">
@@ -88,7 +222,7 @@ if (empty($_SESSION['is_login'])) {
                 </div>
 
                 <div class="modal-body p-4">
-                    
+
                     <!-- Alert Messages -->
                     <div id="alertMessage" class="alert alert-dismissible fade" role="alert" style="display: none;">
                         <span id="alertText"></span>
@@ -98,10 +232,11 @@ if (empty($_SESSION['is_login'])) {
                     <!-- LOGIN FORM -->
                     <div id="loginFormContainer">
                         <form id="loginForm">
-                            
+
                             <!-- Google Sign-In Button -->
                             <div class="d-grid mb-3">
-                                <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtnLogin">
+                                <button type="button" class="btn btn-outline-secondary btn-google"
+                                    id="googleSignInBtnLogin">
                                     <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
                                         style="vertical-align: middle; margin-right: 8px;">
                                         <path fill="#EA4335"
@@ -121,7 +256,8 @@ if (empty($_SESSION['is_login'])) {
                             <!-- Divider -->
                             <div class="position-relative my-4">
                                 <hr>
-                                <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
+                                <span
+                                    class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
                                     OR
                                 </span>
                             </div>
@@ -130,8 +266,8 @@ if (empty($_SESSION['is_login'])) {
                                 <label class="form-label fw-semibold">Username</label>
                                 <div class="position-relative">
                                     <i class="bi bi-person form-icon"></i>
-                                    <input type="text" name="username" id="loginUsername" class="form-control form-input" 
-                                           placeholder="Enter your username" required>
+                                    <input type="text" name="username" id="loginUsername"
+                                        class="form-control form-input" placeholder="Enter your username" required>
                                 </div>
                             </div>
 
@@ -139,8 +275,8 @@ if (empty($_SESSION['is_login'])) {
                                 <label class="form-label fw-semibold">Password</label>
                                 <div class="position-relative">
                                     <i class="bi bi-lock form-icon"></i>
-                                    <input type="password" id="passwordFieldLogin" name="password" 
-                                           class="form-control form-input" placeholder="Enter your password" required>
+                                    <input type="password" id="passwordFieldLogin" name="password"
+                                        class="form-control form-input" placeholder="Enter your password" required>
                                     <i class="bi bi-eye eye-icon" id="togglePasswordLogin" style="cursor: pointer;"></i>
                                 </div>
                             </div>
@@ -168,10 +304,11 @@ if (empty($_SESSION['is_login'])) {
                     <!-- REGISTER FORM -->
                     <div id="registerFormContainer" style="display: none;">
                         <form id="registerForm">
-                            
+
                             <!-- Google Sign-In Button -->
                             <div class="d-grid mb-3">
-                                <button type="button" class="btn btn-outline-secondary btn-google" id="googleSignInBtnRegister">
+                                <button type="button" class="btn btn-outline-secondary btn-google"
+                                    id="googleSignInBtnRegister">
                                     <svg width="18" height="18" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"
                                         style="vertical-align: middle; margin-right: 8px;">
                                         <path fill="#EA4335"
@@ -191,15 +328,16 @@ if (empty($_SESSION['is_login'])) {
                             <!-- Divider -->
                             <div class="position-relative my-4">
                                 <hr>
-                                <span class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
+                                <span
+                                    class="position-absolute top-50 start-50 translate-middle bg-white px-3 text-muted">
                                     OR
                                 </span>
                             </div>
 
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Username</label>
-                                <input type="text" name="username" id="registerUsername" class="form-control form-input" 
-                                       placeholder="Choose a username" required minlength="3">
+                                <input type="text" name="username" id="registerUsername" class="form-control form-input"
+                                    placeholder="Choose a username" required minlength="3">
                                 <small class="text-muted">
                                     <i class="bi bi-info-circle"></i> At least 3 characters
                                 </small>
@@ -208,10 +346,11 @@ if (empty($_SESSION['is_login'])) {
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Password</label>
                                 <div class="position-relative">
-                                    <input type="password" id="passwordFieldRegister" name="password" 
-                                           class="form-control form-input" placeholder="Create a password" 
-                                           required minlength="6">
-                                    <i class="bi bi-eye eye-icon" id="togglePasswordRegister" style="cursor: pointer;"></i>
+                                    <input type="password" id="passwordFieldRegister" name="password"
+                                        class="form-control form-input" placeholder="Create a password" required
+                                        minlength="6">
+                                    <i class="bi bi-eye eye-icon" id="togglePasswordRegister"
+                                        style="cursor: pointer;"></i>
                                 </div>
                                 <small class="text-muted">
                                     <i class="bi bi-info-circle"></i> At least 6 characters
@@ -221,9 +360,10 @@ if (empty($_SESSION['is_login'])) {
                             <div class="mb-3">
                                 <label class="form-label fw-semibold">Confirm Password</label>
                                 <div class="position-relative">
-                                    <input type="password" id="confirmPasswordField" name="confirm_password" 
-                                           class="form-control form-input" placeholder="Re-enter your password" required>
-                                    <i class="bi bi-eye eye-icon" id="toggleConfirmPassword" style="cursor: pointer;"></i>
+                                    <input type="password" id="confirmPasswordField" name="confirm_password"
+                                        class="form-control form-input" placeholder="Re-enter your password" required>
+                                    <i class="bi bi-eye eye-icon" id="toggleConfirmPassword"
+                                        style="cursor: pointer;"></i>
                                 </div>
                                 <div id="passwordMatchMessage" class="mt-1" style="display: none;">
                                     <small class="text-danger">
@@ -251,56 +391,7 @@ if (empty($_SESSION['is_login'])) {
         </div>
     </div>
 
-    <!-- Track Appointment Modal -->
-    <div class="modal fade" id="trackModal" tabindex="-1">
-        <div class="modal-dialog modal-md modal-dialog-centered">
-            <div class="modal-content card-doctor border-0 shadow">
-                <div class="modal-header bg-doctor text-white">
-                    <h5 class="modal-title">
-                        <i class="bi bi-search"></i> Track Appointment
-                    </h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4">
-                    
-                    <!-- Alert for Track Modal -->
-                    <div id="trackAlertMessage" class="alert alert-dismissible fade" role="alert" style="display: none;">
-                        <span id="trackAlertText"></span>
-                        <button type="button" class="btn-close" onclick="hideTrackAlert()"></button>
-                    </div>
 
-                    <form id="trackForm">
-                        <div class="mb-3">
-                            <label class="form-label fw-semibold">Appointment Reference Number</label>
-                            <input type="text" name="reference" class="form-control form-input" 
-                                   placeholder="e.g., APT-2024-001234" required>
-                            <small class="text-muted">
-                                <i class="bi bi-info-circle"></i> Enter the reference number from your appointment confirmation
-                            </small>
-                        </div>
-
-                        <div class="mb-4">
-                            <label class="form-label fw-semibold">Email Address</label>
-                            <input type="email" name="email" class="form-control form-input" 
-                                   placeholder="your@email.com" required>
-                            <small class="text-muted">
-                                <i class="bi bi-info-circle"></i> The email used when booking the appointment
-                            </small>
-                        </div>
-
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn btn-doctor btn-lg">
-                                <i class="bi bi-search"></i> Track Appointment
-                            </button>
-                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                Cancel
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Footer -->
     <?php include '../context/footer.php'; ?>
@@ -310,15 +401,16 @@ if (empty($_SESSION['is_login'])) {
 
     <script>
     // ===== UTILITY FUNCTIONS =====
-    
+
     function showAlert(message, type = 'danger') {
         const alertBox = document.getElementById('alertMessage');
         const alertText = document.getElementById('alertText');
-        
+
         alertBox.className = `alert alert-${type} alert-dismissible fade show`;
-        alertText.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+        alertText.innerHTML =
+            `<i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
         alertBox.style.display = 'block';
-        
+
         // Auto hide after 5 seconds
         setTimeout(() => {
             hideAlert();
@@ -334,11 +426,12 @@ if (empty($_SESSION['is_login'])) {
     function showTrackAlert(message, type = 'danger') {
         const alertBox = document.getElementById('trackAlertMessage');
         const alertText = document.getElementById('trackAlertText');
-        
+
         alertBox.className = `alert alert-${type} alert-dismissible fade show`;
-        alertText.innerHTML = `<i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
+        alertText.innerHTML =
+            `<i class="bi bi-${type === 'success' ? 'check-circle' : 'exclamation-circle'}"></i> ${message}`;
         alertBox.style.display = 'block';
-        
+
         setTimeout(() => {
             hideTrackAlert();
         }, 5000);
@@ -362,11 +455,11 @@ if (empty($_SESSION['is_login'])) {
     }
 
     // ===== PASSWORD TOGGLE FUNCTIONALITY =====
-    
+
     function setupPasswordToggle(toggleId, fieldId) {
         const toggle = document.getElementById(toggleId);
         const field = document.getElementById(fieldId);
-        
+
         if (toggle && field) {
             toggle.addEventListener('click', () => {
                 const type = field.getAttribute('type') === 'password' ? 'text' : 'password';
@@ -382,7 +475,7 @@ if (empty($_SESSION['is_login'])) {
     setupPasswordToggle('toggleConfirmPassword', 'confirmPasswordField');
 
     // ===== PASSWORD MATCH VALIDATION =====
-    
+
     const passwordFieldRegister = document.getElementById('passwordFieldRegister');
     const confirmPasswordField = document.getElementById('confirmPasswordField');
     const passwordMatchMessage = document.getElementById('passwordMatchMessage');
@@ -407,14 +500,14 @@ if (empty($_SESSION['is_login'])) {
     passwordFieldRegister?.addEventListener('input', checkPasswordMatch);
 
     // ===== FORM SWITCHING =====
-    
+
     document.getElementById('showRegister')?.addEventListener('click', function(e) {
         e.preventDefault();
         hideAlert();
         document.getElementById('loginFormContainer').style.display = 'none';
         document.getElementById('registerFormContainer').style.display = 'block';
         document.getElementById('modalTitle').innerHTML = '<i class="bi bi-person-plus"></i> Register';
-        
+
         // Reset forms
         document.getElementById('loginForm').reset();
     });
@@ -425,7 +518,7 @@ if (empty($_SESSION['is_login'])) {
         document.getElementById('registerFormContainer').style.display = 'none';
         document.getElementById('loginFormContainer').style.display = 'block';
         document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
-        
+
         // Reset forms
         document.getElementById('registerForm').reset();
         passwordMatchMessage.style.display = 'none';
@@ -433,12 +526,12 @@ if (empty($_SESSION['is_login'])) {
     });
 
     // ===== LOGIN FORM SUBMISSION =====
-    
+
     const loginForm = document.getElementById('loginForm');
     loginForm.addEventListener('submit', function(e) {
         e.preventDefault();
         hideAlert();
-        
+
         const submitBtn = loginForm.querySelector('button[type="submit"]');
         const username = document.getElementById('loginUsername').value.trim();
         const password = document.getElementById('passwordFieldLogin').value;
@@ -452,44 +545,47 @@ if (empty($_SESSION['is_login'])) {
         setButtonLoading(submitBtn, true, 'Logging in...');
 
         fetch('backend/login.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                action: 'login',
-                username: username, 
-                password: password 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'login',
+                    username: username,
+                    password: password
+                })
             })
-        })
-        .then(res => res.json())
-        .then(data => {
-            setButtonLoading(submitBtn, false);
-            
-            if (data.success) {
-                showAlert(data.message || 'Login successful! Redirecting...', 'success');
-                
-                setTimeout(() => {
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                    if (modal) modal.hide();
-                    window.location.href = data.redirect || 'dashboard.php';
-                }, 1000);
-            } else {
-                showAlert(data.message || 'Invalid username or password', 'danger');
-            }
-        })
-        .catch(err => {
-            console.error('Login error:', err);
-            setButtonLoading(submitBtn, false);
-            showAlert('An error occurred. Please try again.', 'danger');
-        });
+            .then(res => res.json())
+            .then(data => {
+                setButtonLoading(submitBtn, false);
+
+                if (data.success) {
+                    showAlert(data.message || 'Login successful! Redirecting...', 'success');
+
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById(
+                            'loginModal'));
+                        if (modal) modal.hide();
+                        window.location.href = data.redirect || 'dashboard.php';
+                    }, 1000);
+                } else {
+                    showAlert(data.message || 'Invalid username or password', 'danger');
+                }
+            })
+            .catch(err => {
+                console.error('Login error:', err);
+                setButtonLoading(submitBtn, false);
+                showAlert('An error occurred. Please try again.', 'danger');
+            });
     });
 
     // ===== REGISTER FORM SUBMISSION =====
-    
+
     const registerForm = document.getElementById('registerForm');
     registerForm.addEventListener('submit', function(e) {
         e.preventDefault();
         hideAlert();
-        
+
         const submitBtn = registerForm.querySelector('button[type="submit"]');
         const username = document.getElementById('registerUsername').value.trim();
         const password = document.getElementById('passwordFieldRegister').value;
@@ -519,54 +615,57 @@ if (empty($_SESSION['is_login'])) {
         setButtonLoading(submitBtn, true, 'Registering...');
 
         fetch('backend/login.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                action: 'register',
-                username: username, 
-                password: password, 
-                confirm_password: confirmPassword 
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    action: 'register',
+                    username: username,
+                    password: password,
+                    confirm_password: confirmPassword
+                })
             })
-        })
-        .then(res => res.json())
-        .then(data => {
-            setButtonLoading(submitBtn, false);
-            
-            if (data.success) {
-                showAlert(data.message || 'Registration successful! Please login.', 'success');
-                
-                setTimeout(() => {
-                    // Switch to login form
-                    document.getElementById('registerFormContainer').style.display = 'none';
-                    document.getElementById('loginFormContainer').style.display = 'block';
-                    document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
-                    
-                    // Clear register form
-                    registerForm.reset();
-                    passwordMatchMessage.style.display = 'none';
-                    confirmPasswordField.classList.remove('is-invalid', 'is-valid');
-                    
-                    // Pre-fill username in login form
-                    document.getElementById('loginUsername').value = username;
-                }, 1500);
-            } else {
-                showAlert(data.message || 'Registration failed. Please try again.', 'danger');
-            }
-        })
-        .catch(err => {
-            console.error('Registration error:', err);
-            setButtonLoading(submitBtn, false);
-            showAlert('An error occurred. Please try again.', 'danger');
-        });
+            .then(res => res.json())
+            .then(data => {
+                setButtonLoading(submitBtn, false);
+
+                if (data.success) {
+                    showAlert(data.message || 'Registration successful! Please login.', 'success');
+
+                    setTimeout(() => {
+                        // Switch to login form
+                        document.getElementById('registerFormContainer').style.display = 'none';
+                        document.getElementById('loginFormContainer').style.display = 'block';
+                        document.getElementById('modalTitle').innerHTML =
+                            '<i class="bi bi-box-arrow-in-right"></i> Login';
+
+                        // Clear register form
+                        registerForm.reset();
+                        passwordMatchMessage.style.display = 'none';
+                        confirmPasswordField.classList.remove('is-invalid', 'is-valid');
+
+                        // Pre-fill username in login form
+                        document.getElementById('loginUsername').value = username;
+                    }, 1500);
+                } else {
+                    showAlert(data.message || 'Registration failed. Please try again.', 'danger');
+                }
+            })
+            .catch(err => {
+                console.error('Registration error:', err);
+                setButtonLoading(submitBtn, false);
+                showAlert('An error occurred. Please try again.', 'danger');
+            });
     });
 
     // ===== TRACK APPOINTMENT FORM =====
-    
+
     const trackForm = document.getElementById('trackForm');
     trackForm?.addEventListener('submit', function(e) {
         e.preventDefault();
         hideTrackAlert();
-        
+
         const submitBtn = trackForm.querySelector('button[type="submit"]');
         const reference = trackForm.reference.value.trim();
         const email = trackForm.email.value.trim();
@@ -579,32 +678,38 @@ if (empty($_SESSION['is_login'])) {
         setButtonLoading(submitBtn, true, 'Tracking...');
 
         fetch('backend/track_appointment.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ reference: reference, email: email })
-        })
-        .then(res => res.json())
-        .then(data => {
-            setButtonLoading(submitBtn, false);
-            
-            if (data.success) {
-                showTrackAlert('Appointment found! Redirecting...', 'success');
-                setTimeout(() => {
-                    window.location.href = data.redirect || `track_result.php?ref=${reference}`;
-                }, 1500);
-            } else {
-                showTrackAlert(data.message || 'Appointment not found. Please check your details.', 'danger');
-            }
-        })
-        .catch(err => {
-            console.error('Track error:', err);
-            setButtonLoading(submitBtn, false);
-            showTrackAlert('An error occurred. Please try again.', 'danger');
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    reference: reference,
+                    email: email
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                setButtonLoading(submitBtn, false);
+
+                if (data.success) {
+                    showTrackAlert('Appointment found! Redirecting...', 'success');
+                    setTimeout(() => {
+                        window.location.href = data.redirect || `track_result.php?ref=${reference}`;
+                    }, 1500);
+                } else {
+                    showTrackAlert(data.message || 'Appointment not found. Please check your details.',
+                        'danger');
+                }
+            })
+            .catch(err => {
+                console.error('Track error:', err);
+                setButtonLoading(submitBtn, false);
+                showTrackAlert('An error occurred. Please try again.', 'danger');
+            });
     });
 
     // ===== GOOGLE SIGN-IN =====
-    
+
     function initializeGoogleSignIn() {
         if (typeof google !== 'undefined' && google.accounts) {
             google.accounts.id.initialize({
@@ -616,29 +721,33 @@ if (empty($_SESSION['is_login'])) {
 
     function handleGoogleSignIn(response) {
         hideAlert();
-        
+
         fetch('frontend/google_login_process.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ credential: response.credential })
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data.success) {
-                showAlert('Login successful! Redirecting...', 'success');
-                setTimeout(() => {
-                    const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
-                    if (modal) modal.hide();
-                    window.location.href = data.redirect || 'dashboard.php';
-                }, 1000);
-            } else {
-                showAlert(data.message || 'Google login failed. Please try again.', 'danger');
-            }
-        })
-        .catch(error => {
-            console.error('Google Sign-In error:', error);
-            showAlert('An error occurred during Google login.', 'danger');
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    credential: response.credential
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.success) {
+                    showAlert('Login successful! Redirecting...', 'success');
+                    setTimeout(() => {
+                        const modal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+                        if (modal) modal.hide();
+                        window.location.href = data.redirect || 'dashboard.php';
+                    }, 1000);
+                } else {
+                    showAlert(data.message || 'Google login failed. Please try again.', 'danger');
+                }
+            })
+            .catch(error => {
+                console.error('Google Sign-In error:', error);
+                showAlert('An error occurred during Google login.', 'danger');
+            });
     }
 
     document.getElementById('googleSignInBtnLogin')?.addEventListener('click', function() {
@@ -660,17 +769,17 @@ if (empty($_SESSION['is_login'])) {
     window.addEventListener('load', initializeGoogleSignIn);
 
     // ===== MODAL RESET ON CLOSE =====
-    
+
     document.getElementById('loginModal')?.addEventListener('hidden.bs.modal', function() {
         hideAlert();
         document.getElementById('loginForm').reset();
         document.getElementById('registerForm').reset();
-        
+
         // Reset to login form
         document.getElementById('loginFormContainer').style.display = 'block';
         document.getElementById('registerFormContainer').style.display = 'none';
         document.getElementById('modalTitle').innerHTML = '<i class="bi bi-box-arrow-in-right"></i> Login';
-        
+
         // Clear validation states
         passwordMatchMessage.style.display = 'none';
         confirmPasswordField.classList.remove('is-invalid', 'is-valid');
@@ -683,4 +792,5 @@ if (empty($_SESSION['is_login'])) {
     </script>
 
 </body>
+
 </html>
