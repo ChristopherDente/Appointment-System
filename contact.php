@@ -90,7 +90,7 @@
             </div>
 
             <div class="col-md-6 text-center d-none d-md-block">
-                <img src="frontend/images/calendar.jpg" alt="Contact" class="hero-img">
+                <img src="assets/images/calendar.jpg" alt="Contact" class="hero-img">
             </div>
         </div>
     </div>

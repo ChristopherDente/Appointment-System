@@ -108,7 +108,7 @@
 
             <!-- RIGHT IMAGE -->
             <div class="col-md-6 text-center d-none d-md-block">
-                <img src="frontend/assets/images/calendar.jpg" alt="Calendar" class="hero-img">
+                <img src="assets/images/calendar.jpg" alt="Calendar" class="hero-img">
             </div>
 
         </div>
@@ -297,9 +297,8 @@
         </div>
     </div>
 
-     
-
-  <!-- Footer -->
+    
+    <!-- Footer -->
     <footer class="footer-doctor mt-5">
         <div class="container py-5">
             <div class="row g-4">
