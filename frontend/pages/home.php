@@ -80,8 +80,19 @@ if ($patient_id) {
     $stmt->close();
 }
 
-$calendar_start = date('Y-m-01'); // First day of current month
-$calendar_end = date('Y-m-t', strtotime('+1 month')); // Last day of next month
+
+// Get month from URL parameter or use current month
+$display_month = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
+
+// Validate the month format (YYYY-MM)
+if (!preg_match('/^\d{4}-\d{2}$/', $display_month)) {
+    $display_month = date('Y-m');
+}
+
+
+// Calculate calendar range based on the display month
+$calendar_start = date('Y-m-01', strtotime($display_month)); // First day of selected month
+$calendar_end = date('Y-m-t', strtotime($display_month)); // Last day of selected month
 
 
 $calendar_query = "SELECT 
@@ -124,11 +135,16 @@ if ($patient_id) {
 
 
 // Get current month info
-$current_year = date('Y');
-$current_month = date('m');
-$month_name = date('F Y');
+
+$current_year = date('Y', strtotime($display_month));
+$current_month = date('m', strtotime($display_month));
+$month_name = date('F Y', strtotime($display_month));
 $first_day = date('w', strtotime($calendar_start)); // Day of week (0=Sunday)
-$days_in_month = date('t');
+$days_in_month = date('t', strtotime($display_month));
+
+// Calculate previous and next month
+$prev_month = date('Y-m', strtotime($display_month . ' -1 month'));
+$next_month = date('Y-m', strtotime($display_month . ' +1 month'));
 ?>
 
 <!DOCTYPE html>
@@ -267,15 +283,13 @@ $days_in_month = date('t');
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h5 class="fw-bold mb-0 text-doctor"><?php echo $month_name; ?></h5>
                         <div class="btn-group">
-                            <a href="?month=<?php echo date('Y-m', strtotime('-1 month')); ?>"
-                                class="btn btn-outline-doctor btn-sm">
+                            <a href="?month=<?php echo $prev_month; ?>" class="btn btn-outline-doctor btn-sm">
                                 <i class="bi bi-chevron-left"></i> Prev
                             </a>
                             <a href="?month=<?php echo date('Y-m'); ?>" class="btn btn-outline-doctor btn-sm">
                                 Today
                             </a>
-                            <a href="?month=<?php echo date('Y-m', strtotime('+1 month')); ?>"
-                                class="btn btn-outline-doctor btn-sm">
+                            <a href="?month=<?php echo $next_month; ?>" class="btn btn-outline-doctor btn-sm">
                                 Next <i class="bi bi-chevron-right"></i>
                             </a>
                         </div>
