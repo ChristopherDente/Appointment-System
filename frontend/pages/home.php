@@ -54,10 +54,7 @@ if (empty($_SESSION['is_login'])) {
                                 <i class="bi bi-calendar-plus"></i> Book Appointment
                             </button>
 
-                            <button class="btn btn-outline-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#trackModal">
-                                <i class="bi bi-search"></i> Track Appointment
-                            </button>
+                          
                         </div>
 
                         <div class="mt-4 text-muted small">

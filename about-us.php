@@ -54,7 +54,6 @@
                         </span>
                     </li>
 
-
                 </ul>
             </div>
 
@@ -394,7 +393,7 @@
         </div>
     </div>
 
-    
+
 
     <!-- Footer -->
     <footer class="footer-doctor mt-5">
@@ -440,8 +439,11 @@
             </div>
         </div>
     </footer>
+   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
 
-  <script>
+    <script>
     // ===== UTILITY FUNCTIONS =====
 
     function showAlert(message, type = 'danger') {
@@ -577,19 +579,24 @@
 
         // fetch('http://appointment-system.test/backend/login.php', {
         fetch('backend/login.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password })
-        })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message);
-            if (data.success) window.location.href = data.redirect;
-        })
-        .catch(err => {
-            console.error(err);
-            alert("An error occurred while logging in.");
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message);
+                if (data.success) window.location.href = data.redirect;
+            })
+            .catch(err => {
+                console.error(err);
+                alert("An error occurred while logging in.");
+            });
     });
 
 
@@ -598,28 +605,34 @@
     const registerForm = document.getElementById('registerForm');
     registerForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        
+
         const username = registerForm.username.value.trim();
         const password = registerForm.password.value;
         const confirm_password = registerForm.confirm_password.value;
 
         // fetch('http://appointment-system.test/backend/register.php', {
         fetch('backend/register.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password, confirm_password })
-        })
-        .then(res => res.json())
-        .then(data => {
-            alert(data.message); // optional, can remove if you want silent redirect
-            if (data.success && data.redirect) {
-                window.location.href = data.redirect;
-            }
-        })
-        .catch(err => {
-            console.error(err);
-            alert("An error occurred during registration");
-        });
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username,
+                    password,
+                    confirm_password
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                alert(data.message); // optional, can remove if you want silent redirect
+                if (data.success && data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("An error occurred during registration");
+            });
     });
 
 
