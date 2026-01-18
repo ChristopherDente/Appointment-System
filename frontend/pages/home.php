@@ -37,7 +37,7 @@ if ($patient_id) {
                       FROM tblappointments 
                       WHERE FK_tblpatient = ? 
                       AND appointment_date >= CURDATE() 
-                      AND status IN ('Confirmed', 'Pending')
+                      AND status IN ('Confirmed', 'Approved')
                       AND is_active = 1";
     $stmt = $conn->prepare($upcoming_query);
     $stmt->bind_param("i", $patient_id);
@@ -236,7 +236,7 @@ $next_month = date('Y-m', strtotime($display_month . ' +1 month'));
                 <h4 class="fw-semibold mb-4">Quick Actions</h4>
             </div>
             <div class="col-md-4 mb-3">
-                <a href="book.php" class="text-decoration-none">
+                <a href="../users/book.php" class="text-decoration-none">
                     <div class="stat-card text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-calendar-plus"></i>
@@ -247,7 +247,7 @@ $next_month = date('Y-m', strtotime($display_month . ' +1 month'));
                 </a>
             </div>
             <div class="col-md-4 mb-3">
-                <a href="upcoming.php" class="text-decoration-none">
+                <a href="../users/upcoming.php" class="text-decoration-none">
                     <div class="stat-card text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-clock-history"></i>
@@ -258,7 +258,7 @@ $next_month = date('Y-m', strtotime($display_month . ' +1 month'));
                 </a>
             </div>
             <div class="col-md-4 mb-3">
-                <a href="payments.php" class="text-decoration-none">
+                <a href="../users/payments.php" class="text-decoration-none">
                     <div class="stat-card text-center">
                         <div class="stat-icon mx-auto mb-3">
                             <i class="bi bi-credit-card"></i>

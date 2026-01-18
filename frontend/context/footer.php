@@ -45,11 +45,11 @@ $pathPrefix = $isInFrontend ? '' : 'frontend/';
                     <div class="col-lg-2 col-md-6">
                         <h6 class="text-white fw-semibold mb-3">Quick Links</h6>
                         <ul class="list-unstyled footer-links">
-                            <li><a href="home.php">Dashboard</a></li>
-                            <li><a href="book.php">Book Appointment</a></li>
-                            <li><a href="upcoming.php">Upcoming</a></li>
-                            <li><a href="history.php">History</a></li>
-                            <li><a href="profile.php">Profile</a></li>
+                            <li><a href="../pages/home.php">Dashboard</a></li>
+                            <li><a href="../users/book.php">Book Appointment</a></li>
+                            <li><a href="../users/upcoming.php">Upcoming</a></li>
+                            <li><a href="../users/history.php">History</a></li>
+                            <li><a href="../users/profile.php">Profile</a></li>
                         </ul>
                     </div>
 
@@ -57,10 +57,9 @@ $pathPrefix = $isInFrontend ? '' : 'frontend/';
                     <div class="col-lg-3 col-md-6">
                         <h6 class="text-white fw-semibold mb-3">Services</h6>
                         <ul class="list-unstyled footer-links">
-                            <li><a href="book.php">Book Appointment</a></li>
-                            <li><a href="payments.php">Payment History</a></li>
-                            <li><a href="support.php">Support</a></li>
-                            <li><a href="past.php">Past Appointments</a></li>
+                            <li><a href="../users/payments.php">Payment History</a></li>
+                            <li><a href="../users/support.php">Support</a></li>
+                        
                         </ul>
                     </div>
                 <?php endif; ?>

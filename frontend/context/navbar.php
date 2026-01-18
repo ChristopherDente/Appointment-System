@@ -39,7 +39,7 @@ if ($current_dir == 'users' || $current_dir == 'admin' || $current_dir == 'docto
                 <?php if ($role == 1): ?>
                 <li class="nav-item">
                     <a class="nav-link <?php echo ($current_page == 'home.php') ? 'active' : ''; ?>"
-                        href="<?php echo ($current_dir == 'users') ? '' : '../users/'; ?>home.php">Dashboard</a>
+                        href="<?php echo ($current_dir == 'pages') ? '' : '../pages/'; ?>home.php">Dashboard</a>
                 </li>
 
                 <li class="nav-item dropdown">
@@ -51,8 +51,7 @@ if ($current_dir == 'users' || $current_dir == 'admin' || $current_dir == 'docto
                                 href="<?php echo ($current_dir == 'users') ? '' : '../users/'; ?>book.php">Book Appointment</a></li>
                         <li><a class="dropdown-item <?php echo ($current_page == 'upcoming.php') ? 'active' : ''; ?>"
                                 href="<?php echo ($current_dir == 'users') ? '' : '../users/'; ?>upcoming.php">Upcoming Appointments</a></li>
-                        <li><a class="dropdown-item <?php echo ($current_page == 'past.php') ? 'active' : ''; ?>"
-                                href="<?php echo ($current_dir == 'users') ? '' : '../users/'; ?>past.php">Past Appointments</a></li>
+ 
                         <li><a class="dropdown-item <?php echo ($current_page == 'history.php') ? 'active' : ''; ?>"
                                 href="<?php echo ($current_dir == 'users') ? '' : '../users/'; ?>history.php">Appointment History</a></li>
                     </ul>
