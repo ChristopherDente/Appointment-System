@@ -6,8 +6,7 @@ if (empty($_SESSION['is_login'])) {
     exit;
 }
 
-// At the top of your home.php file (after session_start)
-require_once '../../backend/config/conn.php'; // Adjust path as needed
+require_once '../../backend/config/conn.php';
 
 // Get current user ID from session
 $user_id = $_SESSION['PK_tbluser'] ?? null;
@@ -26,125 +25,138 @@ if ($user_id) {
     $stmt->close();
 }
 
-// Initialize stats
-$upcoming_count = 0;
-$completed_count = 0;
-$pending_payments = 0;
+// Initialize statistics
+$total_spent = 0;
+$paid_count = 0;
+$pending_amount = 0;
 
+// Fetch payments from database
+$payments = [];
 if ($patient_id) {
-    // Get upcoming appointments count
-    $upcoming_query = "SELECT COUNT(*) as count 
-                      FROM tblappointments 
-                      WHERE FK_tblpatient = ? 
-                      AND appointment_date >= CURDATE() 
-                      AND status IN ('Confirmed', 'Approved')
-                      AND is_active = 1";
-    $stmt = $conn->prepare($upcoming_query);
-    $stmt->bind_param("i", $patient_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        $upcoming_count = $row['count'];
-    }
-    $stmt->close();
-
-    // Get completed appointments count
-    $completed_query = "SELECT COUNT(*) as count 
-                       FROM tblappointments 
-                       WHERE FK_tblpatient = ? 
-                       AND status = 'Done'
-                       AND is_active = 1";
-    $stmt = $conn->prepare($completed_query);
-    $stmt->bind_param("i", $patient_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        $completed_count = $row['count'];
-    }
-    $stmt->close();
-
-    // Get pending payments (if you have a payments table)
-    // Assuming you have tblpayments with amount and status fields
-    $payment_query = "SELECT COALESCE(SUM(amount), 0) as total 
-                     FROM tblpayments 
-                     WHERE FK_tblpatient = ? 
-                     AND status = 'Pending'
-                     AND is_active = 1";
+    $payment_query = "SELECT 
+                p.PK_tblpayments,
+                p.invoice_number,
+                p.amount,
+                p.payment_method,
+                p.status,
+                p.payment_date,
+                p.created_at,
+                a.appointment_date,
+                u.fname AS doc_firstName,
+                u.lname AS doc_lastName,
+                dept.departmentName,
+                s.servicename
+                FROM tblpayments p
+                LEFT JOIN tblappointments a ON a.FK_tblpatient = p.FK_tblpatient
+                LEFT JOIN tbldoctors d ON a.FK_tbldoctors = d.PK_tbldoctors
+                LEFT JOIN tbluser u ON d.FK_tbluser = u.PK_tbluser
+                LEFT JOIN tbldepartment dept ON a.FK_department = dept.PK_tblDepartment
+                LEFT JOIN tblservices s ON a.FK_tblservices = s.PK_tblservices
+                WHERE p.FK_tblpatient = ?
+                AND p.is_active = 1
+                ORDER BY p.created_at DESC;
+                ";
+    
     $stmt = $conn->prepare($payment_query);
     $stmt->bind_param("i", $patient_id);
     $stmt->execute();
     $result = $stmt->get_result();
-    if ($row = $result->fetch_assoc()) {
-        $pending_payments = $row['total'];
-    }
-    $stmt->close();
-}
-
-
-// Get month from URL parameter or use current month
-$display_month = isset($_GET['month']) ? $_GET['month'] : date('Y-m');
-
-// Validate the month format (YYYY-MM)
-if (!preg_match('/^\d{4}-\d{2}$/', $display_month)) {
-    $display_month = date('Y-m');
-}
-
-
-// Calculate calendar range based on the display month
-$calendar_start = date('Y-m-01', strtotime($display_month)); // First day of selected month
-$calendar_end = date('Y-m-t', strtotime($display_month)); // Last day of selected month
-
-
-$calendar_query = "SELECT 
-    a.PK_tblappointments,
-    a.appointment_date,
-    a.appointment_time,
-    a.status,
-    CONCAT(u.fname, ' ', u.lname) AS doctor_name,
-    doc.specialization,
-    s.servicename
-FROM tblappointments a
-LEFT JOIN tbldoctors doc ON a.FK_tbldoctors = doc.PK_tbldoctors
-LEFT JOIN tbluser u ON doc.FK_tbluser = u.PK_tbluser
-LEFT JOIN tblservices s ON a.FK_tblservices = s.PK_tblservices
-WHERE a.FK_tblpatient = ?
-  AND a.appointment_date BETWEEN ? AND ?
-  AND a.is_active = 1
-ORDER BY a.appointment_date, a.appointment_time";
-
-
-$appointments = [];
-if ($patient_id) {
-    $stmt = $conn->prepare($calendar_query);
-    $stmt->bind_param(
-        "iss",
-        $patient_id,
-        $calendar_start,
-        $calendar_end
-    );
-    $stmt->execute();
-    $result = $stmt->get_result();
-
+    
     while ($row = $result->fetch_assoc()) {
-        $date = $row['appointment_date'];
-        $appointments[$date][] = $row;
+        $payments[] = $row;
+        
+        // Calculate statistics
+        if ($row['status'] == 'Paid' || $row['status'] == 'Completed') {
+            $total_spent += $row['amount'];
+            $paid_count++;
+        } elseif ($row['status'] == 'Pending') {
+            $pending_amount += $row['amount'];
+        }
     }
-
     $stmt->close();
 }
 
+// Helper functions
+function formatCurrency($amount) {
+    return '₱' . number_format($amount, 2);
+}
 
-// Get current month info
+function formatDate($date) {
+    return date('M j, Y', strtotime($date));
+}
 
-$current_year = date('Y', strtotime($display_month));
-$current_month = date('m', strtotime($display_month));
-$month_name = date('F Y', strtotime($display_month));
-$first_day = date('w', strtotime($calendar_start)); // Day of week (0=Sunday)
-$days_in_month = date('t', strtotime($display_month));
+function getStatusBadgeClass($status) {
+    switch (strtolower($status)) {
+        case 'paid':
+        case 'completed':
+            return 'status-paid';
+        case 'pending':
+            return 'status-pending';
+        case 'failed':
+        case 'cancelled':
+            return 'status-failed';
+        default:
+            return 'status-pending';
+    }
+}
 
-// Calculate previous and next month
-$prev_month = date('Y-m', strtotime($display_month . ' -1 month'));
-$next_month = date('Y-m', strtotime($display_month . ' +1 month'));
+function getStatusText($status) {
+    switch (strtolower($status)) {
+        case 'paid':
+        case 'completed':
+            return 'Paid';
+        case 'pending':
+            return 'Pending';
+        case 'failed':
+            return 'Failed';
+        case 'cancelled':
+            return 'Cancelled';
+        default:
+            return ucfirst($status);
+    }
+}
+
+function getStatusIcon($status) {
+    switch (strtolower($status)) {
+        case 'paid':
+        case 'completed':
+            return 'bi-check-circle';
+        case 'pending':
+            return 'bi-clock';
+        case 'failed':
+        case 'cancelled':
+            return 'bi-x-circle';
+        default:
+            return 'bi-clock';
+    }
+}
+
+function getPaymentMethodIcon($method) {
+    switch (strtolower($method)) {
+        case 'credit card':
+        case 'debit card':
+        case 'card':
+            return 'bi-credit-card';
+        case 'cash':
+        case 'cash on arrival':
+            return 'bi-cash-coin';
+        case 'gcash':
+            return 'bi-phone';
+        case 'paymaya':
+            return 'bi-wallet2';
+        case 'bank transfer':
+            return 'bi-bank';
+        default:
+            return 'bi-credit-card';
+    }
+}
+
+function getPaymentMethodDisplay($method) {
+    if (empty($method)) {
+        return 'Not Specified';
+    }
+    return ucwords($method);
+}
 ?>
 
 <!DOCTYPE html>
@@ -152,7 +164,7 @@ $next_month = date('Y-m', strtotime($display_month . ' +1 month'));
 
 <head>
     <meta charset="UTF-8">
-    <title>Online Appointment Booking System</title>
+    <title>Billing & Payments - Online Appointment System</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap -->
@@ -186,19 +198,19 @@ $next_month = date('Y-m', strtotime($display_month . ' +1 month'));
         <div class="row mb-4">
             <div class="col-md-4">
                 <div class="stat-card">
-                    <h3>₱4,850</h3>
+                    <h3><?php echo formatCurrency($total_spent); ?></h3>
                     <p><i class="bi bi-wallet2"></i> Total Spent</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="stat-card" style="background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);">
-                    <h3>8</h3>
+                <div class="stat-card">
+                    <h3><?php echo $paid_count; ?></h3>
                     <p><i class="bi bi-check-circle"></i> Paid Transactions</p>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="stat-card" style="background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);">
-                    <h3>₱550</h3>
+                <div class="stat-card">
+                    <h3><?php echo formatCurrency($pending_amount); ?></h3>
                     <p><i class="bi bi-clock-history"></i> Pending Payments</p>
                 </div>
             </div>
@@ -232,256 +244,98 @@ $next_month = date('Y-m', strtotime($display_month . ' +1 month'));
                 <i class="bi bi-receipt text-doctor"></i> Payment History
             </h5>
 
-            <div id="paymentList">
-                <!-- Payment Card 1 -->
-                <div class="payment-card" data-status="paid">
-                    <div class="row align-items-center">
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Invoice #</div>
-                            <div class="fw-semibold">INV-2026-001</div>
-                            <div class="text-muted small">Jan 10, 2026</div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-muted small mb-1">Doctor</div>
-                            <div class="fw-semibold">Dr. Maria Santos</div>
-                            <div class="text-muted small">General Medicine</div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Payment Method</div>
-                            <div class="payment-method-badge">
-                                <i class="bi bi-credit-card"></i> Credit Card
+            <?php if (empty($payments)): ?>
+                <!-- Empty State - No Payments -->
+                <div class="empty-state">
+                    <i class="bi bi-receipt"></i>
+                    <h5 class="fw-semibold">No payment history</h5>
+                    <p>Your payment transactions will appear here</p>
+                </div>
+            <?php else: ?>
+                <div id="paymentList">
+                    <?php foreach ($payments as $payment): 
+                        $status_lower = strtolower($payment['status']);
+                        $is_paid = ($status_lower == 'paid' || $status_lower == 'completed');
+                        $is_pending = ($status_lower == 'pending');
+                        $is_failed = ($status_lower == 'failed' || $status_lower == 'cancelled');
+                    ?>
+                        <!-- Payment Card -->
+                        <div class="payment-card" data-status="<?php echo $status_lower; ?>">
+                            <div class="row align-items-center">
+                                <div class="col-md-2">
+                                    <div class="text-muted small mb-1">Invoice #</div>
+                                    <div class="fw-semibold"><?php echo htmlspecialchars($payment['invoice_number'] ?? 'N/A'); ?></div>
+                                    <div class="text-muted small">
+                                        <?php echo formatDate($payment['payment_date'] ?? $payment['created_at']); ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="text-muted small mb-1">Doctor</div>
+                                    <div class="fw-semibold">
+                                        Dr. <?php echo htmlspecialchars($payment['doc_firstName'] . ' ' . $payment['doc_lastName']); ?>
+                                    </div>
+                                    <div class="text-muted small">
+                                        <?php echo htmlspecialchars($payment['departmentName'] ?? 'General'); ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-muted small mb-1">Payment Method</div>
+                                    <div class="payment-method-badge">
+                                        <i class="bi <?php echo getPaymentMethodIcon($payment['payment_method']); ?>"></i>
+                                        <?php echo getPaymentMethodDisplay($payment['payment_method']); ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="text-muted small mb-1">Amount</div>
+                                    <div class="fw-bold text-doctor">
+                                        <?php echo formatCurrency($payment['amount']); ?>
+                                    </div>
+                                </div>
+                                <div class="col-md-2">
+                                    <span class="status-badge <?php echo getStatusBadgeClass($payment['status']); ?>">
+                                        <i class="bi <?php echo getStatusIcon($payment['status']); ?>"></i>
+                                        <?php echo getStatusText($payment['status']); ?>
+                                    </span>
+                                </div>
+                                <div class="col-md-1 text-end">
+                                    <?php if ($is_paid): ?>
+                                        <button class="btn btn-sm btn-outline-doctor invoice-btn"
+                                            onclick="downloadInvoice('<?php echo htmlspecialchars($payment['invoice_number']); ?>', <?php echo $payment['PK_tblpayments']; ?>)">
+                                            <i class="bi bi-download"></i>
+                                        </button>
+                                    <?php elseif ($is_pending): ?>
+                                        <button class="btn btn-sm btn-doctor invoice-btn"
+                                            onclick="payNow('<?php echo htmlspecialchars($payment['invoice_number']); ?>', <?php echo $payment['PK_tblpayments']; ?>)">
+                                            Pay
+                                        </button>
+                                    <?php elseif ($is_failed): ?>
+                                        <button class="btn btn-sm btn-doctor invoice-btn"
+                                            onclick="retryPayment('<?php echo htmlspecialchars($payment['invoice_number']); ?>', <?php echo $payment['PK_tblpayments']; ?>)">
+                                            Retry
+                                        </button>
+                                    <?php endif; ?>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Amount</div>
-                            <div class="fw-bold text-doctor">₱550</div>
-                        </div>
-                        <div class="col-md-2">
-                            <span class="status-badge status-paid">
-                                <i class="bi bi-check-circle"></i> Paid
-                            </span>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-outline-doctor invoice-btn"
-                                onclick="downloadInvoice('INV-2026-001')">
-                                <i class="bi bi-download"></i>
-                            </button>
-                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <!-- Empty State (hidden by default, shown when filtered) -->
+                <div class="empty-state" id="emptyState" style="display: none;">
+                    <i class="bi bi-receipt"></i>
+                    <h5 class="fw-semibold">No payments found</h5>
+                    <p>Try adjusting your filters or search query</p>
+                </div>
+
+                <!-- Pagination (Optional - can be implemented with LIMIT/OFFSET) -->
+                <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
+                    <div class="text-muted small">
+                        Showing <?php echo count($payments); ?> transaction<?php echo count($payments) != 1 ? 's' : ''; ?>
                     </div>
                 </div>
-
-                <!-- Payment Card 2 -->
-                <div class="payment-card" data-status="pending">
-                    <div class="row align-items-center">
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Invoice #</div>
-                            <div class="fw-semibold">INV-2026-002</div>
-                            <div class="text-muted small">Jan 15, 2026</div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-muted small mb-1">Doctor</div>
-                            <div class="fw-semibold">Dr. Robert Chen</div>
-                            <div class="text-muted small">Cardiology</div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Payment Method</div>
-                            <div class="payment-method-badge">
-                                <i class="bi bi-cash-coin"></i> Cash on Arrival
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Amount</div>
-                            <div class="fw-bold text-doctor">₱1,250</div>
-                        </div>
-                        <div class="col-md-2">
-                            <span class="status-badge status-pending">
-                                <i class="bi bi-clock"></i> Pending
-                            </span>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-doctor invoice-btn" onclick="payNow('INV-2026-002')">
-                                Pay
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Payment Card 3 -->
-                <div class="payment-card" data-status="paid">
-                    <div class="row align-items-center">
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Invoice #</div>
-                            <div class="fw-semibold">INV-2025-158</div>
-                            <div class="text-muted small">Dec 28, 2025</div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-muted small mb-1">Doctor</div>
-                            <div class="fw-semibold">Dr. Lisa Garcia</div>
-                            <div class="text-muted small">Pediatrics</div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Payment Method</div>
-                            <div class="payment-method-badge">
-                                <i class="bi bi-phone"></i> GCash
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Amount</div>
-                            <div class="fw-bold text-doctor">₱650</div>
-                        </div>
-                        <div class="col-md-2">
-                            <span class="status-badge status-paid">
-                                <i class="bi bi-check-circle"></i> Paid
-                            </span>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-outline-doctor invoice-btn"
-                                onclick="downloadInvoice('INV-2025-158')">
-                                <i class="bi bi-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Payment Card 4 -->
-                <div class="payment-card" data-status="paid">
-                    <div class="row align-items-center">
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Invoice #</div>
-                            <div class="fw-semibold">INV-2025-145</div>
-                            <div class="text-muted small">Dec 15, 2025</div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-muted small mb-1">Doctor</div>
-                            <div class="fw-semibold">Dr. Emily Rodriguez</div>
-                            <div class="text-muted small">Dermatology</div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Payment Method</div>
-                            <div class="payment-method-badge">
-                                <i class="bi bi-wallet2"></i> PayMaya
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Amount</div>
-                            <div class="fw-bold text-doctor">₱850</div>
-                        </div>
-                        <div class="col-md-2">
-                            <span class="status-badge status-paid">
-                                <i class="bi bi-check-circle"></i> Paid
-                            </span>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-outline-doctor invoice-btn"
-                                onclick="downloadInvoice('INV-2025-145')">
-                                <i class="bi bi-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Payment Card 5 -->
-                <div class="payment-card" data-status="failed">
-                    <div class="row align-items-center">
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Invoice #</div>
-                            <div class="fw-semibold">INV-2025-132</div>
-                            <div class="text-muted small">Dec 5, 2025</div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-muted small mb-1">Doctor</div>
-                            <div class="fw-semibold">Dr. James Wong</div>
-                            <div class="text-muted small">Orthopedics</div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Payment Method</div>
-                            <div class="payment-method-badge">
-                                <i class="bi bi-credit-card"></i> Credit Card
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Amount</div>
-                            <div class="fw-bold text-doctor">₱1,050</div>
-                        </div>
-                        <div class="col-md-2">
-                            <span class="status-badge status-failed">
-                                <i class="bi bi-x-circle"></i> Failed
-                            </span>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-doctor invoice-btn" onclick="retryPayment('INV-2025-132')">
-                                Retry
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Payment Card 6 -->
-                <div class="payment-card" data-status="paid">
-                    <div class="row align-items-center">
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Invoice #</div>
-                            <div class="fw-semibold">INV-2025-120</div>
-                            <div class="text-muted small">Nov 22, 2025</div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="text-muted small mb-1">Doctor</div>
-                            <div class="fw-semibold">Dr. Patricia Gomez</div>
-                            <div class="text-muted small">Dentistry</div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Payment Method</div>
-                            <div class="payment-method-badge">
-                                <i class="bi bi-cash-coin"></i> Cash
-                            </div>
-                        </div>
-                        <div class="col-md-2">
-                            <div class="text-muted small mb-1">Amount</div>
-                            <div class="fw-bold text-doctor">₱750</div>
-                        </div>
-                        <div class="col-md-2">
-                            <span class="status-badge status-paid">
-                                <i class="bi bi-check-circle"></i> Paid
-                            </span>
-                        </div>
-                        <div class="col-md-1 text-end">
-                            <button class="btn btn-sm btn-outline-doctor invoice-btn"
-                                onclick="downloadInvoice('INV-2025-120')">
-                                <i class="bi bi-download"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Empty State (hidden by default) -->
-            <div class="empty-state" id="emptyState" style="display: none;">
-                <i class="bi bi-receipt"></i>
-                <h5 class="fw-semibold">No payments found</h5>
-                <p>Try adjusting your filters or search query</p>
-            </div>
-
-            <!-- Pagination -->
-            <div class="d-flex justify-content-between align-items-center mt-4 pt-3 border-top">
-                <div class="text-muted small">
-                    Showing 1-6 of 8 transactions
-                </div>
-                <nav>
-                    <ul class="pagination pagination-sm mb-0">
-                        <li class="page-item disabled">
-                            <a class="page-link" href="#">Previous</a>
-                        </li>
-                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                        <li class="page-item">
-                            <a class="page-link" href="#">Next</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
-
 
     <!-- Footer -->
     <?php include '../context/footer.php'; ?>
@@ -498,7 +352,13 @@ $next_month = date('Y-m', strtotime($display_month . ' +1 month'));
         let visibleCount = 0;
 
         payments.forEach(payment => {
-            if (status === 'all' || payment.dataset.status === status) {
+            const paymentStatus = payment.dataset.status;
+            
+            // Handle 'paid' filter to include both 'paid' and 'completed'
+            if (status === 'all' || 
+                paymentStatus === status || 
+                (status === 'paid' && (paymentStatus === 'paid' || paymentStatus === 'completed')) ||
+                (status === 'failed' && (paymentStatus === 'failed' || paymentStatus === 'cancelled'))) {
                 payment.style.display = 'block';
                 visibleCount++;
             } else {
@@ -533,24 +393,24 @@ $next_month = date('Y-m', strtotime($display_month . ' +1 month'));
     }
 
     // Download invoice
-    function downloadInvoice(invoiceNumber) {
-        alert(`Downloading invoice ${invoiceNumber}...`);
-        // In production, this would trigger actual PDF download
+    function downloadInvoice(invoiceNumber, paymentId) {
+        // Redirect to invoice download/view page
+        window.location.href = `download_invoice.php?id=${paymentId}`;
     }
 
     // Pay now for pending payments
-    function payNow(invoiceNumber) {
+    function payNow(invoiceNumber, paymentId) {
         if (confirm(`Proceed to payment for ${invoiceNumber}?`)) {
-            alert('Redirecting to payment gateway...');
-            // In production, redirect to payment page
+            // Redirect to payment processing page
+            window.location.href = `process_payment.php?id=${paymentId}`;
         }
     }
 
     // Retry failed payment
-    function retryPayment(invoiceNumber) {
+    function retryPayment(invoiceNumber, paymentId) {
         if (confirm(`Retry payment for ${invoiceNumber}?`)) {
-            alert('Redirecting to payment gateway...');
-            // In production, redirect to payment page
+            // Redirect to payment processing page
+            window.location.href = `process_payment.php?id=${paymentId}&retry=1`;
         }
     }
     </script>
