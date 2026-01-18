@@ -77,11 +77,10 @@
                         <p class="text-muted mb-4">
                             Have questions or need assistance? We're here to help. 
                             Reach out to us through any of the channels below.
-                        </p>
-
+                        </p>   
                         <div class="d-flex d-flex-left gap-3 flex-wrap">
-                            <button class="btn btn-doctor btn-lg px-4" data-bs-toggle="modal"
-                                data-bs-target="#appointmentModal">
+                             <button class="btn btn-doctor btn-lg px-4" data-bs-toggle="modal"
+                                data-bs-target="#loginModal">
                                 <i class="bi bi-calendar-plus"></i> Book Appointment
                             </button>
                         </div>
