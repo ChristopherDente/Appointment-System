@@ -258,14 +258,7 @@ while ($row = $dept_result->fetch_assoc()) {
                                     </select>
                                 </div>
 
-                                <div class="col-md-6">
-                                    <label class="form-label">Contact Number <span class="text-danger">*</span></label>
-                                    <input type="tel" class="form-control" name="contact" placeholder="+63 9XX XXX XXXX" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Email Address <span class="text-danger">*</span></label>
-                                    <input type="email" class="form-control" name="email" placeholder="your.email@example.com" required>
-                                </div>
+                                 
                                 <div class="col-12">
                                     <label class="form-label">Additional Notes (Optional)</label>
                                     <textarea class="form-control" name="notes" rows="3" placeholder="Any additional information you'd like to share..."></textarea>
@@ -278,7 +271,7 @@ while ($row = $dept_result->fetch_assoc()) {
                             <h4 class="fw-semibold mb-3">Payment Method</h4>
 
                             <!-- Fee Breakdown -->
-                            <div class="fee-breakdown mb-4">
+                            <!-- <div class="fee-breakdown mb-4">
                                 <h6 class="fw-semibold mb-3">Fee Breakdown</h6>
                                 <div class="fee-item">
                                     <span>Consultation Fee</span>
@@ -292,7 +285,7 @@ while ($row = $dept_result->fetch_assoc()) {
                                     <span>Total Amount</span>
                                     <span id="displayTotalFee">₱0</span>
                                 </div>
-                            </div>
+                            </div> -->
 
                             <!-- Payment Methods -->
                             <div class="row g-3 mb-4">
@@ -424,10 +417,10 @@ while ($row = $dept_result->fetch_assoc()) {
                             <span class="summary-label">Time:</span>
                             <span class="summary-value" id="summaryTime">-</span>
                         </div>
-                        <div class="summary-item border-top pt-2 mt-2">
+                        <!-- <div class="summary-item border-top pt-2 mt-2">
                             <span class="summary-label fw-semibold">Total Fee:</span>
                             <span class="summary-value text-doctor fw-bold" id="summaryTotal">₱0</span>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="alert alert-info mt-3 mb-0 border-0" style="background-color: #e6f4f1; color: #2f9e8f;">
@@ -689,13 +682,7 @@ while ($row = $dept_result->fetch_assoc()) {
             }
             if (currentStep === 4) {
                 const reason = document.querySelector('select[name="reason"]').value;
-                const contact = document.querySelector('input[name="contact"]').value;
-                const email = document.querySelector('input[name="email"]').value;
-
-                if (!reason || !contact || !email) {
-                    alert('Please fill in all required fields');
-                    return;
-                }
+                
             }
         }
 
@@ -790,7 +777,7 @@ while ($row = $dept_result->fetch_assoc()) {
         submitBtn.disabled = true;
         submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Processing...';
 
-        fetch('save-appointment.php', {
+        fetch('../../backend/appointment.php', {
                 method: 'POST',
                 body: formData
             })
